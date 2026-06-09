@@ -5,19 +5,39 @@
  */
 
 /* ══════════════════════════════════════════════
-   SERVICE CARD IMAGES
-   Paste your WordPress media URLs below.
-   (Media Library → click the image → copy the "File URL")
-   Leave a value empty ('') and that card simply shows no photo.
+   IMÁGENES DE LA PÁGINA
+   Pega aquí las URL de la Biblioteca de Medios de WordPress.
+   (Medios → clic en la imagen → copia la "File URL" / "URL del archivo")
+
+   • Deja un valor vacío ('') y ese elemento simplemente no muestra foto.
+   • Funciona con URL absolutas (https://...) o relativas a la raíz (/wp-content/...).
+   • Para el JSON-LD (logo y og-image) se recomienda URL absoluta.
 ══════════════════════════════════════════════ */
-$rl_service_images = array(
-  'landscape-design' => 'https://www.ruizlandscape.com/wp-content/uploads/landscape-design.jpg',
-  'lawn-care'        => 'https://www.ruizlandscape.com/wp-content/uploads/lawn-care.jpg',
-  'tree-shrub'       => 'https://www.ruizlandscape.com/wp-content/uploads/tree-shrub-care.jpg',
-  'irrigation'       => 'https://www.ruizlandscape.com/wp-content/uploads/irrigation-systems.jpg',
-  'synthetic-turf'   => 'https://www.ruizlandscape.com/wp-content/uploads/synthetic-turf.jpg',
-  'large-trees'      => 'https://www.ruizlandscape.com/wp-content/uploads/large-tree-installation.jpg',
-  'lighting'         => 'https://www.ruizlandscape.com/wp-content/uploads/low-voltage-lighting.jpg',
+$rl_images = array(
+
+  // ── Fondos de sección (CSS) ──
+  'hero-bg'          => '/wp-content/uploads/2026/06/RuizLandscape-scaled.jpg', // Sección 1 — fondo del hero
+  'cta-bg'           => '', // Sección 8 — fondo del CTA final
+
+  // ── Sección 2 · Welcome ──
+  'welcome-main'     => '/wp-content/uploads/2026/06/RuizCrew.png',
+  'welcome-accent'   => '', // foto pequeña sobrepuesta (esquina)
+
+  // ── Sección 3 · Tarjetas de servicios ──
+  'landscape-design' => '/wp-content/uploads/2026/06/LandscapeDesignInstallation-scaled.jpg',
+  'lawn-care'        => '/wp-content/uploads/2026/06/LawnCareMaintenance-scaled.jpg',
+  'tree-shrub'       => '/wp-content/uploads/2026/06/TreeShrubCare-scaled.jpg',
+  'irrigation'       => '/wp-content/uploads/2026/06/Irrigation-scaled.jpg',
+  'synthetic-turf'   => '/wp-content/uploads/2026/06/SyntethicTurf-scaled.jpg',
+  'large-trees'      => '/wp-content/uploads/2026/06/TreeInstallation-scaled.jpg',
+  'lighting'         => '/wp-content/uploads/2026/06/OutdoorLightningSystem-scaled.jpg',
+
+  // ── Sección 4 · Why Choose Us ──
+  'why-photo'        => '', // retrato / foto del equipo
+
+  // ── Marca / Schema (JSON-LD) ──
+  'logo'             => 'https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/logo.png',
+  'og-image'         => 'https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/og-image.jpg',
 );
 
 get_header(); ?>
@@ -34,8 +54,8 @@ get_header(); ?>
       "@id": "https://www.ruizlandscape.com/#business",
       "name": "Ruiz Landscape Service, Inc.",
       "url": "https://www.ruizlandscape.com",
-      "logo": "https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/logo.png",
-      "image": "https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/og-image.jpg",
+      "logo": "<?php echo esc_url( $rl_images['logo'] ); ?>",
+      "image": "<?php echo esc_url( $rl_images['og-image'] ); ?>",
       "description": "Family-owned, eco-conscious landscaping company serving Orange, Los Angeles, and Imperial counties in Southern California.",
       "telephone": "+1-949-305-1605",
       "email": "office@RuizLandscape.com",
@@ -76,7 +96,7 @@ get_header(); ?>
       "@id": "https://www.ruizlandscape.com/#org",
       "name": "Ruiz Landscape Service, Inc.",
       "url": "https://www.ruizlandscape.com",
-      "logo": "https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/logo.png",
+      "logo": "<?php echo esc_url( $rl_images['logo'] ); ?>",
       "sameAs": [
         "https://www.facebook.com/ruiz.landscape.7",
         "https://twitter.com/RuizLandscapeOC",
@@ -190,6 +210,19 @@ get_header(); ?>
 </script>
 
 <main id="rl-home">
+<script>
+/* Marca el contenedor ANTES de que se pinten las secciones, de modo que
+   nazcan ocultas (sin parpadeo). Si el usuario prefiere movimiento
+   reducido, no se activa y todo se muestra normal. */
+(function () {
+  try {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) {
+      document.getElementById('rl-home').classList.add('rl-reveal-on');
+    }
+  } catch (e) {}
+})();
+</script>
 <style>
 /* ══════════════════════════════════════════════
    HOME PAGE STYLES
@@ -315,32 +348,34 @@ body { padding-top: 104px !important; }
 #rl-home .rl-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('<?php echo get_theme_file_uri("/assets/hero-bg.webp"); ?>');
+  background-image: url('<?php echo esc_url( $rl_images['hero-bg'] ); ?>');
   background-size: cover;
   background-position: center;
-  opacity: 0.35;
+  opacity: 1;
 }
 
-/* Diagonal dark overlay left side */
+/* Overlay diagonal: oscuro a la izquierda (para que el texto se lea),
+   medio a la derecha (para que la foto se vea). Sube/baja estos valores
+   para oscurecer u aclarar el overlay. */
 #rl-home .rl-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     105deg,
-    rgba(20,32,10,0.97) 0%,
-    rgba(20,32,10,0.92) 38%,
-    rgba(20,32,10,0.55) 60%,
-    rgba(20,32,10,0.0) 80%
+    rgba(20,32,10,0.90) 0%,
+    rgba(20,32,10,0.70) 40%,
+    rgba(20,32,10,0.45) 70%,
+    rgba(20,32,10,0.34) 100%
   );
 }
 
 #rl-home .rl-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 1180px;
+  max-width: 1560px;
   margin-left: auto;
   margin-right: auto;
-  padding: 80px 32px;
+  padding: 80px clamp(28px, 4.5vw, 64px);
   width: 100%;
 }
 
@@ -448,22 +483,32 @@ body { padding-top: 104px !important; }
 #rl-home .rl-welcome {
   background: #ffffff;
   border-top: 4px solid #c8a84b;
+  padding: 0;            /* anula el padding vertical de .rl-section */
+}
+
+/* La franja Welcome rompe el contenedor para ir de borde a borde */
+#rl-home .rl-welcome .rl-container {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #rl-home .rl-welcome-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+  gap: 0;
+  align-items: stretch;
 }
 
 #rl-home .rl-welcome-img {
   position: relative;
+  height: 100%;
 }
 
 #rl-home .rl-welcome-img-main {
   width: 100%;
-  height: 480px;
+  height: 100%;
+  min-height: 560px;
   object-fit: cover;
   display: block;
 }
@@ -482,7 +527,7 @@ body { padding-top: 104px !important; }
 #rl-home .rl-welcome-badge {
   position: absolute;
   top: 24px;
-  left: -16px;
+  left: 0;
   background: #3d5a2a;
   color: #fff;
   padding: 14px 20px;
@@ -494,7 +539,13 @@ body { padding-top: 104px !important; }
   line-height: 1.3;
 }
 
-#rl-home .rl-welcome-text { display: flex; flex-direction: column; gap: 20px; }
+#rl-home .rl-welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 80px clamp(40px, 5vw, 88px);
+}
 
 #rl-home .rl-welcome-text .rl-body-text + .rl-body-text { margin-top: -8px; }
 
@@ -537,7 +588,7 @@ body { padding-top: 104px !important; }
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s ease, border-color 0.22s ease;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s ease, border-color 0.22s ease, opacity 0.65s ease;
 }
 
 #rl-home .rl-services .rl-service-card:hover {
@@ -805,7 +856,7 @@ body { padding-top: 104px !important; }
 #rl-home .rl-area-card {
   background: #fff;
   padding: 40px 32px;
-  transition: background 0.18s;
+  transition: background 0.18s, opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 0.84, 0.34, 1);
 }
 
 #rl-home .rl-area-card:hover { background: #f7f5f0; }
@@ -1009,7 +1060,7 @@ body { padding-top: 104px !important; }
 #rl-home .rl-final-cta-bg {
   position: absolute;
   inset: 0;
-  background-image: url('<?php echo get_theme_file_uri("/assets/cta-bg.webp"); ?>');
+  background-image: url('<?php echo esc_url( $rl_images['cta-bg'] ); ?>');
   background-size: cover;
   background-position: center;
   opacity: 0.12;
@@ -1082,7 +1133,9 @@ body { padding-top: 104px !important; }
 
 @media (max-width: 768px) {
   #rl-home .rl-section { padding: 64px 0; }
-  #rl-home .rl-welcome-inner { grid-template-columns: 1fr; gap: 40px; }
+  #rl-home .rl-welcome-inner { grid-template-columns: 1fr; gap: 0; }
+  #rl-home .rl-welcome-img-main { min-height: 360px; }
+  #rl-home .rl-welcome-text { padding: 48px 24px; }
   #rl-home .rl-welcome-img-accent { display: none; }
   #rl-home .rl-areas-grid { grid-template-columns: 1fr; }
   #rl-home .rl-trust-item { border-right: none; margin-right: 0; padding-right: 0; }
@@ -1094,6 +1147,284 @@ body { padding-top: 104px !important; }
   #rl-home .rl-steps { grid-template-columns: 1fr; }
   #rl-home .rl-hero h1 { font-size: 36px; }
 }
+
+/* ══ SCROLL REVEAL ════════════════════════════
+   Activo solo si JS añade .rl-reveal-on al contenedor
+   y el usuario NO prefiere movimiento reducido.
+══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Subida + fundido (elementos sin transición propia) */
+  #rl-home.rl-reveal-on .rl-welcome-text,
+  #rl-home.rl-reveal-on .rl-services-head,
+  #rl-home.rl-reveal-on .rl-why-img,
+  #rl-home.rl-reveal-on .rl-reason,
+  #rl-home.rl-reveal-on .rl-areas-head,
+  #rl-home.rl-reveal-on .rl-process-head,
+  #rl-home.rl-reveal-on .rl-step,
+  #rl-home.rl-reveal-on .rl-faq-item,
+  #rl-home.rl-reveal-on .rl-final-cta-inner {
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity 0.7s cubic-bezier(0.16, 0.84, 0.34, 1),
+                transform 0.7s cubic-bezier(0.16, 0.84, 0.34, 1);
+  }
+
+  /* Tarjetas con transición propia: solo fijamos el estado inicial;
+     la transición la aporta su propia regla (el hover sigue rápido). */
+  #rl-home.rl-reveal-on .rl-service-card,
+  #rl-home.rl-reveal-on .rl-area-card {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+
+  /* Solo fundido (imagen full-bleed y columnas sticky: evitan
+     huecos por el desplazamiento y no rompen el position:sticky) */
+  #rl-home.rl-reveal-on .rl-welcome-img,
+  #rl-home.rl-reveal-on .rl-why-left,
+  #rl-home.rl-reveal-on .rl-faq-left {
+    opacity: 0;
+    transition: opacity 0.85s ease;
+  }
+
+  /* Estado revelado */
+  #rl-home.rl-reveal-on .rl-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ══ HERO SPLIT + CONTACT FORM ════════════════ */
+#rl-home .rl-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  width: 100%;
+}
+
+#rl-home .rl-hero-copy h1 { max-width: none; }
+#rl-home .rl-hero-copy .rl-hero-ctas { margin-bottom: 0; }
+
+#rl-home .rl-hero-form-wrap { width: 100%; }
+
+#rl-home .rl-hero-form {
+  background: rgba(16, 26, 8, 0.74);
+  border: 1px solid rgba(200, 168, 75, 0.35);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+#rl-home .rl-hero-form-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+#rl-home .rl-hero-form-sub {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.6);
+  margin: -6px 0 4px;
+}
+
+#rl-home .rl-hero-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#rl-home .rl-hero-form input:not([type="checkbox"]),
+#rl-home .rl-hero-form select,
+#rl-home .rl-hero-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #ffffff;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  padding: 12px 13px;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+#rl-home .rl-hero-form textarea { resize: vertical; min-height: 132px; }
+
+#rl-home .rl-hero-form input::placeholder,
+#rl-home .rl-hero-form textarea::placeholder { color: rgba(255,255,255,0.42); }
+
+#rl-home .rl-hero-form input:not([type="checkbox"]):focus,
+#rl-home .rl-hero-form select:focus,
+#rl-home .rl-hero-form textarea:focus {
+  border-color: #c8a84b;
+  background: rgba(255,255,255,0.1);
+}
+
+/* Checkbox de consentimiento (Privacy / Terms) */
+#rl-home .rl-hero-form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 2px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-transform: none;
+  color: rgba(255,255,255,0.62);
+  cursor: pointer;
+}
+#rl-home .rl-hero-form-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  flex-shrink: 0;
+  accent-color: #c8a84b;
+  cursor: pointer;
+}
+#rl-home .rl-hero-form-check a {
+  color: #c8a84b;
+  text-decoration: underline;
+}
+
+#rl-home .rl-hero-form select {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c8a84b' stroke-width='2.5'><path d='m6 9 6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 38px;
+}
+#rl-home .rl-hero-form select option { color: #1a2410; }
+
+#rl-home .rl-hero-form-btn {
+  margin-top: 4px;
+  width: 100%;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  background: #c8a84b;
+  color: #1a2410;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 15px 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.18s;
+}
+#rl-home .rl-hero-form-btn:hover { background: #d8bb63; }
+
+/* ══ TRUST BAR — MARQUEE ══════════════════════ */
+#rl-home .rl-trustbar {
+  background: #1a2410;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 18px 0;
+  overflow: hidden;
+}
+
+#rl-home .rl-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+#rl-home .rl-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: rl-marquee 40s linear infinite;
+}
+
+/* Pausa al pasar el cursor */
+#rl-home .rl-marquee:hover .rl-marquee-track { animation-play-state: paused; }
+
+#rl-home .rl-marquee-group { display: flex; }
+
+#rl-home .rl-trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 64px;     /* separación uniforme (incl. el último) → loop sin saltos */
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+  white-space: nowrap;
+}
+
+#rl-home .rl-trust-chip svg { color: #c8a84b; flex-shrink: 0; }
+
+@keyframes rl-marquee {
+  from { transform: translateX(-50%); }  /* el contenido se mueve hacia la DERECHA */
+  to   { transform: translateX(0); }
+}
+/* Para invertir el sentido (derecha → izquierda):
+   from { transform: translateX(0); } to { transform: translateX(-50%); } */
+
+@media (prefers-reduced-motion: reduce) {
+  #rl-home .rl-marquee-track { animation: none; }
+}
+
+/* ── Hero responsive ── */
+@media (max-width: 900px) {
+  #rl-home .rl-hero { min-height: auto; }
+  #rl-home .rl-hero-content { padding-top: 64px; padding-bottom: 64px; }
+  #rl-home .rl-hero-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+@media (max-width: 480px) {
+  #rl-home .rl-hero-form { padding: 22px; }
+  #rl-home .rl-hero-form-row { grid-template-columns: 1fr; }
+}
+
+/* ══ HERO — ANIMACIÓN DE ENTRADA (al cargar) ══════
+   Aparece escalonado el headline y, un poco después, el
+   formulario. Solo si el usuario NO prefiere movimiento reducido.
+══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+  #rl-home .rl-hero-tags,
+  #rl-home .rl-hero-copy h1,
+  #rl-home .rl-hero-copy .rl-hero-sub,
+  #rl-home .rl-hero-ctas {
+    opacity: 0;
+    animation: rl-hero-rise 0.85s cubic-bezier(0.16, 0.84, 0.34, 1) both;
+  }
+  #rl-home .rl-hero-tags              { animation-delay: 0.10s; }
+  #rl-home .rl-hero-copy h1           { animation-delay: 0.22s; }
+  #rl-home .rl-hero-copy .rl-hero-sub { animation-delay: 0.34s; }
+  #rl-home .rl-hero-ctas              { animation-delay: 0.46s; }
+
+  #rl-home .rl-hero-form {
+    opacity: 0;
+    animation: rl-hero-form-in 0.95s cubic-bezier(0.16, 0.84, 0.34, 1) 0.42s both;
+  }
+}
+
+@keyframes rl-hero-rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rl-hero-form-in {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
 </style>
 
 <!-- ══════════════════════════════════════════════
@@ -1103,49 +1434,149 @@ body { padding-top: 104px !important; }
   <div class="rl-hero-bg" role="img" aria-label="Ruiz Landscape project photo"></div>
   <div class="rl-hero-overlay"></div>
   <div class="rl-hero-content">
+    <div class="rl-hero-grid">
 
-    <div class="rl-hero-tags">
-      <span class="rl-hero-tag">Family-Owned</span>
-      <span class="rl-hero-tag">Eco-Conscious</span>
-      <span class="rl-hero-tag">Orange, LA &amp; Imperial Counties</span>
+      <!-- ── Mitad izquierda: headline ── -->
+      <div class="rl-hero-copy">
+        <div class="rl-hero-tags">
+          <span class="rl-hero-tag">Family-Owned</span>
+          <span class="rl-hero-tag">Eco-Conscious</span>
+          <span class="rl-hero-tag">Orange, LA &amp; Imperial Counties</span>
+        </div>
+
+        <h1>Eco-conscious landscaping<br><span>for a greener tomorrow.</span></h1>
+
+        <p class="rl-hero-sub">
+          Your outdoor space can be more than a yard — it can be a sanctuary. As a family-owned landscaping company serving Orange, Los Angeles, and Imperial counties, Ruiz Landscape designs, builds, and cares for beautiful, sustainable landscapes that work in harmony with California's climate.
+        </p>
+
+        <div class="rl-hero-ctas">
+          <a href="/contact?utm_source=home&utm_medium=hero&utm_campaign=cta" class="rl-btn-primary">
+            Schedule a free consultation
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#rl-services" class="rl-btn-secondary">Explore our work</a>
+        </div>
+      </div>
+
+      <!-- ── Mitad derecha: formulario de contacto ── -->
+      <div class="rl-hero-form-wrap">
+        <?php
+        /* ─────────────────────────────────────────────────────────────
+           FORMULARIO DE CONTACTO
+           Esto es solo el maquetado visual. Para que ENVÍE de verdad
+           tienes dos opciones:
+             1) Plugin de formularios (Contact Form 7, WPForms, etc.):
+                borra el <form>…</form> de abajo y pega aquí el shortcode:
+                  echo do_shortcode('[contact-form-7 id="123" title="Hero"]');
+                El recuadro .rl-hero-form conserva el estilo igual.
+             2) Conectar estos campos a tu propio manejador
+                (admin-post.php o la REST API de WordPress).
+        ───────────────────────────────────────────────────────────── */
+        ?>
+        <form class="rl-hero-form" name="ruiz_hero_contact" method="post" action="">
+          <div class="rl-hero-form-title">Get your free consultation</div>
+          <p class="rl-hero-form-sub">Tell us about your project — we'll get back to you within one business day.</p>
+
+          <div class="rl-hero-form-row">
+            <input type="text" name="rl_name" placeholder="Full name" aria-label="Full name" required>
+            <input type="tel" name="rl_phone" placeholder="Phone" aria-label="Phone">
+          </div>
+
+          <input type="email" name="rl_email" placeholder="Email address" aria-label="Email address" required>
+
+          <select name="rl_service" aria-label="Service of interest" required>
+            <option value="" selected disabled>Service of interest…</option>
+            <option>Landscape Design &amp; Installation</option>
+            <option>Lawn Care &amp; Maintenance</option>
+            <option>Tree &amp; Shrub Care</option>
+            <option>Irrigation Systems</option>
+            <option>Synthetic Turf</option>
+            <option>Large Tree Installation</option>
+            <option>Low Voltage Lighting</option>
+            <option>Something else</option>
+          </select>
+
+          <textarea name="rl_message" placeholder="Tell us a bit about your project (optional)" aria-label="Project details"></textarea>
+
+          <label class="rl-hero-form-check">
+            <input type="checkbox" name="rl_consent" required>
+            <span>I agree to the <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-and-conditions">Terms &amp; Conditions</a>.</span>
+          </label>
+
+          <?php /* reCAPTCHA: pega aquí el widget cuando lo integres, p.ej.
+                   <div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div> */ ?>
+
+          <button type="submit" class="rl-hero-form-btn">
+            Request my consultation
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+
     </div>
+  </div>
+</section>
 
-    <h1>Eco-conscious landscaping<br><span>for a greener tomorrow.</span></h1>
 
-    <p class="rl-hero-sub">
-      Your outdoor space can be more than a yard — it can be a sanctuary. As a family-owned landscaping company serving Orange, Los Angeles, and Imperial counties, Ruiz Landscape designs, builds, and cares for beautiful, sustainable landscapes that work in harmony with California's climate.
-    </p>
-    <p class="rl-hero-sub" style="margin-top:-12px;">
-      From water-wise garden design to full installation, lawn care, and lighting — we bring our family's passion for the land to your home, one landscape at a time.
-    </p>
+<!-- ══════════════════════════════════════════════
+     TRUST BAR — MARQUEE (sección aparte)
+══════════════════════════════════════════════ -->
+<section class="rl-trustbar" aria-label="Trust highlights">
+  <div class="rl-marquee">
+    <div class="rl-marquee-track">
 
-    <div class="rl-hero-ctas">
-      <a href="/contact?utm_source=home&utm_medium=hero&utm_campaign=cta" class="rl-btn-primary">
-        Schedule a free consultation
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="#rl-services" class="rl-btn-secondary">Explore our work</a>
+      <?php
+      /* Un solo grupo de chips; se duplica abajo (aria-hidden) para que
+         el desplazamiento sea infinito y sin saltos. */
+      ?>
+      <div class="rl-marquee-group">
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Family-Owned &amp; Operated
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          CA Lic# 925207
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 8 17 8 17 8z"/></svg>
+          Eco-Conscious Practices
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Serving OC, LA &amp; Imperial Counties
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          Better Business Bureau Accredited
+        </span>
+      </div>
+
+      <div class="rl-marquee-group" aria-hidden="true">
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Family-Owned &amp; Operated
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          CA Lic# 925207
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 8 17 8 17 8z"/></svg>
+          Eco-Conscious Practices
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Serving OC, LA &amp; Imperial Counties
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          Better Business Bureau Accredited
+        </span>
+      </div>
+
     </div>
-
-    <div class="rl-trust-strip">
-      <div class="rl-trust-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Family-Owned &amp; Operated
-      </div>
-      <div class="rl-trust-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
-        CA Lic# 925207
-      </div>
-      <div class="rl-trust-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 8 17 8 17 8z"/></svg>
-        Eco-Conscious Practices
-      </div>
-      <div class="rl-trust-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        Serving OC, LA &amp; Imperial Counties
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -1158,20 +1589,24 @@ body { padding-top: 104px !important; }
     <div class="rl-welcome-inner">
 
       <div class="rl-welcome-img">
-        <img
-          src="<?php echo get_theme_file_uri('/assets/welcome-main.webp'); ?>"
-          alt="Ruiz Landscape team at a completed landscape project in Orange County"
-          class="rl-welcome-img-main"
-          loading="eager"
-          width="580" height="480"
-        />
-        <img
-          src="<?php echo get_theme_file_uri('/assets/welcome-accent.webp'); ?>"
-          alt="Detail of eco-conscious garden design by Ruiz Landscape"
-          class="rl-welcome-img-accent"
-          loading="lazy"
-          width="200" height="200"
-        />
+        <?php if ( ! empty( $rl_images['welcome-main'] ) ) : ?>
+          <img
+            src="<?php echo esc_url( $rl_images['welcome-main'] ); ?>"
+            alt="Ruiz Landscape team at a completed landscape project in Orange County"
+            class="rl-welcome-img-main"
+            loading="eager"
+            width="580" height="480"
+          />
+        <?php endif; ?>
+        <?php if ( ! empty( $rl_images['welcome-accent'] ) ) : ?>
+          <img
+            src="<?php echo esc_url( $rl_images['welcome-accent'] ); ?>"
+            alt="Detail of eco-conscious garden design by Ruiz Landscape"
+            class="rl-welcome-img-accent"
+            loading="lazy"
+            width="200" height="200"
+          />
+        <?php endif; ?>
         <div class="rl-welcome-badge">
           Family-Owned<br>Since Day One
         </div>
@@ -1220,8 +1655,8 @@ body { padding-top: 104px !important; }
           <!-- Card 1 — Landscape Design & Installation (compass) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
-              <?php if ( ! empty( $rl_service_images['landscape-design'] ) ) : ?>
-                <img src="<?php echo esc_url( $rl_service_images['landscape-design'] ); ?>" alt="Landscape design and installation project by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php if ( ! empty( $rl_images['landscape-design'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_images['landscape-design'] ); ?>" alt="Landscape design and installation project by Ruiz Landscape" loading="lazy" width="600" height="400">
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
@@ -1241,8 +1676,8 @@ body { padding-top: 104px !important; }
           <!-- Card 2 — Lawn Care & Maintenance (sprout) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
-              <?php if ( ! empty( $rl_service_images['lawn-care'] ) ) : ?>
-                <img src="<?php echo esc_url( $rl_service_images['lawn-care'] ); ?>" alt="Lawn care and maintenance by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php if ( ! empty( $rl_images['lawn-care'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_images['lawn-care'] ); ?>" alt="Lawn care and maintenance by Ruiz Landscape" loading="lazy" width="600" height="400">
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
@@ -1262,8 +1697,8 @@ body { padding-top: 104px !important; }
           <!-- Card 3 — Tree & Shrub Care (tree) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
-              <?php if ( ! empty( $rl_service_images['tree-shrub'] ) ) : ?>
-                <img src="<?php echo esc_url( $rl_service_images['tree-shrub'] ); ?>" alt="Tree and shrub care by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php if ( ! empty( $rl_images['tree-shrub'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_images['tree-shrub'] ); ?>" alt="Tree and shrub care by Ruiz Landscape" loading="lazy" width="600" height="400">
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
@@ -1283,8 +1718,8 @@ body { padding-top: 104px !important; }
           <!-- Card 4 — Irrigation Systems (droplet) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
-              <?php if ( ! empty( $rl_service_images['irrigation'] ) ) : ?>
-                <img src="<?php echo esc_url( $rl_service_images['irrigation'] ); ?>" alt="Irrigation system installation by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php if ( ! empty( $rl_images['irrigation'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_images['irrigation'] ); ?>" alt="Irrigation system installation by Ruiz Landscape" loading="lazy" width="600" height="400">
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
@@ -1304,8 +1739,8 @@ body { padding-top: 104px !important; }
           <!-- Card 5 — Synthetic Turf (turf grid) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
-              <?php if ( ! empty( $rl_service_images['synthetic-turf'] ) ) : ?>
-                <img src="<?php echo esc_url( $rl_service_images['synthetic-turf'] ); ?>" alt="Synthetic turf installation by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php if ( ! empty( $rl_images['synthetic-turf'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_images['synthetic-turf'] ); ?>" alt="Synthetic turf installation by Ruiz Landscape" loading="lazy" width="600" height="400">
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
@@ -1325,8 +1760,8 @@ body { padding-top: 104px !important; }
           <!-- Card 6 — Large Tree Installation (pine) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
-              <?php if ( ! empty( $rl_service_images['large-trees'] ) ) : ?>
-                <img src="<?php echo esc_url( $rl_service_images['large-trees'] ); ?>" alt="Large tree installation by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php if ( ! empty( $rl_images['large-trees'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_images['large-trees'] ); ?>" alt="Large tree installation by Ruiz Landscape" loading="lazy" width="600" height="400">
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
@@ -1346,8 +1781,8 @@ body { padding-top: 104px !important; }
           <!-- Card 7 — Low Voltage Lighting (lightbulb) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
-              <?php if ( ! empty( $rl_service_images['lighting'] ) ) : ?>
-                <img src="<?php echo esc_url( $rl_service_images['lighting'] ); ?>" alt="Low voltage landscape lighting by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php if ( ! empty( $rl_images['lighting'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_images['lighting'] ); ?>" alt="Low voltage landscape lighting by Ruiz Landscape" loading="lazy" width="600" height="400">
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
@@ -1396,13 +1831,15 @@ body { padding-top: 104px !important; }
         <p class="rl-body-text">
           There are a lot of landscaping companies in Southern California. Here's what makes working with Ruiz different — and why our clients stay with us for years.
         </p>
-        <img
-          src="<?php echo get_theme_file_uri('/assets/why-photo.webp'); ?>"
-          alt="Rafael Ruiz, President of Ruiz Landscape Service"
-          class="rl-why-img"
-          loading="lazy"
-          width="480" height="360"
-        />
+        <?php if ( ! empty( $rl_images['why-photo'] ) ) : ?>
+          <img
+            src="<?php echo esc_url( $rl_images['why-photo'] ); ?>"
+            alt="Rafael Ruiz, President of Ruiz Landscape Service"
+            class="rl-why-img"
+            loading="lazy"
+            width="480" height="360"
+          />
+        <?php endif; ?>
       </div>
 
       <div class="rl-why-reasons">
@@ -1764,6 +2201,75 @@ body { padding-top: 104px !important; }
 
   buildDots();
   update();
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════
+     SCROLL REVEAL — VANILLA JS
+══════════════════════════════════════════════ -->
+<script>
+(function () {
+  var root = document.getElementById('rl-home');
+  if (!root || !root.classList.contains('rl-reveal-on')) return; // reduce-motion u off
+
+  var SELECTOR = [
+    '.rl-welcome-img', '.rl-welcome-text',
+    '.rl-services-head', '.rl-service-card',
+    '.rl-why-left', '.rl-why-img', '.rl-reason',
+    '.rl-areas-head', '.rl-area-card',
+    '.rl-process-head', '.rl-step',
+    '.rl-faq-left', '.rl-faq-item',
+    '.rl-final-cta-inner'
+  ].join(',');
+
+  var targets = Array.prototype.slice.call(root.querySelectorAll(SELECTOR));
+  if (!targets.length) return;
+
+  function revealAll() {
+    targets.forEach(function (el) { el.classList.add('rl-in'); });
+  }
+
+  // Sin soporte de IntersectionObserver: mostrar todo de inmediato.
+  if (!('IntersectionObserver' in window)) { revealAll(); return; }
+
+  try {
+    // Escalonado: el retraso de cada elemento según su posición dentro
+    // del mismo grupo (hermanos que también son objetivos).
+    targets.forEach(function (el) {
+      var i = 0, sib = el.previousElementSibling;
+      while (sib) {
+        if (sib.matches && sib.matches(SELECTOR)) i++;
+        sib = sib.previousElementSibling;
+      }
+      el._rlDelay = Math.min(i, 6) * 90; // ms, con tope para no alargar de más
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+
+        el.style.transitionDelay = el._rlDelay + 'ms';
+        el.classList.add('rl-in');
+
+        // Limpiar el delay tras la animación para no retrasar el hover.
+        el.addEventListener('transitionend', function clear() {
+          el.style.transitionDelay = '';
+          el.removeEventListener('transitionend', clear);
+        });
+
+        observer.unobserve(el);
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    targets.forEach(function (el) { observer.observe(el); });
+  } catch (e) {
+    // Cualquier fallo: revelar todo para que nunca quede contenido oculto.
+    revealAll();
+  }
 })();
 </script>
 
