@@ -4,6 +4,22 @@
  * Template Post Type: page
  */
 
+/* ══════════════════════════════════════════════
+   SERVICE CARD IMAGES
+   Paste your WordPress media URLs below.
+   (Media Library → click the image → copy the "File URL")
+   Leave a value empty ('') and that card simply shows no photo.
+══════════════════════════════════════════════ */
+$rl_service_images = array(
+  'landscape-design' => 'https://www.ruizlandscape.com/wp-content/uploads/landscape-design.jpg',
+  'lawn-care'        => 'https://www.ruizlandscape.com/wp-content/uploads/lawn-care.jpg',
+  'tree-shrub'       => 'https://www.ruizlandscape.com/wp-content/uploads/tree-shrub-care.jpg',
+  'irrigation'       => 'https://www.ruizlandscape.com/wp-content/uploads/irrigation-systems.jpg',
+  'synthetic-turf'   => 'https://www.ruizlandscape.com/wp-content/uploads/synthetic-turf.jpg',
+  'large-trees'      => 'https://www.ruizlandscape.com/wp-content/uploads/large-tree-installation.jpg',
+  'lighting'         => 'https://www.ruizlandscape.com/wp-content/uploads/low-voltage-lighting.jpg',
+);
+
 get_header(); ?>
 
 <!-- ══════════════════════════════════════════════
@@ -382,7 +398,7 @@ body { padding-top: 104px !important; }
   color: #1a2410;
 }
 
-#rl-home .rl-hero-ctas #rl-home .rl-btn-primary:hover {
+#rl-home .rl-hero-ctas .rl-btn-primary:hover {
   background: transparent;
   color: #c8a84b;
 }
@@ -392,7 +408,7 @@ body { padding-top: 104px !important; }
   color: rgba(255,255,255,0.85);
 }
 
-#rl-home .rl-hero-ctas #rl-home .rl-btn-secondary:hover {
+#rl-home .rl-hero-ctas .rl-btn-secondary:hover {
   background: rgba(255,255,255,0.1);
   color: #fff;
   border-color: rgba(255,255,255,0.7);
@@ -480,7 +496,7 @@ body { padding-top: 104px !important; }
 
 #rl-home .rl-welcome-text { display: flex; flex-direction: column; gap: 20px; }
 
-.rl-welcome-text .rl-body-text + #rl-home .rl-body-text { margin-top: -8px; }
+#rl-home .rl-welcome-text .rl-body-text + .rl-body-text { margin-top: -8px; }
 
 #rl-home .rl-text-link {
   display: inline-flex;
@@ -511,57 +527,88 @@ body { padding-top: 104px !important; }
   margin-bottom: 56px;
 }
 
-.rl-services-head #rl-home .rl-eyebrow { justify-content: center; }
-.rl-services-head #rl-home .rl-divider { margin: 20px auto; }
-.rl-services-head #rl-home .rl-body-text { margin: 0 auto; text-align: center; }
-
-#rl-home .rl-services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: #ddd9ce;
-}
+#rl-home .rl-services-head .rl-eyebrow { justify-content: center; }
+#rl-home .rl-services-head .rl-divider { margin: 20px auto; }
+#rl-home .rl-services-head .rl-body-text { margin: 0 auto; text-align: center; }
 
 #rl-home .rl-service-card {
   background: #ffffff;
-  padding: 36px 32px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  transition: background 0.18s;
   position: relative;
+  overflow: hidden;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s ease, border-color 0.22s ease;
+}
+
+#rl-home .rl-services .rl-service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 26px 38px -16px rgba(26, 36, 16, 0.45);
+  border-color: #3d5a2a;
+}
+
+#rl-home .rl-service-card:hover .rl-service-title { color: #3d5a2a; }
+
+/* Card photo */
+#rl-home .rl-service-media {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 300px;
+  background: #e9e5dc;
   overflow: hidden;
 }
 
-#rl-home .rl-service-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 0;
-  background: #3d5a2a;
-  transition: height 0.25s ease;
+#rl-home .rl-service-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
 }
 
-#rl-home .rl-service-card:hover { background: #f9f7f2; }
-#rl-home .rl-service-card:hover::before { height: 100%; }
+/* Green wash that fades in over the photo on hover */
+#rl-home .rl-service-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 36, 16, 0.62) 0%, rgba(26, 36, 16, 0.12) 45%, rgba(26, 36, 16, 0) 75%);
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  z-index: 1;
+}
+
+#rl-home .rl-service-card:hover .rl-service-media::after { opacity: 1; }
+#rl-home .rl-service-card:hover .rl-service-media img { transform: scale(1.08); }
+
+/* Card content */
+#rl-home .rl-service-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 32px 36px;
+  flex: 1;
+}
 
 #rl-home .rl-service-icon {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border: 2px solid #e0dbd0;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #3d5a2a;
   flex-shrink: 0;
-  transition: border-color 0.18s, background 0.18s;
+  position: relative;
+  z-index: 2;
+  margin-top: -24px;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
 }
 
-.rl-service-card:hover #rl-home .rl-service-icon {
+#rl-home .rl-service-card:hover .rl-service-icon {
   border-color: #3d5a2a;
-  background: #f0f5ea;
+  background: #3d5a2a;
+  color: #ffffff;
 }
 
 #rl-home .rl-service-num {
@@ -606,6 +653,76 @@ body { padding-top: 104px !important; }
 
 #rl-home .rl-service-link:hover { gap: 10px; }
 
+/* ── Services carousel ── */
+#rl-home .rl-carousel {
+  --rl-gap: 24px;
+  --rl-per-view: 3;
+  position: relative;
+}
+
+#rl-home .rl-carousel-viewport {
+  overflow: hidden;
+  padding: 12px 0 36px;
+}
+
+#rl-home .rl-carousel-track {
+  display: flex;
+  gap: var(--rl-gap);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* each card occupies an equal fraction of the viewport based on --rl-per-view */
+#rl-home .rl-services .rl-service-card {
+  flex: 0 0 calc((100% - (var(--rl-per-view) - 1) * var(--rl-gap)) / var(--rl-per-view));
+  box-sizing: border-box;
+  border: 1px solid #e0dbd0;
+}
+
+#rl-home .rl-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 16px;
+}
+
+#rl-home .rl-carousel-btn {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #3d5a2a;
+  background: #ffffff;
+  color: #3d5a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s, color 0.18s, opacity 0.18s;
+}
+
+#rl-home .rl-carousel-btn:hover:not(:disabled) { background: #3d5a2a; color: #ffffff; }
+#rl-home .rl-carousel-btn:disabled { opacity: 0.3; cursor: default; }
+
+#rl-home .rl-carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#rl-home .rl-carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1.5px solid #b9b3a4;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+#rl-home .rl-carousel-dot:hover { border-color: #3d5a2a; }
+#rl-home .rl-carousel-dot.active { background: #c8a84b; border-color: #c8a84b; }
+
 /* ══ SECTION 4 — WHY CHOOSE US ═════════════════ */
 #rl-home .rl-why {
   background: #1a2410;
@@ -621,10 +738,10 @@ body { padding-top: 104px !important; }
 
 #rl-home .rl-why-left { position: sticky; top: 120px; }
 
-.rl-why-left #rl-home .rl-eyebrow { color: #c8a84b; }
-.rl-why-left #rl-home .rl-h2 { color: #ffffff; }
-.rl-why-left #rl-home .rl-divider { background: #4a6e32; }
-.rl-why-left #rl-home .rl-body-text { color: rgba(255,255,255,0.6); font-size: 15px; }
+#rl-home .rl-why-left .rl-eyebrow { color: #c8a84b; }
+#rl-home .rl-why-left .rl-h2 { color: #ffffff; }
+#rl-home .rl-why-left .rl-divider { background: #4a6e32; }
+#rl-home .rl-why-left .rl-body-text { color: rgba(255,255,255,0.6); font-size: 15px; }
 
 #rl-home .rl-why-img {
   width: 100%;
@@ -744,8 +861,8 @@ body { padding-top: 104px !important; }
 #rl-home .rl-process { background: #f4f1ea; }
 
 #rl-home .rl-process-head { text-align: center; margin-bottom: 64px; }
-.rl-process-head #rl-home .rl-eyebrow { justify-content: center; }
-.rl-process-head #rl-home .rl-divider { margin: 20px auto; }
+#rl-home .rl-process-head .rl-eyebrow { justify-content: center; }
+#rl-home .rl-process-head .rl-divider { margin: 20px auto; }
 
 #rl-home .rl-steps {
   display: grid;
@@ -821,7 +938,7 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-faq-left { position: sticky; top: 120px; }
-.rl-faq-left #rl-home .rl-body-text { font-size: 15px; }
+#rl-home .rl-faq-left .rl-body-text { font-size: 15px; }
 
 #rl-home .rl-faq-list { display: flex; flex-direction: column; gap: 2px; }
 
@@ -866,7 +983,7 @@ body { padding-top: 104px !important; }
   user-select: none;
 }
 
-.rl-faq-item.open #rl-home .rl-faq-icon {
+#rl-home .rl-faq-item.open .rl-faq-icon {
   background: #3d5a2a;
   color: #fff;
 }
@@ -880,7 +997,7 @@ body { padding-top: 104px !important; }
   border-top: 1px solid #e8e4da;
 }
 
-.rl-faq-item.open #rl-home .rl-faq-a { display: block; padding-top: 18px; }
+#rl-home .rl-faq-item.open .rl-faq-a { display: block; padding-top: 18px; }
 
 /* ══ SECTION 8 — FINAL CTA ════════════════════ */
 #rl-home .rl-final-cta {
@@ -908,15 +1025,15 @@ body { padding-top: 104px !important; }
   margin-right: auto;
 }
 
-.rl-final-cta #rl-home .rl-eyebrow { justify-content: center; color: #8fb870; }
-.rl-final-cta #rl-home .rl-eyebrow::before { background: #c8a84b; }
+#rl-home .rl-final-cta .rl-eyebrow { justify-content: center; color: #8fb870; }
+#rl-home .rl-final-cta .rl-eyebrow::before { background: #c8a84b; }
 
-.rl-final-cta #rl-home .rl-h2 {
+#rl-home .rl-final-cta .rl-h2 {
   color: #ffffff;
   margin-bottom: 20px;
 }
 
-.rl-final-cta #rl-home .rl-body-text {
+#rl-home .rl-final-cta .rl-body-text {
   color: rgba(255,255,255,0.72);
   margin: 0 auto 40px;
   text-align: center;
@@ -936,7 +1053,7 @@ body { padding-top: 104px !important; }
   color: #1a2410;
 }
 
-#rl-home .rl-final-cta #rl-home .rl-btn-primary:hover {
+#rl-home .rl-final-cta .rl-btn-primary:hover {
   background: transparent;
   color: #c8a84b;
 }
@@ -946,7 +1063,7 @@ body { padding-top: 104px !important; }
   color: rgba(255,255,255,0.85);
 }
 
-#rl-home .rl-final-cta #rl-home .rl-btn-secondary:hover {
+#rl-home .rl-final-cta .rl-btn-secondary:hover {
   background: rgba(255,255,255,0.1);
   color: #fff;
   border-color: rgba(255,255,255,0.7);
@@ -954,28 +1071,28 @@ body { padding-top: 104px !important; }
 
 /* ══ RESPONSIVE ═══════════════════════════════ */
 @media (max-width: 1024px) {
-  #rl-home .rl-services-grid { grid-template-columns: repeat(2, 1fr); }
-  .rl-steps { grid-template-columns: repeat(2, 1fr); }
-  .rl-why-inner { grid-template-columns: 1fr; gap: 48px; }
+  #rl-home .rl-services .rl-carousel { --rl-per-view: 2; }
+  #rl-home .rl-steps { grid-template-columns: repeat(2, 1fr); }
+  #rl-home .rl-why-inner { grid-template-columns: 1fr; gap: 48px; }
   #rl-home .rl-why-left { position: static; }
   #rl-home .rl-why-img { height: 260px; }
-  .rl-faq-inner { grid-template-columns: 1fr; gap: 40px; }
+  #rl-home .rl-faq-inner { grid-template-columns: 1fr; gap: 40px; }
   #rl-home .rl-faq-left { position: static; }
 }
 
 @media (max-width: 768px) {
   #rl-home .rl-section { padding: 64px 0; }
-  .rl-welcome-inner { grid-template-columns: 1fr; gap: 40px; }
+  #rl-home .rl-welcome-inner { grid-template-columns: 1fr; gap: 40px; }
   #rl-home .rl-welcome-img-accent { display: none; }
-  .rl-areas-grid { grid-template-columns: 1fr; }
-  .rl-trust-item { border-right: none; margin-right: 0; padding-right: 0; }
+  #rl-home .rl-areas-grid { grid-template-columns: 1fr; }
+  #rl-home .rl-trust-item { border-right: none; margin-right: 0; padding-right: 0; }
 }
 
 @media (max-width: 560px) {
   #rl-home .rl-container { padding: 0 20px; }
-  .rl-services-grid { grid-template-columns: 1fr; }
-  .rl-steps { grid-template-columns: 1fr; }
-  .rl-hero h1 { font-size: 36px; }
+  #rl-home .rl-services .rl-carousel { --rl-per-view: 1; }
+  #rl-home .rl-steps { grid-template-columns: 1fr; }
+  #rl-home .rl-hero h1 { font-size: 36px; }
 }
 </style>
 
@@ -1082,7 +1199,7 @@ body { padding-top: 104px !important; }
 
 
 <!-- ══════════════════════════════════════════════
-     SECTION 3 — SERVICES
+     SECTION 3 — SERVICES (CAROUSEL)
 ══════════════════════════════════════════════ -->
 <section class="rl-section rl-services" id="rl-services" aria-labelledby="services-heading">
   <div class="rl-container">
@@ -1096,107 +1213,171 @@ body { padding-top: 104px !important; }
       </p>
     </div>
 
-    <div class="rl-services-grid">
+    <div class="rl-carousel">
+      <div class="rl-carousel-viewport">
+        <div class="rl-carousel-track">
 
-      <!-- Card 1 -->
-      <article class="rl-service-card">
-        <div class="rl-service-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <!-- Card 1 — Landscape Design & Installation (compass) -->
+          <article class="rl-service-card">
+            <div class="rl-service-media">
+              <?php if ( ! empty( $rl_service_images['landscape-design'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_service_images['landscape-design'] ); ?>" alt="Landscape design and installation project by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php endif; ?>
+            </div>
+            <div class="rl-service-body">
+              <div class="rl-service-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="14.8 9.2 13.2 13.2 9.2 14.8 10.8 10.8"/></svg>
+              </div>
+              <span class="rl-service-num">01</span>
+              <h3 class="rl-service-title">Landscape Design &amp; Installation</h3>
+              <p class="rl-service-desc">From lush gardens to water-wise outdoor living spaces, our designers bring your outdoor vision to life with creativity, expertise, and sustainable materials.</p>
+              <a href="/services/landscape-design-installation" class="rl-service-link">
+                Learn more
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2 — Lawn Care & Maintenance (sprout) -->
+          <article class="rl-service-card">
+            <div class="rl-service-media">
+              <?php if ( ! empty( $rl_service_images['lawn-care'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_service_images['lawn-care'] ); ?>" alt="Lawn care and maintenance by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php endif; ?>
+            </div>
+            <div class="rl-service-body">
+              <div class="rl-service-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20c4-1.5 1-5 2.5-8.5"/><path d="M10 11c.9.7 1.4 1.8 1.8 3-1.6.3-2.8.3-3.8-.2-1-.5-1.8-1.5-2.4-3.4 2.2-.4 3.5 0 4.4.6z"/><path d="M14 8a5.6 5.6 0 0 0-.9 3.2c1.5-.1 2.6-.5 3.4-1.1.8-.8 1.3-1.8 1.4-3.7-2.2.1-3.2.8-3.9 1.6z"/></svg>
+              </div>
+              <span class="rl-service-num">02</span>
+              <h3 class="rl-service-title">Lawn Care &amp; Maintenance</h3>
+              <p class="rl-service-desc">Keep your landscape looking its best with comprehensive care — mowing, fertilization, weed control, and seasonal upkeep that protects your investment.</p>
+              <a href="/services/lawn-care-maintenance" class="rl-service-link">
+                Learn more
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 3 — Tree & Shrub Care (tree) -->
+          <article class="rl-service-card">
+            <div class="rl-service-media">
+              <?php if ( ! empty( $rl_service_images['tree-shrub'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_service_images['tree-shrub'] ); ?>" alt="Tree and shrub care by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php endif; ?>
+            </div>
+            <div class="rl-service-body">
+              <div class="rl-service-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19a4 4 0 0 1-2.24-7.32A3.5 3.5 0 0 1 9 6.03V6a3 3 0 1 1 6 0v.04a3.5 3.5 0 0 1 3.24 5.65A4 4 0 0 1 16 19Z"/><path d="M12 19v3"/></svg>
+              </div>
+              <span class="rl-service-num">03</span>
+              <h3 class="rl-service-title">Tree &amp; Shrub Care</h3>
+              <p class="rl-service-desc">Professional pruning, trimming, disease management, and removal to keep every tree and shrub on your property healthy, safe, and thriving.</p>
+              <a href="/services/tree-shrub-care" class="rl-service-link">
+                Learn more
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 4 — Irrigation Systems (droplet) -->
+          <article class="rl-service-card">
+            <div class="rl-service-media">
+              <?php if ( ! empty( $rl_service_images['irrigation'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_service_images['irrigation'] ); ?>" alt="Irrigation system installation by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php endif; ?>
+            </div>
+            <div class="rl-service-body">
+              <div class="rl-service-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5 12 2.5C11.5 5 10 7.4 8 9.5 6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+              </div>
+              <span class="rl-service-num">04</span>
+              <h3 class="rl-service-title">Irrigation Systems</h3>
+              <p class="rl-service-desc">Water-wise irrigation designed to conserve water while keeping your landscape lush — efficient systems, professional installation, and maintenance.</p>
+              <a href="/services/irrigation-systems" class="rl-service-link">
+                Learn more
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 5 — Synthetic Turf (turf grid) -->
+          <article class="rl-service-card">
+            <div class="rl-service-media">
+              <?php if ( ! empty( $rl_service_images['synthetic-turf'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_service_images['synthetic-turf'] ); ?>" alt="Synthetic turf installation by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php endif; ?>
+            </div>
+            <div class="rl-service-body">
+              <div class="rl-service-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7"/><rect x="13.5" y="3.5" width="7" height="7"/><rect x="3.5" y="13.5" width="7" height="7"/><rect x="13.5" y="13.5" width="7" height="7"/></svg>
+              </div>
+              <span class="rl-service-num">05</span>
+              <h3 class="rl-service-title">Synthetic Turf</h3>
+              <p class="rl-service-desc">A pristine, low-maintenance lawn that saves water year-round — ideal for pet-friendly yards, kids' play areas, and homeowners reducing their water use.</p>
+              <a href="/services/synthetic-turf" class="rl-service-link">
+                Learn more
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 6 — Large Tree Installation (pine) -->
+          <article class="rl-service-card">
+            <div class="rl-service-media">
+              <?php if ( ! empty( $rl_service_images['large-trees'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_service_images['large-trees'] ); ?>" alt="Large tree installation by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php endif; ?>
+            </div>
+            <div class="rl-service-body">
+              <div class="rl-service-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 7 11h3l-4 6h12l-4-6h3z"/><path d="M12 17v4"/></svg>
+              </div>
+              <span class="rl-service-num">06</span>
+              <h3 class="rl-service-title">Large Tree Installation</h3>
+              <p class="rl-service-desc">From towering shade trees to majestic specimens, we select and install mature trees with the precision and care that gives them the best chance to thrive.</p>
+              <a href="/services/large-tree-installation" class="rl-service-link">
+                Learn more
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 7 — Low Voltage Lighting (lightbulb) -->
+          <article class="rl-service-card">
+            <div class="rl-service-media">
+              <?php if ( ! empty( $rl_service_images['lighting'] ) ) : ?>
+                <img src="<?php echo esc_url( $rl_service_images['lighting'] ); ?>" alt="Low voltage landscape lighting by Ruiz Landscape" loading="lazy" width="600" height="400">
+              <?php endif; ?>
+            </div>
+            <div class="rl-service-body">
+              <div class="rl-service-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+              </div>
+              <span class="rl-service-num">07</span>
+              <h3 class="rl-service-title">Low Voltage Lighting</h3>
+              <p class="rl-service-desc">Energy-efficient landscape lighting that accentuates your home's best features, extends your evenings outdoors, and adds curb appeal and safety.</p>
+              <a href="/services/low-voltage-lighting" class="rl-service-link">
+                Learn more
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
         </div>
-        <span class="rl-service-num">01</span>
-        <h3 class="rl-service-title">Landscape Design &amp; Installation</h3>
-        <p class="rl-service-desc">From lush gardens to water-wise outdoor living spaces, our designers bring your outdoor vision to life with creativity, expertise, and sustainable materials.</p>
-        <a href="/services/landscape-design-installation" class="rl-service-link">
-          Learn more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </article>
+      </div>
 
-      <!-- Card 2 -->
-      <article class="rl-service-card">
-        <div class="rl-service-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <span class="rl-service-num">02</span>
-        <h3 class="rl-service-title">Lawn Care &amp; Maintenance</h3>
-        <p class="rl-service-desc">Keep your landscape looking its best with comprehensive care — mowing, fertilization, weed control, and seasonal upkeep that protects your investment.</p>
-        <a href="/services/lawn-care-maintenance" class="rl-service-link">
-          Learn more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="rl-service-card">
-        <div class="rl-service-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 8 17 8 17 8z"/></svg>
-        </div>
-        <span class="rl-service-num">03</span>
-        <h3 class="rl-service-title">Tree &amp; Shrub Care</h3>
-        <p class="rl-service-desc">Professional pruning, trimming, disease management, and removal to keep every tree and shrub on your property healthy, safe, and thriving.</p>
-        <a href="/services/tree-shrub-care" class="rl-service-link">
-          Learn more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </article>
-
-      <!-- Card 4 -->
-      <article class="rl-service-card">
-        <div class="rl-service-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6m0 0C9 8 7 10 7 13a5 5 0 0 0 10 0c0-3-2-5-5-5z"/><path d="M12 22v-3"/></svg>
-        </div>
-        <span class="rl-service-num">04</span>
-        <h3 class="rl-service-title">Irrigation Systems</h3>
-        <p class="rl-service-desc">Water-wise irrigation designed to conserve water while keeping your landscape lush — efficient systems, professional installation, and maintenance.</p>
-        <a href="/services/irrigation-systems" class="rl-service-link">
-          Learn more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </article>
-
-      <!-- Card 5 -->
-      <article class="rl-service-card">
-        <div class="rl-service-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="0"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-        </div>
-        <span class="rl-service-num">05</span>
-        <h3 class="rl-service-title">Synthetic Turf</h3>
-        <p class="rl-service-desc">A pristine, low-maintenance lawn that saves water year-round — ideal for pet-friendly yards, kids' play areas, and homeowners reducing their water use.</p>
-        <a href="/services/synthetic-turf" class="rl-service-link">
-          Learn more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </article>
-
-      <!-- Card 6 -->
-      <article class="rl-service-card">
-        <div class="rl-service-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
-        </div>
-        <span class="rl-service-num">06</span>
-        <h3 class="rl-service-title">Large Tree Installation</h3>
-        <p class="rl-service-desc">From towering shade trees to majestic specimens, we select and install mature trees with the precision and care that gives them the best chance to thrive.</p>
-        <a href="/services/large-tree-installation" class="rl-service-link">
-          Learn more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </article>
-
-      <!-- Card 7 -->
-      <article class="rl-service-card">
-        <div class="rl-service-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-        </div>
-        <span class="rl-service-num">07</span>
-        <h3 class="rl-service-title">Low Voltage Lighting</h3>
-        <p class="rl-service-desc">Energy-efficient landscape lighting that accentuates your home's best features, extends your evenings outdoors, and adds curb appeal and safety.</p>
-        <a href="/services/low-voltage-lighting" class="rl-service-link">
-          Learn more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </article>
-
+      <div class="rl-carousel-controls">
+        <button class="rl-carousel-btn" data-dir="prev" aria-label="Previous services" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="rl-carousel-dots" aria-label="Service slides"></div>
+        <button class="rl-carousel-btn" data-dir="next" aria-label="Next services" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -1447,32 +1628,6 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════════════════
-     SECTION 8 — FINAL CTA
-══════════════════════════════════════════════ -->
-<section class="rl-section-sm rl-final-cta" id="rl-cta" aria-labelledby="cta-heading">
-  <div class="rl-final-cta-bg" role="presentation"></div>
-  <div class="rl-final-cta-inner">
-    <span class="rl-eyebrow">Get Started Today</span>
-    <h2 class="rl-h2" id="cta-heading">Ready to transform your outdoor space?</h2>
-    <div class="rl-divider" style="margin:20px auto;"></div>
-    <p class="rl-body-text">
-      Contact Ruiz Landscape today to schedule a consultation with one of our friendly experts. Let us bring your landscaping dreams to life and create a space you'll love for years to come — beautifully designed, built to last, and gentler on the planet.
-    </p>
-    <div class="rl-final-cta-btns">
-      <a href="/contact?utm_source=home&utm_medium=final-cta&utm_campaign=cta" class="rl-btn-primary">
-        Schedule a free consultation
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="tel:9493051605" class="rl-btn-secondary">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.41 2 2 0 0 1 3.54 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.52-.52a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        Call us: 949-305-1605
-      </a>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <!-- ══════════════════════════════════════════════
@@ -1500,6 +1655,115 @@ body { padding-top: 104px !important; }
       }
     });
   });
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════
+     SERVICES CAROUSEL — VANILLA JS
+══════════════════════════════════════════════ -->
+<script>
+(function () {
+  var root = document.querySelector('#rl-services .rl-carousel');
+  if (!root) return;
+
+  var track    = root.querySelector('.rl-carousel-track');
+  var cards    = Array.prototype.slice.call(track.children);
+  var dotsWrap = root.querySelector('.rl-carousel-dots');
+  var controls = root.querySelector('.rl-carousel-controls');
+  var prevBtn  = root.querySelector('[data-dir="prev"]');
+  var nextBtn  = root.querySelector('[data-dir="next"]');
+  var index    = 0;
+
+  if (!cards.length) return;
+
+  // How many cards are visible — must match the CSS media queries above.
+  function perView() {
+    var w = window.innerWidth;
+    if (w <= 560) return 1;
+    if (w <= 1024) return 2;
+    return 3;
+  }
+
+  function maxIndex() {
+    return Math.max(0, cards.length - perView());
+  }
+
+  // Width of one card + the gap, measured from the live layout.
+  function step() {
+    if (cards.length > 1) {
+      return cards[1].offsetLeft - cards[0].offsetLeft;
+    }
+    return cards[0].getBoundingClientRect().width;
+  }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    var count = maxIndex() + 1;
+    for (var i = 0; i < count; i++) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'rl-carousel-dot' + (i === index ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      (function (i) {
+        dot.addEventListener('click', function () { go(i); });
+      })(i);
+      dotsWrap.appendChild(dot);
+    }
+  }
+
+  function update() {
+    track.style.transform = 'translateX(' + (-index * step()) + 'px)';
+
+    var dots = dotsWrap.querySelectorAll('.rl-carousel-dot');
+    Array.prototype.forEach.call(dots, function (d, i) {
+      d.classList.toggle('active', i === index);
+    });
+
+    prevBtn.disabled = index <= 0;
+    nextBtn.disabled = index >= maxIndex();
+
+    // Hide controls entirely when every card already fits.
+    controls.style.display = (maxIndex() === 0) ? 'none' : 'flex';
+  }
+
+  function go(i) {
+    index = Math.max(0, Math.min(i, maxIndex()));
+    update();
+  }
+
+  prevBtn.addEventListener('click', function () { go(index - 1); });
+  nextBtn.addEventListener('click', function () { go(index + 1); });
+
+  // ── Touch / swipe support ──
+  var startX = null;
+  var viewport = root.querySelector('.rl-carousel-viewport');
+
+  viewport.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) {
+      go(index + (dx < 0 ? 1 : -1));
+    }
+    startX = null;
+  });
+
+  // ── Recalculate on resize ──
+  var rafId;
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(function () {
+      index = Math.min(index, maxIndex());
+      buildDots();
+      update();
+    });
+  });
+
+  buildDots();
+  update();
 })();
 </script>
 
