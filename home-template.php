@@ -1413,61 +1413,8 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-
 <!-- ══════════════════════════════════════════════
-     SECTION 2 — WELCOME
-══════════════════════════════════════════════ -->
-<section class="rl-section rl-welcome" id="rl-welcome">
-  <div class="rl-container">
-    <div class="rl-welcome-inner">
-
-      <div class="rl-welcome-img">
-        <?php if ( ! empty( $rl_images['welcome-main'] ) ) : ?>
-          <img
-            src="<?php echo esc_url( $rl_images['welcome-main'] ); ?>"
-            alt="Ruiz Landscape team at a completed landscape project in Orange County"
-            class="rl-welcome-img-main"
-            loading="eager"
-            width="580" height="480"
-          />
-        <?php endif; ?>
-        <?php if ( ! empty( $rl_images['welcome-accent'] ) ) : ?>
-          <img
-            src="<?php echo esc_url( $rl_images['welcome-accent'] ); ?>"
-            alt="Detail of eco-conscious garden design by Ruiz Landscape"
-            class="rl-welcome-img-accent"
-            loading="lazy"
-            width="200" height="200"
-          />
-        <?php endif; ?>
-        <div class="rl-welcome-badge">
-          Family-Owned<br>Since Day One
-        </div>
-      </div>
-
-      <div class="rl-welcome-text">
-        <span class="rl-eyebrow">Welcome to Ruiz Landscape</span>
-        <h2 class="rl-h2">Family-owned landscaping, rooted in Southern California.</h2>
-        <div class="rl-divider"></div>
-        <p class="rl-body-text">
-          At Ruiz Landscape, we believe every outdoor space has the potential to be a haven of tranquility and beauty. As a family-owned and operated company, we bring trust, integrity, and a genuine love of the craft to every project we take on — whether it's a complete backyard transformation or keeping an established garden thriving.
-        </p>
-        <p class="rl-body-text">
-          We serve the communities of Orange, Los Angeles, and Imperial counties with a simple commitment: to create landscapes that captivate the eye, nurture the environment, and enrich the lives of the families who enjoy them.
-        </p>
-        <a href="/about" class="rl-text-link">
-          Learn our story
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════
-     SECTION 3 — SERVICES (CAROUSEL)
+     SECTION 2 — SERVICES (CAROUSEL)
 ══════════════════════════════════════════════ -->
 <section class="rl-section rl-services" id="rl-services" aria-labelledby="services-heading">
   <div class="rl-container">
@@ -1648,6 +1595,60 @@ body { padding-top: 104px !important; }
 
   </div>
 </section>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 3 — ABOUT RUIZ LANDSCAPE
+══════════════════════════════════════════════ -->
+<section class="rl-section rl-welcome" id="rl-welcome">
+  <div class="rl-container">
+    <div class="rl-welcome-inner">
+
+      <div class="rl-welcome-img">
+        <?php if ( ! empty( $rl_images['welcome-main'] ) ) : ?>
+          <img
+            src="<?php echo esc_url( $rl_images['welcome-main'] ); ?>"
+            alt="Ruiz Landscape team at a completed landscape project in Orange County"
+            class="rl-welcome-img-main"
+            loading="eager"
+            width="580" height="480"
+          />
+        <?php endif; ?>
+        <?php if ( ! empty( $rl_images['welcome-accent'] ) ) : ?>
+          <img
+            src="<?php echo esc_url( $rl_images['welcome-accent'] ); ?>"
+            alt="Detail of eco-conscious garden design by Ruiz Landscape"
+            class="rl-welcome-img-accent"
+            loading="lazy"
+            width="200" height="200"
+          />
+        <?php endif; ?>
+        <div class="rl-welcome-badge">
+          Family-Owned<br>Since Day One
+        </div>
+      </div>
+
+      <div class="rl-welcome-text">
+        <span class="rl-eyebrow">Welcome to Ruiz Landscape</span>
+        <h2 class="rl-h2">Family-owned landscaping, rooted in Southern California.</h2>
+        <div class="rl-divider"></div>
+        <p class="rl-body-text">
+          At Ruiz Landscape, we believe every outdoor space has the potential to be a haven of tranquility and beauty. As a family-owned and operated company, we bring trust, integrity, and a genuine love of the craft to every project we take on — whether it's a complete backyard transformation or keeping an established garden thriving.
+        </p>
+        <p class="rl-body-text">
+          We serve the communities of Orange, Los Angeles, and Imperial counties with a simple commitment: to create landscapes that captivate the eye, nurture the environment, and enrich the lives of the families who enjoy them.
+        </p>
+        <a href="/about" class="rl-text-link">
+          Learn our story
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
 
 
 <!-- ══════════════════════════════════════════════

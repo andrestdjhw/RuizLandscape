@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react"
 
 const services = [
-  { label: "Landscape Design & Installation", href: "/services/landscape-design", key: "landscape-design", desc: "Custom outdoor spaces, designed & built to last." },
-  { label: "Lawn Care & Maintenance", href: "/services/lawn-care", key: "lawn-care", desc: "Reliable upkeep for a lush, healthy lawn." },
+  { label: "Landscape Design & Installation", href: "/services/landscape-design-installation", key: "landscape-design", desc: "Custom outdoor spaces, designed & built to last." },
+  { label: "Lawn Care & Maintenance", href: "/services/lawn-care-maintenance", key: "lawn-care", desc: "Reliable upkeep for a lush, healthy lawn." },
   { label: "Tree & Shrub Care", href: "/services/tree-shrub-care", key: "tree-shrub-care", desc: "Expert pruning, trimming & plant health." },
-  { label: "Irrigation Systems", href: "/services/irrigation", key: "irrigation", desc: "Smart, water-saving systems installed & repaired." },
+  { label: "Irrigation Systems", href: "/services/irrigation-systems", key: "irrigation", desc: "Smart, water-saving systems installed & repaired." },
   { label: "Synthetic Turf", href: "/services/synthetic-turf", key: "synthetic-turf", desc: "Always-green turf with zero mowing." },
-  { label: "Large Trees Installation", href: "/services/large-trees", key: "large-trees", desc: "Mature trees sourced & planted with care." },
-  { label: "Low Voltage Lighting", href: "/services/lighting", key: "lighting", desc: "Showcase your yard with elegant night lighting." },
+  { label: "Large Trees Installation", href: "/services/large-tree-installation", key: "large-trees", desc: "Mature trees sourced & planted with care." },
+  { label: "Low Voltage Lighting", href: "/services/low-voltage-lighting", key: "lighting", desc: "Showcase your yard with elegant night lighting." },
   { label: "Landscape Design (2D / 3D)", href: "/services/landscape-design-2d", key: "landscape-design-2d", desc: "Plans to visualize your project before we build." },
 ]
 
@@ -350,21 +350,21 @@ function Navbar() {
           left: 16px;
           right: 16px;
           height: 2px;
-          background: var(--rl-green);
+          background: var(--rl-accent);
           transform: scaleX(0);
           transition: transform 0.2s ease;
         }
 
-        .rl-nav-link:hover { color: var(--rl-green); }
+        .rl-nav-link:hover { color: var(--rl-accent); }
         .rl-nav-link:hover::after { transform: scaleX(1); }
 
         .rl-nav-link.cta {
-          background: var(--rl-green);
+          background: var(--rl-accent);
           color: #ffffff;
           padding: 9px 22px;
           font-size: 12px;
           letter-spacing: 0.1em;
-          border: 2px solid var(--rl-green);
+          border: 2px solid var(--rl-accent);
           transition: background 0.15s, color 0.15s;
         }
 
@@ -372,7 +372,7 @@ function Navbar() {
 
         .rl-nav-link.cta:hover {
           background: transparent;
-          color: var(--rl-green);
+          color: var(--rl-accent);
         }
 
         .rl-chevron {

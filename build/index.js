@@ -1111,12 +1111,12 @@ __webpack_require__.r(__webpack_exports__);
 
 const services = [{
   label: "Landscape Design & Installation",
-  href: "/services/landscape-design",
+  href: "/services/landscape-design-installation",
   key: "landscape-design",
   desc: "Custom outdoor spaces, designed & built to last."
 }, {
   label: "Lawn Care & Maintenance",
-  href: "/services/lawn-care",
+  href: "/services/lawn-care-maintenance",
   key: "lawn-care",
   desc: "Reliable upkeep for a lush, healthy lawn."
 }, {
@@ -1126,7 +1126,7 @@ const services = [{
   desc: "Expert pruning, trimming & plant health."
 }, {
   label: "Irrigation Systems",
-  href: "/services/irrigation",
+  href: "/services/irrigation-systems",
   key: "irrigation",
   desc: "Smart, water-saving systems installed & repaired."
 }, {
@@ -1136,12 +1136,12 @@ const services = [{
   desc: "Always-green turf with zero mowing."
 }, {
   label: "Large Trees Installation",
-  href: "/services/large-trees",
+  href: "/services/large-tree-installation",
   key: "large-trees",
   desc: "Mature trees sourced & planted with care."
 }, {
   label: "Low Voltage Lighting",
-  href: "/services/lighting",
+  href: "/services/low-voltage-lighting",
   key: "lighting",
   desc: "Showcase your yard with elegant night lighting."
 }, {
@@ -1618,21 +1618,21 @@ function Navbar() {
           left: 16px;
           right: 16px;
           height: 2px;
-          background: var(--rl-green);
+          background: var(--rl-accent);
           transform: scaleX(0);
           transition: transform 0.2s ease;
         }
 
-        .rl-nav-link:hover { color: var(--rl-green); }
+        .rl-nav-link:hover { color: var(--rl-accent); }
         .rl-nav-link:hover::after { transform: scaleX(1); }
 
         .rl-nav-link.cta {
-          background: var(--rl-green);
+          background: var(--rl-accent);
           color: #ffffff;
           padding: 9px 22px;
           font-size: 12px;
           letter-spacing: 0.1em;
-          border: 2px solid var(--rl-green);
+          border: 2px solid var(--rl-accent);
           transition: background 0.15s, color 0.15s;
         }
 
@@ -1640,7 +1640,7 @@ function Navbar() {
 
         .rl-nav-link.cta:hover {
           background: transparent;
-          color: var(--rl-green);
+          color: var(--rl-accent);
         }
 
         .rl-chevron {
