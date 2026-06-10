@@ -227,13 +227,31 @@ get_header(); ?>
 /* ══════════════════════════════════════════════
    HOME PAGE STYLES
 ══════════════════════════════════════════════ */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Barlow+Condensed:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
 
 /* ── Body offset for fixed navbar ── */
 body { padding-top: 104px !important; }
 
 /* ── Scoped reset: only direct children of #rl-home sections ── */
-#rl-home { font-family: 'Barlow', sans-serif; color: #2a2a20; overflow-x: hidden; }
+#rl-home {
+  /* ══ PALETA (basada en el logo) ════════════════
+     Cambia un valor aquí y se actualiza todo el home. */
+  --rl-green:        #3d5a2a;   /* verde principal · alterno del logo (Turf Green): #237756 */
+  --rl-green-dark:   #1a2410;   /* verde casi negro — fondos oscuros y texto display */
+  --rl-green-mid:    #4a6e32;   /* verde medio — eyebrows y divisor sobre oscuro */
+  --rl-green-light:  #8fb870;   /* verde claro — acentos sobre fondos oscuros */
+
+  --rl-accent:       #996a6c;   /* CAFÉ (Smoky Rose) — reemplaza al dorado */
+  --rl-accent-rgb:   153, 106, 108;
+  --rl-accent-hover: #ab7d7f;   /* café un poco más claro para hovers */
+  --rl-on-accent:    #ffffff;   /* texto sobre el café (botones sólidos) */
+
+  --rl-cream:        #f4f1ea;   /* fondo crema de secciones claras */
+
+  font-family: 'Montserrat', sans-serif;
+  color: #2a2a20;
+  overflow-x: hidden;
+}
 
 /* ── Shared layout ── */
 #rl-home .rl-section { padding: 88px 0; }
@@ -255,7 +273,7 @@ body { padding-top: 104px !important; }
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #4a6e32;
+  color: var(--rl-green-mid);
   margin-bottom: 16px;
 }
 
@@ -264,17 +282,17 @@ body { padding-top: 104px !important; }
   display: block;
   width: 24px;
   height: 2px;
-  background: #c8a84b;
+  background: var(--rl-accent);
 }
 
 #rl-home .rl-h2 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(28px, 3.5vw, 42px);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(23px, 2.8vw, 33px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.1;
-  color: #1a2410;
+  color: var(--rl-green-dark);
 }
 
 #rl-home .rl-body-text {
@@ -288,22 +306,22 @@ body { padding-top: 104px !important; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #3d5a2a;
+  background: var(--rl-green);
   color: #fff;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 15px 28px;
   text-decoration: none;
-  border: 2px solid #3d5a2a;
+  border: 2px solid var(--rl-green);
   transition: background 0.18s, color 0.18s;
 }
 
 #rl-home .rl-btn-primary:hover {
   background: transparent;
-  color: #3d5a2a;
+  color: var(--rl-green);
 }
 
 #rl-home .rl-btn-secondary {
@@ -311,27 +329,27 @@ body { padding-top: 104px !important; }
   align-items: center;
   gap: 8px;
   background: transparent;
-  color: #3d5a2a;
-  font-family: 'Barlow', sans-serif;
+  color: var(--rl-green);
+  font-family: 'Montserrat', sans-serif;
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 15px 28px;
   text-decoration: none;
-  border: 2px solid #3d5a2a;
+  border: 2px solid var(--rl-green);
   transition: background 0.18s, color 0.18s;
 }
 
 #rl-home .rl-btn-secondary:hover {
-  background: #3d5a2a;
+  background: var(--rl-green);
   color: #fff;
 }
 
 #rl-home .rl-divider {
   width: 48px;
   height: 3px;
-  background: #c8a84b;
+  background: var(--rl-accent);
   margin: 20px 0;
 }
 
@@ -341,7 +359,7 @@ body { padding-top: 104px !important; }
   min-height: 92vh;
   display: flex;
   align-items: center;
-  background-color: #1a2410;
+  background-color: var(--rl-green-dark);
   overflow: hidden;
 }
 
@@ -391,14 +409,14 @@ body { padding-top: 104px !important; }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #c8a84b;
-  border: 1px solid rgba(200,168,75,0.4);
+  color: var(--rl-accent);
+  border: 1px solid rgba(var(--rl-accent-rgb),0.4);
   padding: 5px 12px;
 }
 
 #rl-home .rl-hero h1 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(38px, 6vw, 76px);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(31px, 4.8vw, 56px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.01em;
@@ -409,7 +427,7 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-hero h1 span {
-  color: #8fb870;
+  color: var(--rl-green-light);
 }
 
 #rl-home .rl-hero-sub {
@@ -428,14 +446,14 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-hero-ctas .rl-btn-primary {
-  background: #c8a84b;
-  border-color: #c8a84b;
-  color: #1a2410;
+  background: var(--rl-accent);
+  border-color: var(--rl-accent);
+  color: var(--rl-on-accent);
 }
 
 #rl-home .rl-hero-ctas .rl-btn-primary:hover {
   background: transparent;
-  color: #c8a84b;
+  color: var(--rl-accent);
 }
 
 #rl-home .rl-hero-ctas .rl-btn-secondary {
@@ -477,12 +495,12 @@ body { padding-top: 104px !important; }
   padding-right: 0;
 }
 
-#rl-home .rl-trust-item svg { color: #c8a84b; flex-shrink: 0; }
+#rl-home .rl-trust-item svg { color: var(--rl-accent); flex-shrink: 0; }
 
 /* ══ SECTION 2 — WELCOME ═══════════════════════ */
 #rl-home .rl-welcome {
   background: #ffffff;
-  border-top: 4px solid #c8a84b;
+  border-top: 4px solid var(--rl-accent);
   padding: 0;            /* anula el padding vertical de .rl-section */
 }
 
@@ -528,10 +546,10 @@ body { padding-top: 104px !important; }
   position: absolute;
   top: 24px;
   left: 0;
-  background: #3d5a2a;
+  background: var(--rl-green);
   color: #fff;
   padding: 14px 20px;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -553,24 +571,24 @@ body { padding-top: 104px !important; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #3d5a2a;
+  color: var(--rl-green);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 2px solid #c8a84b;
+  border-bottom: 2px solid var(--rl-accent);
   padding-bottom: 2px;
   transition: color 0.15s;
   width: fit-content;
   margin-top: 8px;
 }
 
-#rl-home .rl-text-link:hover { color: #c8a84b; }
+#rl-home .rl-text-link:hover { color: var(--rl-accent); }
 
 /* ══ SECTION 3 — SERVICES ══════════════════════ */
 #rl-home .rl-services {
-  background: #f4f1ea;
+  background: var(--rl-cream);
 }
 
 #rl-home .rl-services-head {
@@ -594,10 +612,10 @@ body { padding-top: 104px !important; }
 #rl-home .rl-services .rl-service-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 26px 38px -16px rgba(26, 36, 16, 0.45);
-  border-color: #3d5a2a;
+  border-color: var(--rl-green);
 }
 
-#rl-home .rl-service-card:hover .rl-service-title { color: #3d5a2a; }
+#rl-home .rl-service-card:hover .rl-service-title { color: var(--rl-green); }
 
 /* Card photo */
 #rl-home .rl-service-media {
@@ -648,7 +666,7 @@ body { padding-top: 104px !important; }
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #3d5a2a;
+  color: var(--rl-green);
   flex-shrink: 0;
   position: relative;
   z-index: 2;
@@ -657,27 +675,27 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-service-card:hover .rl-service-icon {
-  border-color: #3d5a2a;
-  background: #3d5a2a;
+  border-color: var(--rl-green);
+  background: var(--rl-green);
   color: #ffffff;
 }
 
 #rl-home .rl-service-num {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #c8a84b;
+  color: var(--rl-accent);
 }
 
 #rl-home .rl-service-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #1a2410;
+  color: var(--rl-green-dark);
   line-height: 1.2;
 }
 
@@ -696,7 +714,7 @@ body { padding-top: 104px !important; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #3d5a2a;
+  color: var(--rl-green);
   text-decoration: none;
   margin-top: 4px;
   transition: gap 0.15s;
@@ -741,9 +759,9 @@ body { padding-top: 104px !important; }
 #rl-home .rl-carousel-btn {
   width: 48px;
   height: 48px;
-  border: 2px solid #3d5a2a;
+  border: 2px solid var(--rl-green);
   background: #ffffff;
-  color: #3d5a2a;
+  color: var(--rl-green);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -752,7 +770,7 @@ body { padding-top: 104px !important; }
   transition: background 0.18s, color 0.18s, opacity 0.18s;
 }
 
-#rl-home .rl-carousel-btn:hover:not(:disabled) { background: #3d5a2a; color: #ffffff; }
+#rl-home .rl-carousel-btn:hover:not(:disabled) { background: var(--rl-green); color: #ffffff; }
 #rl-home .rl-carousel-btn:disabled { opacity: 0.3; cursor: default; }
 
 #rl-home .rl-carousel-dots {
@@ -771,12 +789,12 @@ body { padding-top: 104px !important; }
   transition: background 0.18s, border-color 0.18s;
 }
 
-#rl-home .rl-carousel-dot:hover { border-color: #3d5a2a; }
-#rl-home .rl-carousel-dot.active { background: #c8a84b; border-color: #c8a84b; }
+#rl-home .rl-carousel-dot:hover { border-color: var(--rl-green); }
+#rl-home .rl-carousel-dot.active { background: var(--rl-accent); border-color: var(--rl-accent); }
 
 /* ══ SECTION 4 — WHY CHOOSE US ═════════════════ */
 #rl-home .rl-why {
-  background: #1a2410;
+  background: var(--rl-green-dark);
   color: #fff;
 }
 
@@ -789,9 +807,9 @@ body { padding-top: 104px !important; }
 
 #rl-home .rl-why-left { position: sticky; top: 120px; }
 
-#rl-home .rl-why-left .rl-eyebrow { color: #c8a84b; }
+#rl-home .rl-why-left .rl-eyebrow { color: var(--rl-accent); }
 #rl-home .rl-why-left .rl-h2 { color: #ffffff; }
-#rl-home .rl-why-left .rl-divider { background: #4a6e32; }
+#rl-home .rl-why-left .rl-divider { background: var(--rl-green-mid); }
 #rl-home .rl-why-left .rl-body-text { color: rgba(255,255,255,0.6); font-size: 15px; }
 
 #rl-home .rl-why-img {
@@ -816,7 +834,7 @@ body { padding-top: 104px !important; }
 #rl-home .rl-reason:first-child { padding-top: 0; }
 
 #rl-home .rl-reason-num {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 36px;
   font-weight: 800;
   color: rgba(255,255,255,0.08);
@@ -825,12 +843,12 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-reason-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 17px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #8fb870;
+  color: var(--rl-green-light);
   margin-bottom: 10px;
 }
 
@@ -863,7 +881,7 @@ body { padding-top: 104px !important; }
 
 #rl-home .rl-area-badge {
   display: inline-block;
-  background: #3d5a2a;
+  background: var(--rl-green);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -874,12 +892,12 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-area-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 22px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: #1a2410;
+  color: var(--rl-green-dark);
   margin-bottom: 14px;
   line-height: 1.2;
 }
@@ -899,17 +917,17 @@ body { padding-top: 104px !important; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #3d5a2a;
+  color: var(--rl-green);
   text-decoration: none;
-  border-bottom: 2px solid #c8a84b;
+  border-bottom: 2px solid var(--rl-accent);
   padding-bottom: 2px;
   transition: color 0.15s;
 }
 
-#rl-home .rl-area-link:hover { color: #c8a84b; }
+#rl-home .rl-area-link:hover { color: var(--rl-accent); }
 
 /* ══ SECTION 6 — HOW WE WORK ══════════════════ */
-#rl-home .rl-process { background: #f4f1ea; }
+#rl-home .rl-process { background: var(--rl-cream); }
 
 #rl-home .rl-process-head { text-align: center; margin-bottom: 64px; }
 #rl-home .rl-process-head .rl-eyebrow { justify-content: center; }
@@ -933,7 +951,7 @@ body { padding-top: 104px !important; }
   position: absolute;
   top: -10px;
   right: -4px;
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 100px;
   font-weight: 800;
   color: rgba(61,90,42,0.04);
@@ -943,12 +961,12 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-step-num {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #c8a84b;
+  color: var(--rl-accent);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -963,12 +981,12 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-step-title {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: #1a2410;
+  color: var(--rl-green-dark);
   margin-bottom: 14px;
 }
 
@@ -1009,10 +1027,10 @@ body { padding-top: 104px !important; }
   border: none;
   text-align: left;
   cursor: pointer;
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: 600;
-  color: #1a2410;
+  color: var(--rl-green-dark);
   transition: background 0.15s;
 }
 
@@ -1021,12 +1039,12 @@ body { padding-top: 104px !important; }
 #rl-home .rl-faq-icon {
   width: 22px;
   height: 22px;
-  border: 2px solid #3d5a2a;
+  border: 2px solid var(--rl-green);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: #3d5a2a;
+  color: var(--rl-green);
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
@@ -1035,7 +1053,7 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-faq-item.open .rl-faq-icon {
-  background: #3d5a2a;
+  background: var(--rl-green);
   color: #fff;
 }
 
@@ -1052,7 +1070,7 @@ body { padding-top: 104px !important; }
 
 /* ══ SECTION 8 — FINAL CTA ════════════════════ */
 #rl-home .rl-final-cta {
-  background: #3d5a2a;
+  background: var(--rl-green);
   position: relative;
   overflow: hidden;
 }
@@ -1076,8 +1094,8 @@ body { padding-top: 104px !important; }
   margin-right: auto;
 }
 
-#rl-home .rl-final-cta .rl-eyebrow { justify-content: center; color: #8fb870; }
-#rl-home .rl-final-cta .rl-eyebrow::before { background: #c8a84b; }
+#rl-home .rl-final-cta .rl-eyebrow { justify-content: center; color: var(--rl-green-light); }
+#rl-home .rl-final-cta .rl-eyebrow::before { background: var(--rl-accent); }
 
 #rl-home .rl-final-cta .rl-h2 {
   color: #ffffff;
@@ -1099,14 +1117,14 @@ body { padding-top: 104px !important; }
 }
 
 #rl-home .rl-final-cta .rl-btn-primary {
-  background: #c8a84b;
-  border-color: #c8a84b;
-  color: #1a2410;
+  background: var(--rl-accent);
+  border-color: var(--rl-accent);
+  color: var(--rl-on-accent);
 }
 
 #rl-home .rl-final-cta .rl-btn-primary:hover {
   background: transparent;
-  color: #c8a84b;
+  color: var(--rl-accent);
 }
 
 #rl-home .rl-final-cta .rl-btn-secondary {
@@ -1206,132 +1224,13 @@ body { padding-top: 104px !important; }
 #rl-home .rl-hero-copy h1 { max-width: none; }
 #rl-home .rl-hero-copy .rl-hero-ctas { margin-bottom: 0; }
 
-#rl-home .rl-hero-form-wrap { width: 100%; }
-
-#rl-home .rl-hero-form {
-  background: rgba(16, 26, 8, 0.74);
-  border: 1px solid rgba(200, 168, 75, 0.35);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 13px;
-}
-
-#rl-home .rl-hero-form-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 25px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  color: #ffffff;
-}
-
-#rl-home .rl-hero-form-sub {
-  font-size: 13px;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.6);
-  margin: -6px 0 4px;
-}
-
-#rl-home .rl-hero-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-#rl-home .rl-hero-form input:not([type="checkbox"]),
-#rl-home .rl-hero-form select,
-#rl-home .rl-hero-form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #ffffff;
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  padding: 12px 13px;
-  border-radius: 0;
-  outline: none;
-  transition: border-color 0.15s, background 0.15s;
-}
-
-#rl-home .rl-hero-form textarea { resize: vertical; min-height: 132px; }
-
-#rl-home .rl-hero-form input::placeholder,
-#rl-home .rl-hero-form textarea::placeholder { color: rgba(255,255,255,0.42); }
-
-#rl-home .rl-hero-form input:not([type="checkbox"]):focus,
-#rl-home .rl-hero-form select:focus,
-#rl-home .rl-hero-form textarea:focus {
-  border-color: #c8a84b;
-  background: rgba(255,255,255,0.1);
-}
-
-/* Checkbox de consentimiento (Privacy / Terms) */
-#rl-home .rl-hero-form-check {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 2px;
-  font-family: 'Barlow', sans-serif;
-  font-size: 12.5px;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-transform: none;
-  color: rgba(255,255,255,0.62);
-  cursor: pointer;
-}
-#rl-home .rl-hero-form-check input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  margin: 1px 0 0;
-  flex-shrink: 0;
-  accent-color: #c8a84b;
-  cursor: pointer;
-}
-#rl-home .rl-hero-form-check a {
-  color: #c8a84b;
-  text-decoration: underline;
-}
-
-#rl-home .rl-hero-form select {
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c8a84b' stroke-width='2.5'><path d='m6 9 6 6 6-6'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 13px center;
-  padding-right: 38px;
-}
-#rl-home .rl-hero-form select option { color: #1a2410; }
-
-#rl-home .rl-hero-form-btn {
-  margin-top: 4px;
-  width: 100%;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  background: #c8a84b;
-  color: #1a2410;
-  font-family: 'Barlow', sans-serif;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 15px 28px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  transition: background 0.18s;
-}
-#rl-home .rl-hero-form-btn:hover { background: #d8bb63; }
+/* El formulario de contacto vive ahora en el componente React
+   src/scripts/ContactForm.js (se monta en #render-contact-form-here).
+   Sus estilos van dentro del propio componente. */
 
 /* ══ TRUST BAR — MARQUEE ══════════════════════ */
 #rl-home .rl-trustbar {
-  background: #1a2410;
+  background: var(--rl-green-dark);
   border-top: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 18px 0;
@@ -1368,7 +1267,7 @@ body { padding-top: 104px !important; }
   white-space: nowrap;
 }
 
-#rl-home .rl-trust-chip svg { color: #c8a84b; flex-shrink: 0; }
+#rl-home .rl-trust-chip svg { color: var(--rl-accent); flex-shrink: 0; }
 
 @keyframes rl-marquee {
   from { transform: translateX(-50%); }  /* el contenido se mueve hacia la DERECHA */
@@ -1388,11 +1287,6 @@ body { padding-top: 104px !important; }
   #rl-home .rl-hero-grid { grid-template-columns: 1fr; gap: 36px; }
 }
 
-@media (max-width: 480px) {
-  #rl-home .rl-hero-form { padding: 22px; }
-  #rl-home .rl-hero-form-row { grid-template-columns: 1fr; }
-}
-
 /* ══ HERO — ANIMACIÓN DE ENTRADA (al cargar) ══════
    Aparece escalonado el headline y, un poco después, el
    formulario. Solo si el usuario NO prefiere movimiento reducido.
@@ -1409,21 +1303,11 @@ body { padding-top: 104px !important; }
   #rl-home .rl-hero-copy h1           { animation-delay: 0.22s; }
   #rl-home .rl-hero-copy .rl-hero-sub { animation-delay: 0.34s; }
   #rl-home .rl-hero-ctas              { animation-delay: 0.46s; }
-
-  #rl-home .rl-hero-form {
-    opacity: 0;
-    animation: rl-hero-form-in 0.95s cubic-bezier(0.16, 0.84, 0.34, 1) 0.42s both;
-  }
 }
 
 @keyframes rl-hero-rise {
   from { opacity: 0; transform: translateY(26px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes rl-hero-form-in {
-  from { opacity: 0; transform: translateY(30px) scale(0.98); }
-  to   { opacity: 1; transform: none; }
 }
 </style>
 
@@ -1459,60 +1343,9 @@ body { padding-top: 104px !important; }
         </div>
       </div>
 
-      <!-- ── Mitad derecha: formulario de contacto ── -->
-      <div class="rl-hero-form-wrap">
-        <?php
-        /* ─────────────────────────────────────────────────────────────
-           FORMULARIO DE CONTACTO
-           Esto es solo el maquetado visual. Para que ENVÍE de verdad
-           tienes dos opciones:
-             1) Plugin de formularios (Contact Form 7, WPForms, etc.):
-                borra el <form>…</form> de abajo y pega aquí el shortcode:
-                  echo do_shortcode('[contact-form-7 id="123" title="Hero"]');
-                El recuadro .rl-hero-form conserva el estilo igual.
-             2) Conectar estos campos a tu propio manejador
-                (admin-post.php o la REST API de WordPress).
-        ───────────────────────────────────────────────────────────── */
-        ?>
-        <form class="rl-hero-form" name="ruiz_hero_contact" method="post" action="">
-          <div class="rl-hero-form-title">Get your free consultation</div>
-          <p class="rl-hero-form-sub">Tell us about your project — we'll get back to you within one business day.</p>
-
-          <div class="rl-hero-form-row">
-            <input type="text" name="rl_name" placeholder="Full name" aria-label="Full name" required>
-            <input type="tel" name="rl_phone" placeholder="Phone" aria-label="Phone">
-          </div>
-
-          <input type="email" name="rl_email" placeholder="Email address" aria-label="Email address" required>
-
-          <select name="rl_service" aria-label="Service of interest" required>
-            <option value="" selected disabled>Service of interest…</option>
-            <option>Landscape Design &amp; Installation</option>
-            <option>Lawn Care &amp; Maintenance</option>
-            <option>Tree &amp; Shrub Care</option>
-            <option>Irrigation Systems</option>
-            <option>Synthetic Turf</option>
-            <option>Large Tree Installation</option>
-            <option>Low Voltage Lighting</option>
-            <option>Something else</option>
-          </select>
-
-          <textarea name="rl_message" placeholder="Tell us a bit about your project (optional)" aria-label="Project details"></textarea>
-
-          <label class="rl-hero-form-check">
-            <input type="checkbox" name="rl_consent" required>
-            <span>I agree to the <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-and-conditions">Terms &amp; Conditions</a>.</span>
-          </label>
-
-          <?php /* reCAPTCHA: pega aquí el widget cuando lo integres, p.ej.
-                   <div class="g-recaptcha" data-sitekey="TU_SITE_KEY"></div> */ ?>
-
-          <button type="submit" class="rl-hero-form-btn">
-            Request my consultation
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </form>
-      </div>
+      <!-- ── Mitad derecha: formulario de contacto (componente React) ── -->
+      <!-- Se monta aquí ContactForm desde src/index.js → #render-contact-form-here -->
+      <div id="render-contact-form-here"></div>
 
     </div>
   </div>
@@ -1994,7 +1827,7 @@ body { padding-top: 104px !important; }
         <h2 class="rl-h2" id="faq-heading">Common questions about working with Ruiz Landscape.</h2>
         <div class="rl-divider"></div>
         <p class="rl-body-text">
-          Can't find your answer here? <a href="/contact" style="color:#3d5a2a;font-weight:600;">Reach out directly</a> — we're happy to help.
+          Can't find your answer here? <a href="/contact" style="color:var(--rl-green);font-weight:600;">Reach out directly</a> — we're happy to help.
         </p>
       </div>
 
@@ -2006,7 +1839,7 @@ body { padding-top: 104px !important; }
             <span class="rl-faq-icon">−</span>
           </button>
           <div class="rl-faq-a">
-            We're headquartered in Irvine and serve homeowners across <a href="/locations/orange-county" style="color:#3d5a2a;font-weight:600;">Orange</a>, <a href="/locations/los-angeles-county" style="color:#3d5a2a;font-weight:600;">Los Angeles</a>, and <a href="/locations/imperial-county" style="color:#3d5a2a;font-weight:600;">Imperial</a> counties in California. Reach out with your address and we'll confirm we cover your neighborhood.
+            We're headquartered in Irvine and serve homeowners across <a href="/locations/orange-county" style="color:var(--rl-green);font-weight:600;">Orange</a>, <a href="/locations/los-angeles-county" style="color:var(--rl-green);font-weight:600;">Los Angeles</a>, and <a href="/locations/imperial-county" style="color:var(--rl-green);font-weight:600;">Imperial</a> counties in California. Reach out with your address and we'll confirm we cover your neighborhood.
           </div>
         </div>
 
@@ -2016,7 +1849,7 @@ body { padding-top: 104px !important; }
             <span class="rl-faq-icon">+</span>
           </button>
           <div class="rl-faq-a">
-            Sustainability is built into every design — <a href="/services/irrigation-systems" style="color:#3d5a2a;font-weight:600;">water-wise irrigation</a>, drought-tolerant plantings, eco-friendly materials, organic lawn care, and <a href="/services/synthetic-turf" style="color:#3d5a2a;font-weight:600;">synthetic turf</a> as a water-saving option. We design landscapes that work with California's climate, not against it.
+            Sustainability is built into every design — <a href="/services/irrigation-systems" style="color:var(--rl-green);font-weight:600;">water-wise irrigation</a>, drought-tolerant plantings, eco-friendly materials, organic lawn care, and <a href="/services/synthetic-turf" style="color:var(--rl-green);font-weight:600;">synthetic turf</a> as a water-saving option. We design landscapes that work with California's climate, not against it.
           </div>
         </div>
 
@@ -2026,7 +1859,7 @@ body { padding-top: 104px !important; }
             <span class="rl-faq-icon">+</span>
           </button>
           <div class="rl-faq-a">
-            Yes. We're a full-service company. The same team can <a href="/services/landscape-design-installation" style="color:#3d5a2a;font-weight:600;">design and install your landscape</a> and then maintain it — <a href="/services/lawn-care-maintenance" style="color:#3d5a2a;font-weight:600;">lawn care</a>, irrigation service, and <a href="/services/tree-shrub-care" style="color:#3d5a2a;font-weight:600;">tree and shrub care</a> — so you have one trusted partner for the life of your landscape.
+            Yes. We're a full-service company. The same team can <a href="/services/landscape-design-installation" style="color:var(--rl-green);font-weight:600;">design and install your landscape</a> and then maintain it — <a href="/services/lawn-care-maintenance" style="color:var(--rl-green);font-weight:600;">lawn care</a>, irrigation service, and <a href="/services/tree-shrub-care" style="color:var(--rl-green);font-weight:600;">tree and shrub care</a> — so you have one trusted partner for the life of your landscape.
           </div>
         </div>
 
@@ -2036,7 +1869,7 @@ body { padding-top: 104px !important; }
             <span class="rl-faq-icon">+</span>
           </button>
           <div class="rl-faq-a">
-            Yes. Ruiz Landscape Service is fully licensed in California (CA ST Lic# 925207). Insurance and license documentation are available on request. <a href="/about" style="color:#3d5a2a;font-weight:600;">Learn more about us.</a>
+            Yes. Ruiz Landscape Service is fully licensed in California (CA ST Lic# 925207). Insurance and license documentation are available on request. <a href="/about" style="color:var(--rl-green);font-weight:600;">Learn more about us.</a>
           </div>
         </div>
 
@@ -2046,7 +1879,7 @@ body { padding-top: 104px !important; }
             <span class="rl-faq-icon">+</span>
           </button>
           <div class="rl-faq-a">
-            <a href="/contact" style="color:#3d5a2a;font-weight:600;">Schedule a free consultation.</a> We'll walk your space, learn how you want to use it, and put together a plan and estimate tailored to your project and budget.
+            <a href="/contact" style="color:var(--rl-green);font-weight:600;">Schedule a free consultation.</a> We'll walk your space, learn how you want to use it, and put together a plan and estimate tailored to your project and budget.
           </div>
         </div>
 
@@ -2056,7 +1889,7 @@ body { padding-top: 104px !important; }
             <span class="rl-faq-icon">+</span>
           </button>
           <div class="rl-faq-a">
-            Absolutely — it's one of our specialties. Through <a href="/services/landscape-design-installation" style="color:#3d5a2a;font-weight:600;">water-wise design</a>, drought-tolerant plants, <a href="/services/irrigation-systems" style="color:#3d5a2a;font-weight:600;">efficient irrigation</a>, and <a href="/services/synthetic-turf" style="color:#3d5a2a;font-weight:600;">synthetic turf</a>, we help homeowners cut water use while keeping their landscape beautiful.
+            Absolutely — it's one of our specialties. Through <a href="/services/landscape-design-installation" style="color:var(--rl-green);font-weight:600;">water-wise design</a>, drought-tolerant plants, <a href="/services/irrigation-systems" style="color:var(--rl-green);font-weight:600;">efficient irrigation</a>, and <a href="/services/synthetic-turf" style="color:var(--rl-green);font-weight:600;">synthetic turf</a>, we help homeowners cut water use while keeping their landscape beautiful.
           </div>
         </div>
 

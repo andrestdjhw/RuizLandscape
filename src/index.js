@@ -1,19 +1,10 @@
-import Person from "./scripts/Person"
-import ExampleReactComponent from "./scripts/ExampleReactComponent"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import Navbar from "./scripts/Navbar"
 import Footer from "./scripts/Footer"
+import ContactForm from "./scripts/ContactForm"
 
 
-const person1 = new Person("Brad")
-if (document.querySelector("#render-react-example-here")) {
-  const root = ReactDOM.createRoot(document.querySelector("#render-react-example-here"))
-  root.render(<ExampleReactComponent />)
-}
-
-
-// En el render:
 if (document.querySelector("#render-navbar-here")) {
   const root = ReactDOM.createRoot(document.querySelector("#render-navbar-here"))
   root.render(<Navbar />)
@@ -23,4 +14,10 @@ if (document.querySelector("#render-navbar-here")) {
 if (document.querySelector("#render-footer-here")) {
   const root = ReactDOM.createRoot(document.querySelector("#render-footer-here"))
   root.render(<Footer />)
+}
+
+
+if (document.querySelector("#render-contact-form-here")) {
+  const root = ReactDOM.createRoot(document.querySelector("#render-contact-form-here"))
+  root.render(<ContactForm />)
 }

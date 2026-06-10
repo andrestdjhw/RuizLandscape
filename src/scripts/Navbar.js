@@ -173,6 +173,13 @@ function Navbar() {
         }
 
         .rl-navbar {
+          /* Paleta de marca */
+          --rl-green:        #3d5a2a;
+          --rl-green-mid:    #4a6e32;
+          --rl-accent:       #996a6c;   /* café (Smoky Rose) — antes dorado */
+          --rl-accent-hover: #ab7d7f;
+          --rl-on-accent:    #ffffff;
+
           font-family: 'Barlow', sans-serif;
           position: fixed;
           top: 0;
@@ -237,7 +244,7 @@ function Navbar() {
           white-space: nowrap;
         }
 
-        .rl-topbar-link:hover { color: #3d5a2a; }
+        .rl-topbar-link:hover { color: var(--rl-green); }
 
         .rl-topbar-divider {
           width: 1px;
@@ -249,7 +256,7 @@ function Navbar() {
           display: flex;
           align-items: center;
           gap: 5px;
-          color: #4a6e32;
+          color: var(--rl-green-mid);
           font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -267,12 +274,12 @@ function Navbar() {
           transition: color 0.15s;
         }
 
-        .rl-social-link:hover { color: #3d5a2a; }
+        .rl-social-link:hover { color: var(--rl-green); }
 
         /* ── MAIN NAV ── */
         .rl-mainnav {
           background-color: #ffffff;
-          border-bottom: 2px solid #3d5a2a;
+          border-bottom: 2px solid var(--rl-green);
           padding: 0 32px;
           height: 68px;
           display: grid;
@@ -290,57 +297,12 @@ function Navbar() {
           justify-self: start;
         }
 
-        .rl-logo-icon {
-          width: 44px;
-          height: 44px;
-          border: 2px solid #3d5a2a;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-
-        .rl-logo-icon img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .rl-logo-placeholder {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 800;
-          font-size: 22px;
-          color: #3d5a2a;
-        }
-
-        .rl-logo-divider {
-          width: 1px;
-          height: 32px;
-          background: #d0ccc4;
-        }
-
-        .rl-logo-text {
-          display: flex;
-          flex-direction: column;
-          line-height: 1.15;
-        }
-
-        .rl-logo-name {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 700;
-          font-size: 17px;
-          color: #1a2410;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-        }
-
-        .rl-logo-sub {
-          font-size: 9.5px;
-          font-weight: 600;
-          color: #7a9060;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
+        .rl-logo-img {
+          height: 60px;
+          width: auto;
+          max-width: 230px;
+          display: block;
+          object-fit: contain;
         }
 
         /* Nav links */
@@ -388,21 +350,21 @@ function Navbar() {
           left: 16px;
           right: 16px;
           height: 2px;
-          background: #3d5a2a;
+          background: var(--rl-green);
           transform: scaleX(0);
           transition: transform 0.2s ease;
         }
 
-        .rl-nav-link:hover { color: #3d5a2a; }
+        .rl-nav-link:hover { color: var(--rl-green); }
         .rl-nav-link:hover::after { transform: scaleX(1); }
 
         .rl-nav-link.cta {
-          background: #3d5a2a;
+          background: var(--rl-green);
           color: #ffffff;
           padding: 9px 22px;
           font-size: 12px;
           letter-spacing: 0.1em;
-          border: 2px solid #3d5a2a;
+          border: 2px solid var(--rl-green);
           transition: background 0.15s, color 0.15s;
         }
 
@@ -410,7 +372,7 @@ function Navbar() {
 
         .rl-nav-link.cta:hover {
           background: transparent;
-          color: #3d5a2a;
+          color: var(--rl-green);
         }
 
         .rl-chevron {
@@ -431,7 +393,7 @@ function Navbar() {
           max-width: calc(100vw - 64px);
           background: #ffffff;
           border: 1px solid #d8d4c8;
-          border-top: 3px solid #3d5a2a;
+          border-top: 3px solid var(--rl-green);
           box-shadow: 0 14px 40px rgba(0,0,0,0.13);
           opacity: 0;
           pointer-events: none;
@@ -502,7 +464,7 @@ function Navbar() {
           flex-shrink: 0;
           border: 1px solid #e3ddd0;
           background: #fbfaf6;
-          color: #4a6e32;
+          color: var(--rl-green-mid);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -510,9 +472,9 @@ function Navbar() {
         }
 
         .rl-mega-item:hover .rl-mega-ico {
-          background: #3d5a2a;
+          background: var(--rl-green);
           color: #ffffff;
-          border-color: #3d5a2a;
+          border-color: var(--rl-green);
         }
 
         .rl-mega-txt { display: flex; flex-direction: column; gap: 2px; }
@@ -526,7 +488,7 @@ function Navbar() {
           transition: color 0.12s;
         }
 
-        .rl-mega-item:hover .rl-mega-label { color: #3d5a2a; }
+        .rl-mega-item:hover .rl-mega-label { color: var(--rl-green); }
 
         .rl-mega-desc { font-size: 11px; color: #8a8f7e; line-height: 1.35; }
 
@@ -575,8 +537,8 @@ function Navbar() {
         }
 
         .rl-mega-feature .rl-mega-btn {
-          background: #c8a84b;
-          color: #1a2410;
+          background: var(--rl-accent);
+          color: var(--rl-on-accent);
           padding: 11px 16px;
           font-weight: 700;
           font-size: 11.5px;
@@ -588,7 +550,7 @@ function Navbar() {
           position: relative;
         }
 
-        .rl-mega-feature .rl-mega-btn:hover { background: #d8bb63; }
+        .rl-mega-feature .rl-mega-btn:hover { background: var(--rl-accent-hover); }
 
         .rl-mega-feature .rl-mega-phone {
           margin-top: 14px;
@@ -616,7 +578,7 @@ function Navbar() {
           transition: border-color 0.15s;
         }
 
-        .rl-mobile-toggle:hover { border-color: #3d5a2a; color: #3d5a2a; }
+        .rl-mobile-toggle:hover { border-color: var(--rl-green); color: var(--rl-green); }
 
         /* ── MOBILE MENU ── */
         .rl-mobile-menu {
@@ -652,7 +614,7 @@ function Navbar() {
           transition: color 0.15s, background 0.15s;
         }
 
-        .rl-mobile-link:hover { color: #3d5a2a; background: #f7f5f0; }
+        .rl-mobile-link:hover { color: var(--rl-green); background: #f7f5f0; }
 
         .rl-mobile-services {
           overflow: hidden;
@@ -681,7 +643,7 @@ function Navbar() {
           width: 22px;
           height: 22px;
           flex-shrink: 0;
-          color: #4a6e32;
+          color: var(--rl-green-mid);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -689,16 +651,16 @@ function Navbar() {
 
         .rl-mobile-service-ico svg { width: 17px; height: 17px; }
 
-        .rl-mobile-service-item:hover { color: #3d5a2a; }
+        .rl-mobile-service-item:hover { color: var(--rl-green); }
 
         .rl-mobile-cta {
           margin: 14px 28px 4px;
           display: block;
           text-align: center;
           padding: 13px 20px;
-          background: #3d5a2a;
+          background: var(--rl-green);
           color: #ffffff;
-          border: 2px solid #3d5a2a;
+          border: 2px solid var(--rl-green);
           font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -707,7 +669,7 @@ function Navbar() {
           transition: background 0.15s, color 0.15s;
         }
 
-        .rl-mobile-cta:hover { background: transparent; color: #3d5a2a; }
+        .rl-mobile-cta:hover { background: transparent; color: var(--rl-green); }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
@@ -722,6 +684,7 @@ function Navbar() {
           .rl-topbar { padding: 0 16px; }
           .rl-mainnav { padding: 0 16px; }
           .rl-topbar-center { display: none; }
+          .rl-logo-img { height: 38px; }
         }
       `}</style>
 
@@ -736,9 +699,9 @@ function Navbar() {
               <span>949-305-1605</span>
             </a>
             <div className="rl-topbar-divider" />
-            <a href="mailto:office@RuizLandscape.com" className="rl-topbar-link">
+            <a href="mailto:office@ruizlandscape.com" className="rl-topbar-link">
               <EmailIcon />
-              <span>office@RuizLandscape.com</span>
+              <span>office@ruizlandscape.com</span>
             </a>
           </div>
 
@@ -767,16 +730,12 @@ function Navbar() {
         {/* ── MAIN NAV ── */}
         <div className="rl-mainnav">
           {/* Logo */}
-          <a href="/" className="rl-logo">
-            <div className="rl-logo-icon">
-              {/* Replace with: <img src="<?php echo get_theme_file_uri('/assets/logo.png'); ?>" alt="Ruiz Landscape" /> */}
-              <span className="rl-logo-placeholder">R</span>
-            </div>
-            <div className="rl-logo-divider" />
-            <div className="rl-logo-text">
-              <span className="rl-logo-name">Ruiz Landscape</span>
-              <span className="rl-logo-sub">Service, Inc.</span>
-            </div>
+          <a href="/" className="rl-logo" aria-label="Ruiz Landscape Service, Inc. — Home">
+            <img
+              className="rl-logo-img"
+              src="/wp-content/uploads/2026/06/Ruiz_Landscape_HD_Transparent-scaled.png"
+              alt="Ruiz Landscape Service, Inc."
+            />
           </a>
 
           {/* Desktop links */}
@@ -833,7 +792,7 @@ function Navbar() {
                     <span className="rl-mega-feature-leaf"><LeafIcon /></span>
                     <h4>Free On-Site Estimate</h4>
                     <p>Tell us about your project and we'll give you a clear, no-pressure quote.</p>
-                    <a href="/contact" className="rl-mega-btn" onClick={() => setServicesOpen(false)}>Get a Quote</a>
+                    <a href="/contact" className="rl-mega-btn" onClick={() => setServicesOpen(false)}>Contact Us</a>
                     <a href="tel:9493051605" className="rl-mega-phone">
                       <PhoneIcon /> 949-305-1605
                     </a>

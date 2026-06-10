@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scripts/ExampleReactComponent.js"
-/*!**********************************************!*\
-  !*** ./src/scripts/ExampleReactComponent.js ***!
-  \**********************************************/
+/***/ "./src/scripts/ContactForm.js"
+/*!************************************!*\
+  !*** ./src/scripts/ContactForm.js ***!
+  \************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -18,24 +18,274 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function ExampleReactComponent() {
-  const [clickCount, setClickCount] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 rounded-md",
-    onClick: () => setClickCount(prev => prev + 1),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-      className: "text-xl",
-      children: "Hello from Jared!"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
-      className: "text-sm",
-      children: ["You have clicked on this component", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-        className: "text-yellow-200 font-bold",
-        children: clickCount
-      }), " times."]
+// ── Datos (edítalos aquí) ─────────────────────────────
+
+const services = ["Landscape Design & Installation", "Lawn Care & Maintenance", "Tree & Shrub Care", "Irrigation Systems", "Synthetic Turf", "Large Tree Installation", "Low Voltage Lighting", "Something else"];
+const ArrowRight = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "14",
+  height: "14",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: "2.5",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M5 12h14M12 5l7 7-7 7"
+  })
+});
+
+// ── Componente ────────────────────────────────────────
+function ContactForm({
+  heading = "Get your free consultation",
+  subheading = "Tell us about your project — we'll get back to you within one business day.",
+  privacyHref = "/privacy-policy",
+  termsHref = "/terms-and-conditions"
+}) {
+  /* ───────────────────────────────────────────────────────────────
+     ENVÍO DEL FORMULARIO
+     Tal cual, hace un POST normal a la misma URL (action=""). Tienes
+     dos caminos para que envíe de verdad:
+      1) Plugin (Contact Form 7, WPForms…): renderiza el shortcode del
+        plugin en el template y deja este componente solo para páginas
+        donde quieras el formulario propio. O reemplaza el <form> de
+        abajo por el markup/embed del plugin.
+      2) Manejarlo en React sin recargar — descomenta handleSubmit,
+        ponlo en <form onSubmit={handleSubmit}> y apúntalo a tu
+        endpoint (REST API o admin-ajax):
+      // const [status, setStatus] = React.useState("idle")
+     // async function handleSubmit(e) {
+     //   e.preventDefault()
+     //   setStatus("sending")
+     //   const data = Object.fromEntries(new FormData(e.currentTarget).entries())
+     //   const res = await fetch("/wp-json/ruiz/v1/contact", {
+     //     method: "POST",
+     //     headers: { "Content-Type": "application/json" },
+     //     body: JSON.stringify(data),
+     //   })
+     //   setStatus(res.ok ? "done" : "error")
+     // }
+  ─────────────────────────────────────────────────────────────── */
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("style", {
+      children: `
+        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap');
+
+        .rl-cform * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .rl-cform {
+          /* Paleta de marca */
+          --rl-accent:       #996a6c;   /* café (Smoky Rose) */
+          --rl-accent-rgb:   153, 106, 108;
+          --rl-accent-hover: #ab7d7f;
+          --rl-on-accent:    #ffffff;
+          --rl-green-dark:   #1a2410;
+
+          font-family: 'Barlow', sans-serif;
+          width: 100%;
+          color: #ffffff;
+          background: rgba(16, 26, 8, 0.74);
+          border: 1px solid rgba(var(--rl-accent-rgb), 0.35);
+          -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+          padding: 30px;
+          display: flex;
+          flex-direction: column;
+          gap: 13px;
+        }
+
+        .rl-cform-title {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-size: 25px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+          line-height: 1.1;
+          color: #ffffff;
+        }
+
+        .rl-cform-sub {
+          font-size: 13px;
+          line-height: 1.5;
+          color: rgba(255,255,255,0.6);
+          margin: -6px 0 4px;
+        }
+
+        .rl-cform-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+
+        .rl-cform input:not([type="checkbox"]),
+        .rl-cform select,
+        .rl-cform textarea {
+          width: 100%;
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.18);
+          color: #ffffff;
+          font-family: 'Barlow', sans-serif;
+          font-size: 14px;
+          padding: 12px 13px;
+          border-radius: 0;
+          outline: none;
+          transition: border-color 0.15s, background 0.15s;
+        }
+
+        .rl-cform textarea { resize: vertical; min-height: 132px; }
+
+        .rl-cform input::placeholder,
+        .rl-cform textarea::placeholder { color: rgba(255,255,255,0.42); }
+
+        .rl-cform input:not([type="checkbox"]):focus,
+        .rl-cform select:focus,
+        .rl-cform textarea:focus {
+          border-color: var(--rl-accent);
+          background: rgba(255,255,255,0.1);
+        }
+
+        .rl-cform select {
+          -webkit-appearance: none;
+          appearance: none;
+          cursor: pointer;
+          background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23996a6c' stroke-width='2.5'><path d='m6 9 6 6 6-6'/></svg>");
+          background-repeat: no-repeat;
+          background-position: right 13px center;
+          padding-right: 38px;
+        }
+        .rl-cform select option { color: var(--rl-green-dark); }
+
+        .rl-cform-check {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          margin-top: 2px;
+          font-size: 12.5px;
+          line-height: 1.5;
+          color: rgba(255,255,255,0.62);
+          cursor: pointer;
+        }
+        .rl-cform-check input[type="checkbox"] {
+          width: 16px;
+          height: 16px;
+          margin: 1px 0 0;
+          flex-shrink: 0;
+          accent-color: var(--rl-accent);
+          cursor: pointer;
+        }
+        .rl-cform-check a { color: var(--rl-accent); text-decoration: underline; }
+
+        .rl-cform-btn {
+          margin-top: 4px;
+          width: 100%;
+          justify-content: center;
+          border: none;
+          cursor: pointer;
+          background: var(--rl-accent);
+          color: var(--rl-on-accent);
+          font-family: 'Barlow', sans-serif;
+          font-size: 12.5px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          padding: 15px 28px;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          transition: background 0.18s;
+        }
+        .rl-cform-btn:hover { background: var(--rl-accent-hover); }
+
+        /* Entrada al montar (solo si no hay movimiento reducido) */
+        @media (prefers-reduced-motion: no-preference) {
+          .rl-cform {
+            opacity: 0;
+            animation: rl-cform-in 0.9s cubic-bezier(0.16, 0.84, 0.34, 1) 0.1s both;
+          }
+        }
+        @keyframes rl-cform-in {
+          from { opacity: 0; transform: translateY(30px) scale(0.98); }
+          to   { opacity: 1; transform: none; }
+        }
+
+        @media (max-width: 480px) {
+          .rl-cform { padding: 22px; }
+          .rl-cform-row { grid-template-columns: 1fr; }
+        }
+      `
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
+      className: "rl-cform",
+      name: "ruiz_hero_contact",
+      method: "post",
+      action: "",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "rl-cform-title",
+        children: heading
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "rl-cform-sub",
+        children: subheading
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "rl-cform-row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+          type: "text",
+          name: "rl_name",
+          placeholder: "Full name",
+          "aria-label": "Full name",
+          required: true
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+          type: "tel",
+          name: "rl_phone",
+          placeholder: "Phone",
+          "aria-label": "Phone"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+        type: "email",
+        name: "rl_email",
+        placeholder: "Email address",
+        "aria-label": "Email address",
+        required: true
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
+        name: "rl_service",
+        "aria-label": "Service of interest",
+        required: true,
+        defaultValue: "",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+          value: "",
+          disabled: true,
+          children: "Service of interest\u2026"
+        }), services.map(s => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+          children: s
+        }, s))]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("textarea", {
+        name: "rl_message",
+        placeholder: "Tell us a bit about your project (optional)",
+        "aria-label": "Project details"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+        className: "rl-cform-check",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+          type: "checkbox",
+          name: "rl_consent",
+          required: true
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+          children: ["I agree to the ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+            href: privacyHref,
+            children: "Privacy Policy"
+          }), " and", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+            href: termsHref,
+            children: "Terms & Conditions"
+          }), "."]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+        type: "submit",
+        className: "rl-cform-btn",
+        children: ["Request my consultation", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowRight, {})]
+      })]
     })]
   });
 }
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ExampleReactComponent);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ContactForm);
 
 /***/ },
 
@@ -270,7 +520,7 @@ function Footer() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("style", {
       children: `
-        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
 
         .rl-footer * {
           box-sizing: border-box;
@@ -279,86 +529,44 @@ function Footer() {
         }
 
         .rl-footer {
-          font-family: 'Barlow', sans-serif;
-          color: #b8c4a8;
-          position: relative;
-          overflow: hidden;
-          background:
-            radial-gradient(circle, rgba(106,168,60,0.55) 1px, transparent 1px),
-            radial-gradient(circle, rgba(106,168,60,0.55) 1px, transparent 1px) 10px 10px,
-            linear-gradient(90deg, rgba(106,168,60,0.07) 1px, transparent 1px),
-            linear-gradient(0deg,  rgba(106,168,60,0.07) 1px, transparent 1px);
-          background-size: 20px 20px;
-          background-color: #111a0b;
+          /* Paleta de marca */
+          --rl-green:        #3d5a2a;
+          --rl-green-mid:    #4a6e32;
+          --rl-accent:       #996a6c;   /* café (Smoky Rose) */
+          --rl-accent-rgb:   153, 106, 108;
+          --rl-accent-hover: #ab7d7f;
+          --rl-on-accent:    #ffffff;
+
+          /* Neutros del cuerpo claro (como el navbar) */
+          --rl-surface:      #f7f5f0;
+          --rl-ink:          #3a3a2e;
+          --rl-ink-soft:     #6b7060;
+          --rl-line:         #e0dbd0;
+
+          font-family: 'Montserrat', sans-serif;
+          background: var(--rl-surface);
+          color: var(--rl-ink);
         }
 
-        .rl-footer::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(106,168,60,0.04) 50%,
-            transparent 100%
-          );
-          background-size: 100% 4px;
-          animation: rl-scanline 2s linear infinite;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        .rl-footer::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(200,168,75,0.12),
-            transparent
-          );
-          opacity: 0;
-          animation: rl-glitch 5s infinite;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        @keyframes rl-scanline {
-          0%   { background-position: 0 0; }
-          100% { background-position: 0 4px; }
-        }
-
-        @keyframes rl-glitch {
-          0%   { transform: translateX(-100%); opacity: 0; }
-          20%  { transform: translateX(100%) skewX(4deg); opacity: 1; }
-          100% { transform: translateX(100%); opacity: 0; }
-        }
-
-        .rl-footer-cta,
-        .rl-footer-body,
-        .rl-footer-bottom {
-          position: relative;
-          z-index: 1;
-        }
-
-        /* ── CTA BAND ── */
+        /* ══ CTA BAND — estampado tejido (oscuro) ══ */
         .rl-footer-cta {
-          background: linear-gradient(135deg, #3d5a2a 0%, #4a6e32 60%, #3a5526 100%);
-          border-top: 3px solid #c8a84b;
-          padding: 48px 24px;
-          text-align: center;
-          position: relative;
-          overflow: hidden;
-        }
+          /* Estampado tejido (Uiverse · marcelodolza, adaptado a la paleta) */
+          --s: 90px;
+          --c1: #1b2912;
+          --c2: #121b0b;
+          --_g: var(--c2) 4% 14%, var(--c1) 14% 24%, var(--c2) 22% 34%,
+            var(--c1) 34% 44%, var(--c2) 44% 56%, var(--c1) 56% 66%, var(--c2) 66% 76%,
+            var(--c1) 76% 86%, var(--c2) 86% 96%;
+          background-color: #111a0b;
+          background:
+            radial-gradient(100% 100% at 100% 0, var(--c1) 4%, var(--_g), #0008 96%, #0000),
+            radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--c1) 96%)
+              var(--c1);
+          background-size: var(--s) var(--s);
 
-        .rl-footer-cta::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image: radial-gradient(circle at 20% 50%, rgba(200,168,75,0.06) 0%, transparent 60%),
-                            radial-gradient(circle at 80% 50%, rgba(200,168,75,0.06) 0%, transparent 60%);
-          pointer-events: none;
+          border-top: 3px solid var(--rl-accent);
+          padding: 56px 24px;
+          text-align: center;
         }
 
         .rl-footer-cta-eyebrow {
@@ -369,13 +577,13 @@ function Footer() {
           font-weight: 700;
           letter-spacing: 0.16em;
           text-transform: uppercase;
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-bottom: 12px;
         }
 
         .rl-footer-cta h2 {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-size: clamp(26px, 4vw, 38px);
+          font-family: 'Montserrat', sans-serif;
+          font-size: clamp(22px, 3.2vw, 31px);
           font-weight: 800;
           color: #fff;
           letter-spacing: 0.02em;
@@ -386,7 +594,7 @@ function Footer() {
 
         .rl-footer-cta p {
           font-size: 15px;
-          color: rgba(255,255,255,0.7);
+          color: rgba(255,255,255,0.72);
           max-width: 480px;
           margin: 0 auto 28px;
           line-height: 1.6;
@@ -396,9 +604,9 @@ function Footer() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: #c8a84b;
-          color: #2b3e1d;
-          font-family: 'Barlow Condensed', sans-serif;
+          background: var(--rl-accent);
+          color: var(--rl-on-accent);
+          font-family: 'Montserrat', sans-serif;
           font-size: 14px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -410,11 +618,11 @@ function Footer() {
         }
 
         .rl-footer-cta-btn:hover {
-          background: #d8b85e;
+          background: var(--rl-accent-hover);
           transform: translateY(-2px);
         }
 
-        /* ── MAIN BODY ── */
+        /* ══ MAIN BODY — claro (como el navbar) ══ */
         .rl-footer-body {
           padding: 60px 24px 40px;
           max-width: 1200px;
@@ -424,14 +632,13 @@ function Footer() {
           gap: 48px;
         }
 
-        /* Column heading */
         .rl-footer-col-title {
-          font-family: 'Barlow Condensed', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 13px;
           font-weight: 700;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-bottom: 20px;
           display: flex;
           align-items: center;
@@ -442,7 +649,7 @@ function Footer() {
           content: '';
           flex: 1;
           height: 1px;
-          background: rgba(200,168,75,0.25);
+          background: var(--rl-line);
         }
 
         /* ── COL 1: Brand ── */
@@ -452,62 +659,27 @@ function Footer() {
         }
 
         .rl-footer-logo {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 10px;
           text-decoration: none;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
         }
 
-        .rl-footer-logo-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          border: 2px solid rgba(200,168,75,0.5);
-          background: rgba(255,255,255,0.05);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 800;
-          font-size: 22px;
-          color: #c8a84b;
-          flex-shrink: 0;
-          overflow: hidden;
-        }
-
-        .rl-footer-logo-icon img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 50%;
-        }
-
-        .rl-footer-logo-text .name {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 700;
-          font-size: 19px;
-          color: #fff;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          line-height: 1.1;
-        }
-
-        .rl-footer-logo-text .sub {
-          font-size: 10.5px;
-          font-weight: 500;
-          color: #c8a84b;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
+        .rl-footer-logo-img {
+          height: 58px;
+          width: auto;
+          max-width: 260px;
+          display: block;
+          object-fit: contain;
         }
 
         .rl-footer-tagline {
           font-size: 13.5px;
-          color: rgba(255,255,255,0.55);
+          color: var(--rl-ink-soft);
           line-height: 1.65;
           margin-bottom: 22px;
           font-style: italic;
-          border-left: 2px solid rgba(200,168,75,0.4);
+          border-left: 2px solid var(--rl-accent);
           padding-left: 12px;
         }
 
@@ -523,17 +695,17 @@ function Footer() {
           width: 36px;
           height: 36px;
           border-radius: 6px;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: #b8c4a8;
+          background: #ffffff;
+          border: 1px solid var(--rl-line);
+          color: var(--rl-ink-soft);
           text-decoration: none;
           transition: all 0.2s ease;
         }
 
         .rl-footer-social-btn:hover {
-          background: #c8a84b;
-          border-color: #c8a84b;
-          color: #2b3e1d;
+          background: var(--rl-accent);
+          border-color: var(--rl-accent);
+          color: var(--rl-on-accent);
           transform: translateY(-2px);
         }
 
@@ -549,7 +721,7 @@ function Footer() {
           display: flex;
           align-items: center;
           gap: 8px;
-          color: #b8c4a8;
+          color: #4a4a3a;
           text-decoration: none;
           font-size: 13.5px;
           font-weight: 500;
@@ -558,7 +730,7 @@ function Footer() {
         }
 
         .rl-footer-links a .arrow {
-          color: #c8a84b;
+          color: var(--rl-accent);
           opacity: 0;
           transform: translateX(-4px);
           transition: all 0.15s ease;
@@ -566,7 +738,7 @@ function Footer() {
         }
 
         .rl-footer-links a:hover {
-          color: #fff;
+          color: var(--rl-green);
           padding-left: 4px;
         }
 
@@ -587,7 +759,7 @@ function Footer() {
           display: flex;
           align-items: flex-start;
           gap: 7px;
-          color: #b8c4a8;
+          color: #4a4a3a;
           text-decoration: none;
           font-size: 13px;
           font-weight: 400;
@@ -601,15 +773,15 @@ function Footer() {
           width: 4px;
           height: 4px;
           border-radius: 50%;
-          background: #c8a84b;
+          background: var(--rl-accent);
           margin-top: 6px;
           flex-shrink: 0;
-          opacity: 0.6;
+          opacity: 0.7;
           transition: opacity 0.15s;
         }
 
         .rl-footer-services a:hover {
-          color: #fff;
+          color: var(--rl-green);
         }
 
         .rl-footer-services a:hover::before {
@@ -632,14 +804,14 @@ function Footer() {
         }
 
         .rl-footer-contact-icon {
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-top: 2px;
           flex-shrink: 0;
         }
 
         .rl-footer-contact-item a,
         .rl-footer-contact-item span {
-          color: #b8c4a8;
+          color: #4a4a3a;
           text-decoration: none;
           font-size: 13.5px;
           line-height: 1.5;
@@ -647,12 +819,12 @@ function Footer() {
         }
 
         .rl-footer-contact-item a:hover {
-          color: #fff;
+          color: var(--rl-green);
         }
 
         .rl-footer-counties {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #ffffff;
+          border: 1px solid var(--rl-line);
           border-radius: 6px;
           padding: 12px 14px;
         }
@@ -662,7 +834,7 @@ function Footer() {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-bottom: 8px;
         }
 
@@ -673,9 +845,9 @@ function Footer() {
         }
 
         .rl-footer-county-tag {
-          background: rgba(200,168,75,0.12);
-          border: 1px solid rgba(200,168,75,0.2);
-          color: rgba(255,255,255,0.7);
+          background: rgba(var(--rl-accent-rgb),0.1);
+          border: 1px solid rgba(var(--rl-accent-rgb),0.28);
+          color: #5a5a48;
           font-size: 11px;
           font-weight: 500;
           padding: 3px 9px;
@@ -685,7 +857,7 @@ function Footer() {
 
         /* ── BOTTOM BAR ── */
         .rl-footer-bottom {
-          border-top: 1px solid rgba(255,255,255,0.07);
+          border-top: 1px solid var(--rl-line);
           padding: 18px 24px;
         }
 
@@ -701,11 +873,11 @@ function Footer() {
 
         .rl-footer-copyright {
           font-size: 12px;
-          color: rgba(255,255,255,0.35);
+          color: var(--rl-ink-soft);
         }
 
         .rl-footer-copyright strong {
-          color: rgba(255,255,255,0.5);
+          color: #4a4a3a;
           font-weight: 600;
         }
 
@@ -714,12 +886,11 @@ function Footer() {
           align-items: center;
           gap: 6px;
           font-size: 12px;
-          color: rgba(255,255,255,0.35);
+          color: var(--rl-ink-soft);
         }
 
         .rl-footer-lic svg {
-          color: #c8a84b;
-          opacity: 0.7;
+          color: var(--rl-accent);
         }
 
         /* ── RESPONSIVE ── */
@@ -752,7 +923,7 @@ function Footer() {
           }
 
           .rl-footer-cta {
-            padding: 36px 20px;
+            padding: 44px 20px;
           }
         }
       `
@@ -776,22 +947,15 @@ function Footer() {
         className: "rl-footer-body",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           className: "rl-footer-brand",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
             href: "/",
             className: "rl-footer-logo",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "rl-footer-logo-icon",
-              children: "R"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "rl-footer-logo-text",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                className: "name",
-                children: "Ruiz Landscape"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                className: "sub",
-                children: "Service, Inc."
-              })]
-            })]
+            "aria-label": "Ruiz Landscape Service, Inc. \u2014 Home",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+              className: "rl-footer-logo-img",
+              src: "/wp-content/uploads/2026/06/Ruiz_Landscape_HD_Transparent-scaled.png",
+              alt: "Ruiz Landscape Service, Inc."
+            })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
             className: "rl-footer-tagline",
             children: "Eco-Conscious Landscaping for a Greener Tomorrow"
@@ -1277,6 +1441,13 @@ function Navbar() {
         }
 
         .rl-navbar {
+          /* Paleta de marca */
+          --rl-green:        #3d5a2a;
+          --rl-green-mid:    #4a6e32;
+          --rl-accent:       #996a6c;   /* café (Smoky Rose) — antes dorado */
+          --rl-accent-hover: #ab7d7f;
+          --rl-on-accent:    #ffffff;
+
           font-family: 'Barlow', sans-serif;
           position: fixed;
           top: 0;
@@ -1341,7 +1512,7 @@ function Navbar() {
           white-space: nowrap;
         }
 
-        .rl-topbar-link:hover { color: #3d5a2a; }
+        .rl-topbar-link:hover { color: var(--rl-green); }
 
         .rl-topbar-divider {
           width: 1px;
@@ -1353,7 +1524,7 @@ function Navbar() {
           display: flex;
           align-items: center;
           gap: 5px;
-          color: #4a6e32;
+          color: var(--rl-green-mid);
           font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -1371,12 +1542,12 @@ function Navbar() {
           transition: color 0.15s;
         }
 
-        .rl-social-link:hover { color: #3d5a2a; }
+        .rl-social-link:hover { color: var(--rl-green); }
 
         /* ── MAIN NAV ── */
         .rl-mainnav {
           background-color: #ffffff;
-          border-bottom: 2px solid #3d5a2a;
+          border-bottom: 2px solid var(--rl-green);
           padding: 0 32px;
           height: 68px;
           display: grid;
@@ -1394,57 +1565,12 @@ function Navbar() {
           justify-self: start;
         }
 
-        .rl-logo-icon {
-          width: 44px;
-          height: 44px;
-          border: 2px solid #3d5a2a;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-
-        .rl-logo-icon img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .rl-logo-placeholder {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 800;
-          font-size: 22px;
-          color: #3d5a2a;
-        }
-
-        .rl-logo-divider {
-          width: 1px;
-          height: 32px;
-          background: #d0ccc4;
-        }
-
-        .rl-logo-text {
-          display: flex;
-          flex-direction: column;
-          line-height: 1.15;
-        }
-
-        .rl-logo-name {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 700;
-          font-size: 17px;
-          color: #1a2410;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-        }
-
-        .rl-logo-sub {
-          font-size: 9.5px;
-          font-weight: 600;
-          color: #7a9060;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
+        .rl-logo-img {
+          height: 60px;
+          width: auto;
+          max-width: 230px;
+          display: block;
+          object-fit: contain;
         }
 
         /* Nav links */
@@ -1492,21 +1618,21 @@ function Navbar() {
           left: 16px;
           right: 16px;
           height: 2px;
-          background: #3d5a2a;
+          background: var(--rl-green);
           transform: scaleX(0);
           transition: transform 0.2s ease;
         }
 
-        .rl-nav-link:hover { color: #3d5a2a; }
+        .rl-nav-link:hover { color: var(--rl-green); }
         .rl-nav-link:hover::after { transform: scaleX(1); }
 
         .rl-nav-link.cta {
-          background: #3d5a2a;
+          background: var(--rl-green);
           color: #ffffff;
           padding: 9px 22px;
           font-size: 12px;
           letter-spacing: 0.1em;
-          border: 2px solid #3d5a2a;
+          border: 2px solid var(--rl-green);
           transition: background 0.15s, color 0.15s;
         }
 
@@ -1514,7 +1640,7 @@ function Navbar() {
 
         .rl-nav-link.cta:hover {
           background: transparent;
-          color: #3d5a2a;
+          color: var(--rl-green);
         }
 
         .rl-chevron {
@@ -1535,7 +1661,7 @@ function Navbar() {
           max-width: calc(100vw - 64px);
           background: #ffffff;
           border: 1px solid #d8d4c8;
-          border-top: 3px solid #3d5a2a;
+          border-top: 3px solid var(--rl-green);
           box-shadow: 0 14px 40px rgba(0,0,0,0.13);
           opacity: 0;
           pointer-events: none;
@@ -1606,7 +1732,7 @@ function Navbar() {
           flex-shrink: 0;
           border: 1px solid #e3ddd0;
           background: #fbfaf6;
-          color: #4a6e32;
+          color: var(--rl-green-mid);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1614,9 +1740,9 @@ function Navbar() {
         }
 
         .rl-mega-item:hover .rl-mega-ico {
-          background: #3d5a2a;
+          background: var(--rl-green);
           color: #ffffff;
-          border-color: #3d5a2a;
+          border-color: var(--rl-green);
         }
 
         .rl-mega-txt { display: flex; flex-direction: column; gap: 2px; }
@@ -1630,7 +1756,7 @@ function Navbar() {
           transition: color 0.12s;
         }
 
-        .rl-mega-item:hover .rl-mega-label { color: #3d5a2a; }
+        .rl-mega-item:hover .rl-mega-label { color: var(--rl-green); }
 
         .rl-mega-desc { font-size: 11px; color: #8a8f7e; line-height: 1.35; }
 
@@ -1679,8 +1805,8 @@ function Navbar() {
         }
 
         .rl-mega-feature .rl-mega-btn {
-          background: #c8a84b;
-          color: #1a2410;
+          background: var(--rl-accent);
+          color: var(--rl-on-accent);
           padding: 11px 16px;
           font-weight: 700;
           font-size: 11.5px;
@@ -1692,7 +1818,7 @@ function Navbar() {
           position: relative;
         }
 
-        .rl-mega-feature .rl-mega-btn:hover { background: #d8bb63; }
+        .rl-mega-feature .rl-mega-btn:hover { background: var(--rl-accent-hover); }
 
         .rl-mega-feature .rl-mega-phone {
           margin-top: 14px;
@@ -1720,7 +1846,7 @@ function Navbar() {
           transition: border-color 0.15s;
         }
 
-        .rl-mobile-toggle:hover { border-color: #3d5a2a; color: #3d5a2a; }
+        .rl-mobile-toggle:hover { border-color: var(--rl-green); color: var(--rl-green); }
 
         /* ── MOBILE MENU ── */
         .rl-mobile-menu {
@@ -1756,7 +1882,7 @@ function Navbar() {
           transition: color 0.15s, background 0.15s;
         }
 
-        .rl-mobile-link:hover { color: #3d5a2a; background: #f7f5f0; }
+        .rl-mobile-link:hover { color: var(--rl-green); background: #f7f5f0; }
 
         .rl-mobile-services {
           overflow: hidden;
@@ -1785,7 +1911,7 @@ function Navbar() {
           width: 22px;
           height: 22px;
           flex-shrink: 0;
-          color: #4a6e32;
+          color: var(--rl-green-mid);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1793,16 +1919,16 @@ function Navbar() {
 
         .rl-mobile-service-ico svg { width: 17px; height: 17px; }
 
-        .rl-mobile-service-item:hover { color: #3d5a2a; }
+        .rl-mobile-service-item:hover { color: var(--rl-green); }
 
         .rl-mobile-cta {
           margin: 14px 28px 4px;
           display: block;
           text-align: center;
           padding: 13px 20px;
-          background: #3d5a2a;
+          background: var(--rl-green);
           color: #ffffff;
-          border: 2px solid #3d5a2a;
+          border: 2px solid var(--rl-green);
           font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -1811,7 +1937,7 @@ function Navbar() {
           transition: background 0.15s, color 0.15s;
         }
 
-        .rl-mobile-cta:hover { background: transparent; color: #3d5a2a; }
+        .rl-mobile-cta:hover { background: transparent; color: var(--rl-green); }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
@@ -1826,6 +1952,7 @@ function Navbar() {
           .rl-topbar { padding: 0 16px; }
           .rl-mainnav { padding: 0 16px; }
           .rl-topbar-center { display: none; }
+          .rl-logo-img { height: 38px; }
         }
       `
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("nav", {
@@ -1846,10 +1973,10 @@ function Navbar() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
             className: "rl-topbar-divider"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
-            href: "mailto:office@RuizLandscape.com",
+            href: "mailto:office@ruizlandscape.com",
             className: "rl-topbar-link",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(EmailIcon, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              children: "office@RuizLandscape.com"
+              children: "office@ruizlandscape.com"
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -1885,27 +2012,15 @@ function Navbar() {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "rl-mainnav",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
           href: "/",
           className: "rl-logo",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "rl-logo-icon",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              className: "rl-logo-placeholder",
-              children: "R"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "rl-logo-divider"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "rl-logo-text",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              className: "rl-logo-name",
-              children: "Ruiz Landscape"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              className: "rl-logo-sub",
-              children: "Service, Inc."
-            })]
-          })]
+          "aria-label": "Ruiz Landscape Service, Inc. \u2014 Home",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+            className: "rl-logo-img",
+            src: "/wp-content/uploads/2026/06/Ruiz_Landscape_HD_Transparent-scaled.png",
+            alt: "Ruiz Landscape Service, Inc."
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
           className: "rl-nav-links",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
@@ -1981,7 +2096,7 @@ function Navbar() {
                     href: "/contact",
                     className: "rl-mega-btn",
                     onClick: () => setServicesOpen(false),
-                    children: "Get a Quote"
+                    children: "Contact Us"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
                     href: "tel:9493051605",
                     className: "rl-mega-phone",
@@ -2064,29 +2179,6 @@ function Navbar() {
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Navbar);
-
-/***/ },
-
-/***/ "./src/scripts/Person.js"
-/*!*******************************!*\
-  !*** ./src/scripts/Person.js ***!
-  \*******************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-class Person {
-  constructor(name) {
-    this.name = name;
-    this.greet();
-  }
-  greet() {
-    console.log(`Hello, my name is ${this.name}.`);
-  }
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Person);
 
 /***/ },
 
@@ -2201,37 +2293,32 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scripts_Person__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/Person */ "./src/scripts/Person.js");
-/* harmony import */ var _scripts_ExampleReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scripts/ExampleReactComponent */ "./src/scripts/ExampleReactComponent.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/client */ "react-dom/client");
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _scripts_Navbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./scripts/Navbar */ "./src/scripts/Navbar.js");
-/* harmony import */ var _scripts_Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scripts/Footer */ "./src/scripts/Footer.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "react-dom/client");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _scripts_Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./scripts/Navbar */ "./src/scripts/Navbar.js");
+/* harmony import */ var _scripts_Footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scripts/Footer */ "./src/scripts/Footer.js");
+/* harmony import */ var _scripts_ContactForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./scripts/ContactForm */ "./src/scripts/ContactForm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
 
 
-
-const person1 = new _scripts_Person__WEBPACK_IMPORTED_MODULE_0__["default"]("Brad");
-if (document.querySelector("#render-react-example-here")) {
-  const root = react_dom_client__WEBPACK_IMPORTED_MODULE_3___default().createRoot(document.querySelector("#render-react-example-here"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_scripts_ExampleReactComponent__WEBPACK_IMPORTED_MODULE_1__["default"], {}));
-}
-
-// En el render:
 if (document.querySelector("#render-navbar-here")) {
-  const root = react_dom_client__WEBPACK_IMPORTED_MODULE_3___default().createRoot(document.querySelector("#render-navbar-here"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_scripts_Navbar__WEBPACK_IMPORTED_MODULE_4__["default"], {}));
+  const root = react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(document.querySelector("#render-navbar-here"));
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_scripts_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {}));
 }
 if (document.querySelector("#render-footer-here")) {
-  const root = react_dom_client__WEBPACK_IMPORTED_MODULE_3___default().createRoot(document.querySelector("#render-footer-here"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_scripts_Footer__WEBPACK_IMPORTED_MODULE_5__["default"], {}));
+  const root = react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(document.querySelector("#render-footer-here"));
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_scripts_Footer__WEBPACK_IMPORTED_MODULE_3__["default"], {}));
+}
+if (document.querySelector("#render-contact-form-here")) {
+  const root = react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(document.querySelector("#render-contact-form-here"));
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_scripts_ContactForm__WEBPACK_IMPORTED_MODULE_4__["default"], {}));
 }
 })();
 

@@ -104,7 +104,7 @@ function Footer() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
 
         .rl-footer * {
           box-sizing: border-box;
@@ -113,86 +113,44 @@ function Footer() {
         }
 
         .rl-footer {
-          font-family: 'Barlow', sans-serif;
-          color: #b8c4a8;
-          position: relative;
-          overflow: hidden;
-          background:
-            radial-gradient(circle, rgba(106,168,60,0.55) 1px, transparent 1px),
-            radial-gradient(circle, rgba(106,168,60,0.55) 1px, transparent 1px) 10px 10px,
-            linear-gradient(90deg, rgba(106,168,60,0.07) 1px, transparent 1px),
-            linear-gradient(0deg,  rgba(106,168,60,0.07) 1px, transparent 1px);
-          background-size: 20px 20px;
-          background-color: #111a0b;
+          /* Paleta de marca */
+          --rl-green:        #3d5a2a;
+          --rl-green-mid:    #4a6e32;
+          --rl-accent:       #996a6c;   /* café (Smoky Rose) */
+          --rl-accent-rgb:   153, 106, 108;
+          --rl-accent-hover: #ab7d7f;
+          --rl-on-accent:    #ffffff;
+
+          /* Neutros del cuerpo claro (como el navbar) */
+          --rl-surface:      #f7f5f0;
+          --rl-ink:          #3a3a2e;
+          --rl-ink-soft:     #6b7060;
+          --rl-line:         #e0dbd0;
+
+          font-family: 'Montserrat', sans-serif;
+          background: var(--rl-surface);
+          color: var(--rl-ink);
         }
 
-        .rl-footer::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(106,168,60,0.04) 50%,
-            transparent 100%
-          );
-          background-size: 100% 4px;
-          animation: rl-scanline 2s linear infinite;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        .rl-footer::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(200,168,75,0.12),
-            transparent
-          );
-          opacity: 0;
-          animation: rl-glitch 5s infinite;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        @keyframes rl-scanline {
-          0%   { background-position: 0 0; }
-          100% { background-position: 0 4px; }
-        }
-
-        @keyframes rl-glitch {
-          0%   { transform: translateX(-100%); opacity: 0; }
-          20%  { transform: translateX(100%) skewX(4deg); opacity: 1; }
-          100% { transform: translateX(100%); opacity: 0; }
-        }
-
-        .rl-footer-cta,
-        .rl-footer-body,
-        .rl-footer-bottom {
-          position: relative;
-          z-index: 1;
-        }
-
-        /* ── CTA BAND ── */
+        /* ══ CTA BAND — estampado tejido (oscuro) ══ */
         .rl-footer-cta {
-          background: linear-gradient(135deg, #3d5a2a 0%, #4a6e32 60%, #3a5526 100%);
-          border-top: 3px solid #c8a84b;
-          padding: 48px 24px;
-          text-align: center;
-          position: relative;
-          overflow: hidden;
-        }
+          /* Estampado tejido (Uiverse · marcelodolza, adaptado a la paleta) */
+          --s: 90px;
+          --c1: #1b2912;
+          --c2: #121b0b;
+          --_g: var(--c2) 4% 14%, var(--c1) 14% 24%, var(--c2) 22% 34%,
+            var(--c1) 34% 44%, var(--c2) 44% 56%, var(--c1) 56% 66%, var(--c2) 66% 76%,
+            var(--c1) 76% 86%, var(--c2) 86% 96%;
+          background-color: #111a0b;
+          background:
+            radial-gradient(100% 100% at 100% 0, var(--c1) 4%, var(--_g), #0008 96%, #0000),
+            radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--c1) 96%)
+              var(--c1);
+          background-size: var(--s) var(--s);
 
-        .rl-footer-cta::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background-image: radial-gradient(circle at 20% 50%, rgba(200,168,75,0.06) 0%, transparent 60%),
-                            radial-gradient(circle at 80% 50%, rgba(200,168,75,0.06) 0%, transparent 60%);
-          pointer-events: none;
+          border-top: 3px solid var(--rl-accent);
+          padding: 56px 24px;
+          text-align: center;
         }
 
         .rl-footer-cta-eyebrow {
@@ -203,13 +161,13 @@ function Footer() {
           font-weight: 700;
           letter-spacing: 0.16em;
           text-transform: uppercase;
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-bottom: 12px;
         }
 
         .rl-footer-cta h2 {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-size: clamp(26px, 4vw, 38px);
+          font-family: 'Montserrat', sans-serif;
+          font-size: clamp(22px, 3.2vw, 31px);
           font-weight: 800;
           color: #fff;
           letter-spacing: 0.02em;
@@ -220,7 +178,7 @@ function Footer() {
 
         .rl-footer-cta p {
           font-size: 15px;
-          color: rgba(255,255,255,0.7);
+          color: rgba(255,255,255,0.72);
           max-width: 480px;
           margin: 0 auto 28px;
           line-height: 1.6;
@@ -230,9 +188,9 @@ function Footer() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: #c8a84b;
-          color: #2b3e1d;
-          font-family: 'Barlow Condensed', sans-serif;
+          background: var(--rl-accent);
+          color: var(--rl-on-accent);
+          font-family: 'Montserrat', sans-serif;
           font-size: 14px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -244,11 +202,11 @@ function Footer() {
         }
 
         .rl-footer-cta-btn:hover {
-          background: #d8b85e;
+          background: var(--rl-accent-hover);
           transform: translateY(-2px);
         }
 
-        /* ── MAIN BODY ── */
+        /* ══ MAIN BODY — claro (como el navbar) ══ */
         .rl-footer-body {
           padding: 60px 24px 40px;
           max-width: 1200px;
@@ -258,14 +216,13 @@ function Footer() {
           gap: 48px;
         }
 
-        /* Column heading */
         .rl-footer-col-title {
-          font-family: 'Barlow Condensed', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 13px;
           font-weight: 700;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-bottom: 20px;
           display: flex;
           align-items: center;
@@ -276,7 +233,7 @@ function Footer() {
           content: '';
           flex: 1;
           height: 1px;
-          background: rgba(200,168,75,0.25);
+          background: var(--rl-line);
         }
 
         /* ── COL 1: Brand ── */
@@ -286,62 +243,27 @@ function Footer() {
         }
 
         .rl-footer-logo {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 10px;
           text-decoration: none;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
         }
 
-        .rl-footer-logo-icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          border: 2px solid rgba(200,168,75,0.5);
-          background: rgba(255,255,255,0.05);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 800;
-          font-size: 22px;
-          color: #c8a84b;
-          flex-shrink: 0;
-          overflow: hidden;
-        }
-
-        .rl-footer-logo-icon img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 50%;
-        }
-
-        .rl-footer-logo-text .name {
-          font-family: 'Barlow Condensed', sans-serif;
-          font-weight: 700;
-          font-size: 19px;
-          color: #fff;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          line-height: 1.1;
-        }
-
-        .rl-footer-logo-text .sub {
-          font-size: 10.5px;
-          font-weight: 500;
-          color: #c8a84b;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
+        .rl-footer-logo-img {
+          height: 58px;
+          width: auto;
+          max-width: 260px;
+          display: block;
+          object-fit: contain;
         }
 
         .rl-footer-tagline {
           font-size: 13.5px;
-          color: rgba(255,255,255,0.55);
+          color: var(--rl-ink-soft);
           line-height: 1.65;
           margin-bottom: 22px;
           font-style: italic;
-          border-left: 2px solid rgba(200,168,75,0.4);
+          border-left: 2px solid var(--rl-accent);
           padding-left: 12px;
         }
 
@@ -357,17 +279,17 @@ function Footer() {
           width: 36px;
           height: 36px;
           border-radius: 6px;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: #b8c4a8;
+          background: #ffffff;
+          border: 1px solid var(--rl-line);
+          color: var(--rl-ink-soft);
           text-decoration: none;
           transition: all 0.2s ease;
         }
 
         .rl-footer-social-btn:hover {
-          background: #c8a84b;
-          border-color: #c8a84b;
-          color: #2b3e1d;
+          background: var(--rl-accent);
+          border-color: var(--rl-accent);
+          color: var(--rl-on-accent);
           transform: translateY(-2px);
         }
 
@@ -383,7 +305,7 @@ function Footer() {
           display: flex;
           align-items: center;
           gap: 8px;
-          color: #b8c4a8;
+          color: #4a4a3a;
           text-decoration: none;
           font-size: 13.5px;
           font-weight: 500;
@@ -392,7 +314,7 @@ function Footer() {
         }
 
         .rl-footer-links a .arrow {
-          color: #c8a84b;
+          color: var(--rl-accent);
           opacity: 0;
           transform: translateX(-4px);
           transition: all 0.15s ease;
@@ -400,7 +322,7 @@ function Footer() {
         }
 
         .rl-footer-links a:hover {
-          color: #fff;
+          color: var(--rl-green);
           padding-left: 4px;
         }
 
@@ -421,7 +343,7 @@ function Footer() {
           display: flex;
           align-items: flex-start;
           gap: 7px;
-          color: #b8c4a8;
+          color: #4a4a3a;
           text-decoration: none;
           font-size: 13px;
           font-weight: 400;
@@ -435,15 +357,15 @@ function Footer() {
           width: 4px;
           height: 4px;
           border-radius: 50%;
-          background: #c8a84b;
+          background: var(--rl-accent);
           margin-top: 6px;
           flex-shrink: 0;
-          opacity: 0.6;
+          opacity: 0.7;
           transition: opacity 0.15s;
         }
 
         .rl-footer-services a:hover {
-          color: #fff;
+          color: var(--rl-green);
         }
 
         .rl-footer-services a:hover::before {
@@ -466,14 +388,14 @@ function Footer() {
         }
 
         .rl-footer-contact-icon {
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-top: 2px;
           flex-shrink: 0;
         }
 
         .rl-footer-contact-item a,
         .rl-footer-contact-item span {
-          color: #b8c4a8;
+          color: #4a4a3a;
           text-decoration: none;
           font-size: 13.5px;
           line-height: 1.5;
@@ -481,12 +403,12 @@ function Footer() {
         }
 
         .rl-footer-contact-item a:hover {
-          color: #fff;
+          color: var(--rl-green);
         }
 
         .rl-footer-counties {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: #ffffff;
+          border: 1px solid var(--rl-line);
           border-radius: 6px;
           padding: 12px 14px;
         }
@@ -496,7 +418,7 @@ function Footer() {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #c8a84b;
+          color: var(--rl-accent);
           margin-bottom: 8px;
         }
 
@@ -507,9 +429,9 @@ function Footer() {
         }
 
         .rl-footer-county-tag {
-          background: rgba(200,168,75,0.12);
-          border: 1px solid rgba(200,168,75,0.2);
-          color: rgba(255,255,255,0.7);
+          background: rgba(var(--rl-accent-rgb),0.1);
+          border: 1px solid rgba(var(--rl-accent-rgb),0.28);
+          color: #5a5a48;
           font-size: 11px;
           font-weight: 500;
           padding: 3px 9px;
@@ -519,7 +441,7 @@ function Footer() {
 
         /* ── BOTTOM BAR ── */
         .rl-footer-bottom {
-          border-top: 1px solid rgba(255,255,255,0.07);
+          border-top: 1px solid var(--rl-line);
           padding: 18px 24px;
         }
 
@@ -535,11 +457,11 @@ function Footer() {
 
         .rl-footer-copyright {
           font-size: 12px;
-          color: rgba(255,255,255,0.35);
+          color: var(--rl-ink-soft);
         }
 
         .rl-footer-copyright strong {
-          color: rgba(255,255,255,0.5);
+          color: #4a4a3a;
           font-weight: 600;
         }
 
@@ -548,12 +470,11 @@ function Footer() {
           align-items: center;
           gap: 6px;
           font-size: 12px;
-          color: rgba(255,255,255,0.35);
+          color: var(--rl-ink-soft);
         }
 
         .rl-footer-lic svg {
-          color: #c8a84b;
-          opacity: 0.7;
+          color: var(--rl-accent);
         }
 
         /* ── RESPONSIVE ── */
@@ -586,14 +507,14 @@ function Footer() {
           }
 
           .rl-footer-cta {
-            padding: 36px 20px;
+            padding: 44px 20px;
           }
         }
       `}</style>
 
       <footer className="rl-footer">
 
-        {/* ── CTA Band ── */}
+        {/* ── CTA Band (estampado) ── */}
         <div className="rl-footer-cta">
           <div className="rl-footer-cta-eyebrow">
             <LeafIcon /> Free Consultation
@@ -607,20 +528,17 @@ function Footer() {
           </a>
         </div>
 
-        {/* ── Main Grid ── */}
+        {/* ── Main Grid (claro) ── */}
         <div className="rl-footer-body">
 
           {/* Col 1 — Brand */}
           <div className="rl-footer-brand">
-            <a href="/" className="rl-footer-logo">
-              <div className="rl-footer-logo-icon">
-                {/* Replace with: <img src="<?php echo get_theme_file_uri('/assets/logo.png'); ?>" alt="Ruiz Landscape" /> */}
-                R
-              </div>
-              <div className="rl-footer-logo-text">
-                <div className="name">Ruiz Landscape</div>
-                <div className="sub">Service, Inc.</div>
-              </div>
+            <a href="/" className="rl-footer-logo" aria-label="Ruiz Landscape Service, Inc. — Home">
+              <img
+                className="rl-footer-logo-img"
+                src="/wp-content/uploads/2026/06/Ruiz_Landscape_HD_Transparent-scaled.png"
+                alt="Ruiz Landscape Service, Inc."
+              />
             </a>
 
             <p className="rl-footer-tagline">
