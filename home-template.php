@@ -16,24 +16,24 @@
 $rl_images = array(
 
   // ── Fondos de sección (CSS) ──
-  'hero-bg'          => '/wp-content/uploads/2026/06/RuizLandscape-scaled.jpg', // Sección 1 — fondo del hero
+  'hero-bg'          => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg', // Sección 1 — fondo del hero
   'cta-bg'           => '', // Sección 8 — fondo del CTA final
 
   // ── Sección 2 · Welcome ──
-  'welcome-main'     => '/wp-content/uploads/2026/06/RuizCrew.png',
-  'welcome-accent'   => '', // foto pequeña sobrepuesta (esquina)
+  'welcome-main'     => '/wp-content/uploads/2026/06/RuizAtWork.png',
+  'welcome-accent'   => '/wp-content/uploads/2026/06/Ruiz_LogoVariant.png', // foto pequeña sobrepuesta (esquina)
 
   // ── Sección 3 · Tarjetas de servicios ──
-  'landscape-design' => '/wp-content/uploads/2026/06/LandscapeDesignInstallation-scaled.jpg',
-  'lawn-care'        => '/wp-content/uploads/2026/06/LawnCareMaintenance-scaled.jpg',
-  'tree-shrub'       => '/wp-content/uploads/2026/06/TreeShrubCare-scaled.jpg',
-  'irrigation'       => '/wp-content/uploads/2026/06/Irrigation-scaled.jpg',
-  'synthetic-turf'   => '/wp-content/uploads/2026/06/SyntethicTurf-scaled.jpg',
-  'large-trees'      => '/wp-content/uploads/2026/06/TreeInstallation-scaled.jpg',
-  'lighting'         => '/wp-content/uploads/2026/06/OutdoorLightningSystem-scaled.jpg',
+  'landscape-design' => '/wp-content/uploads/2026/06/LandscapeDesignInstallation-1.jpg',
+  'lawn-care'        => '/wp-content/uploads/2026/06/LawnCareMaintenance-1.jpg',
+  'tree-shrub'       => '/wp-content/uploads/2026/06/TreeShrubRuiz.jpg',
+  'irrigation'       => '/wp-content/uploads/2026/06/IrrigationSystem-scaled.jpg',
+  'synthetic-turf'   => '/wp-content/uploads/2026/06/SyntheticTurfInstallation-scaled.webp',
+  'large-trees'      => '/wp-content/uploads/2026/06/LargeTreeInstallation.jpg',
+  'lighting'         => '/wp-content/uploads/2026/06/LowVoltageLighting-1.jpg',
 
   // ── Sección 4 · Why Choose Us ──
-  'why-photo'        => '', // retrato / foto del equipo
+  'why-photo'        => '/wp-content/uploads/2026/06/WhySectionRuiz.png', // retrato / foto del equipo
 
   // ── Marca / Schema (JSON-LD) ──
   'logo'             => 'https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/logo.png',
@@ -209,6 +209,22 @@ get_header(); ?>
 }
 </script>
 
+<!-- ══════════════════════════════════════════════
+     SVG FILTER — VOID TEXTURE (para el estampado de servicios)
+     Se declara aquí, invisible, para que el filtro esté disponible
+     en toda la página sin repetirlo dentro de la sección.
+══════════════════════════════════════════════ -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
+  <defs>
+    <filter id="void-texture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blended"/>
+      <feComposite in="blended" in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+
 <main id="rl-home">
 <script>
 /* Marca el contenedor ANTES de que se pinten las secciones, de modo que
@@ -257,7 +273,7 @@ body { padding-top: 104px !important; }
 #rl-home .rl-section { padding: 88px 0; }
 #rl-home .rl-section-sm { padding: 64px 0; }
 #rl-home .rl-container {
-  max-width: 1180px;
+  max-width: 1760px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 32px;
@@ -390,7 +406,7 @@ body { padding-top: 104px !important; }
 #rl-home .rl-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 1560px;
+  max-width: 2080px;
   margin-left: auto;
   margin-right: auto;
   padding: 80px clamp(28px, 4.5vw, 64px);
@@ -587,9 +603,60 @@ body { padding-top: 104px !important; }
 #rl-home .rl-text-link:hover { color: var(--rl-accent); }
 
 /* ══ SECTION 3 — SERVICES ══════════════════════ */
+
+/* ── Estampado geométrico (Uiverse · AatreyuShau, adaptado a la paleta verde/crema)
+   Capas:
+   1. Puntos pequeños (#4a6e32 semitransparente sobre crema)
+   2. Radial suave (crema con velo dorado)
+   3. Diagonal izq-der (crema con línea verde muy tenue)
+   4. Diagonal der-izq (crema con acento café muy tenue)
+   5. Diagonal central (crema base)
+   La capa .rl-services-paper aplica el filtro void-texture (ruido de papel)
+   para suavizar el patrón y que no compita con las tarjetas.
+── */
 #rl-home .rl-services {
-  background: var(--rl-cream);
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle, rgba(74,110,50,0.18) 2px, transparent 2px),
+    radial-gradient(circle, var(--rl-cream) 10px, transparent 32px),
+    linear-gradient(
+      -45deg,
+      var(--rl-cream) 0%,
+      transparent 49%,
+      transparent 50%,
+      transparent 51%,
+      var(--rl-cream) 100%
+    ),
+    linear-gradient(
+      45deg,
+      var(--rl-cream) 0%,
+      transparent 49%,
+      rgba(153,106,108,0.22) 50%,
+      transparent 51%,
+      var(--rl-cream) 100%
+    ),
+    linear-gradient(-45deg, transparent 49%, rgba(74,110,50,0.18) 50%, transparent 51%);
+  background-size: 8rem 8rem;
+  background-repeat: repeat;
 }
+
+/* Capa paper: misma textura dorada del original, con el filtro SVG void-texture */
+#rl-home .rl-services-paper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: url(#void-texture);
+  background: linear-gradient(
+    to bottom,
+    rgba(61, 90, 42, 0.07) 0%,
+    rgba(74, 110, 50, 0.10) 100%
+  );
+}
+
+/* El contenido de la sección debe quedar POR ENCIMA de la capa paper */
+#rl-home .rl-services > .rl-container { position: relative; z-index: 1; }
 
 #rl-home .rl-services-head {
   text-align: center;
@@ -794,31 +861,124 @@ body { padding-top: 104px !important; }
 
 /* ══ SECTION 4 — WHY CHOOSE US ═════════════════ */
 #rl-home .rl-why {
-  background: var(--rl-green-dark);
+  /* Estampado tejido (Uiverse · marcelodolza, adaptado a la paleta) — igual que el footer/about */
+  --s: 90px;
+  --c1: #1b2912;
+  --c2: #121b0b;
+  --_g: var(--c2) 4% 14%, var(--c1) 14% 24%, var(--c2) 22% 34%,
+    var(--c1) 34% 44%, var(--c2) 44% 56%, var(--c1) 56% 66%, var(--c2) 66% 76%,
+    var(--c1) 76% 86%, var(--c2) 86% 96%;
+  background-color: var(--rl-green-dark); /* respaldo */
+  background:
+    radial-gradient(100% 100% at 100% 0, var(--c1) 4%, var(--_g), #0008 96%, #0000),
+    radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--c1) 96%)
+      var(--c1);
+  background-size: var(--s) var(--s);
   color: #fff;
+  padding-top: 0;       /* el aire vertical pasa a las razones; la imagen va full-height */
+  padding-bottom: 0;
+}
+
+/* Esta sección rompe el contenedor: la imagen va full-bleed al borde derecho */
+#rl-home .rl-why .rl-container {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #rl-home .rl-why-inner {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 80px;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;   /* media pantalla cada uno */
+  gap: 0;
+  align-items: stretch;
 }
 
-#rl-home .rl-why-left { position: sticky; top: 120px; }
+/* Razones (izquierda): alineadas al contenido del sitio, con aire antes de la imagen.
+   Llevan el padding vertical que antes tenía la sección, para que la imagen quede full-height. */
+#rl-home .rl-why-reasons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 88px;
+  padding-bottom: 88px;
+  padding-left: max(32px, calc((100vw - 1760px) / 2 + 32px));
+  padding-right: 64px;
+}
 
-#rl-home .rl-why-left .rl-eyebrow { color: var(--rl-accent); }
-#rl-home .rl-why-left .rl-h2 { color: #ffffff; }
-#rl-home .rl-why-left .rl-divider { background: var(--rl-green-mid); }
-#rl-home .rl-why-left .rl-body-text { color: rgba(255,255,255,0.6); font-size: 15px; }
+#rl-home .rl-why-left {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;  /* cartita arriba de la foto */
+  min-height: 460px;       /* respaldo por si la otra columna es corta */
+  order: 1;                /* imagen + cartita van a la DERECHA */
+}
 
+/* La imagen llena toda la mitad izquierda */
 #rl-home .rl-why-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 360px;
+  height: 100%;
   object-fit: cover;
-  margin-top: 32px;
   display: block;
+  z-index: 0;
 }
+
+/* Velo sutil para que la cartita siempre tenga contraste sobre la foto */
+#rl-home .rl-why-left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,32,10,0) 40%, rgba(20,32,10,0.45) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Cartita translúcida color acento, por encima de la imagen */
+#rl-home .rl-why-card {
+  position: relative;
+  z-index: 1;
+  margin: 26px;
+  padding: 30px 32px;
+  background: rgba(var(--rl-accent-rgb), 0.82);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 18px 44px -20px rgba(0,0,0,0.55);
+  transition: box-shadow 0.4s ease, background 0.3s ease;
+}
+
+/* Flote en loop — mismo efecto que el ContactForm; se pausa al pasar el cursor */
+@media (prefers-reduced-motion: no-preference) {
+  #rl-home .rl-why-card {
+    animation: rl-why-card-float 5.5s ease-in-out 1.1s infinite;
+  }
+  #rl-home .rl-why-left:hover .rl-why-card {
+    animation-play-state: paused;
+  }
+}
+
+/* Realce sutil al pasar el cursor (sin transform, para no chocar con el flote) */
+#rl-home .rl-why-left:hover .rl-why-card {
+  box-shadow: 0 26px 56px -22px rgba(0,0,0,0.62);
+  background: rgba(var(--rl-accent-rgb), 0.9);
+}
+
+@keyframes rl-why-card-float {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-12px); }
+  45%  { transform: translateY(-6px); }
+  60%  { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+/* Texto dentro de la cartita (sobre el café → todo claro) */
+#rl-home .rl-why-card .rl-eyebrow { color: #ffffff; }
+#rl-home .rl-why-card .rl-eyebrow::before { background: #ffffff; }
+#rl-home .rl-why-card .rl-h2 { color: #ffffff; }
+#rl-home .rl-why-card .rl-divider { background: rgba(255,255,255,0.85); }
+#rl-home .rl-why-card .rl-body-text { color: rgba(255,255,255,0.92); font-size: 15px; margin-bottom: 0; }
 
 #rl-home .rl-why-reasons { display: flex; flex-direction: column; }
 
@@ -837,7 +997,7 @@ body { padding-top: 104px !important; }
   font-family: 'Montserrat', sans-serif;
   font-size: 36px;
   font-weight: 800;
-  color: rgba(255,255,255,0.08);
+  color: var(--rl-accent);
   line-height: 1;
   padding-top: 4px;
 }
@@ -859,7 +1019,67 @@ body { padding-top: 104px !important; }
 }
 
 /* ══ SECTION 5 — AREAS WE SERVE ═══════════════ */
-#rl-home .rl-areas { background: #ffffff; }
+#rl-home .rl-areas {
+  position: relative;
+  overflow: hidden;
+  background: var(--rl-cream);   /* base bajo el resplandor */
+  isolation: isolate;            /* contiene el z-index de los pseudo-elementos */
+}
+
+/* Resplandor cónico giratorio (Uiverse · ariba_9087, adaptado a la paleta).
+   Dos capas que giran en sentidos opuestos para dar profundidad.
+   ► Para el original PASTEL, reemplaza el conic-gradient de abajo por:
+     conic-gradient(from 0deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb,
+                    #a2e4ff, #c9afff, #ffb7b2, #ff9aa2) */
+#rl-home .rl-areas::before,
+#rl-home .rl-areas::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--rl-green),
+    var(--rl-green-mid),
+    var(--rl-green-light),
+    var(--rl-cream),
+    var(--rl-accent),
+    var(--rl-green-light),
+    var(--rl-green-mid),
+    var(--rl-green)
+  );
+  filter: blur(60px);            /* resplandor suave */
+  opacity: 0.45;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Segunda capa: un poco más pequeña y tenue */
+#rl-home .rl-areas::after {
+  width: 180%;
+  height: 180%;
+  opacity: 0.3;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #rl-home .rl-areas::before { animation: rl-areas-rotate 18s linear infinite; }
+  #rl-home .rl-areas::after  { animation: rl-areas-rotate-rev 22s linear infinite; }
+}
+
+@keyframes rl-areas-rotate {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes rl-areas-rotate-rev {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+/* El contenido por encima del resplandor */
+#rl-home .rl-areas .rl-container { position: relative; z-index: 1; }
 
 #rl-home .rl-areas-head { margin-bottom: 52px; }
 
@@ -927,17 +1147,68 @@ body { padding-top: 104px !important; }
 #rl-home .rl-area-link:hover { color: var(--rl-accent); }
 
 /* ══ SECTION 6 — HOW WE WORK ══════════════════ */
-#rl-home .rl-process { background: var(--rl-cream); }
+#rl-home .rl-process {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle, rgba(74,110,50,0.18) 2px, transparent 2px),
+    radial-gradient(circle, var(--rl-cream) 10px, transparent 32px),
+    linear-gradient(
+      -45deg,
+      var(--rl-cream) 0%,
+      transparent 49%,
+      transparent 50%,
+      transparent 51%,
+      var(--rl-cream) 100%
+    ),
+    linear-gradient(
+      45deg,
+      var(--rl-cream) 0%,
+      transparent 49%,
+      rgba(153,106,108,0.22) 50%,
+      transparent 51%,
+      var(--rl-cream) 100%
+    ),
+    linear-gradient(-45deg, transparent 49%, rgba(74,110,50,0.18) 50%, transparent 51%);
+  background-size: 8rem 8rem;
+  background-repeat: repeat;
+}
+
+/* Capa paper sobre el estampado */
+#rl-home .rl-process::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: url(#void-texture);
+  background: linear-gradient(
+    to bottom,
+    rgba(61, 90, 42, 0.07) 0%,
+    rgba(74, 110, 50, 0.10) 100%
+  );
+}
+
+#rl-home .rl-process > .rl-container { position: relative; z-index: 1; }
 
 #rl-home .rl-process-head { text-align: center; margin-bottom: 64px; }
 #rl-home .rl-process-head .rl-eyebrow { justify-content: center; }
 #rl-home .rl-process-head .rl-divider { margin: 20px auto; }
 
+/* ── Process carousel wrapper ── */
+#rl-home .rl-process-carousel { position: relative; }
+
+#rl-home .rl-process-viewport {
+  overflow: hidden;
+  padding-bottom: 4px;
+}
+
 #rl-home .rl-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 2px;
   background: #ddd9ce;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 #rl-home .rl-step {
@@ -945,6 +1216,23 @@ body { padding-top: 104px !important; }
   padding: 40px 28px;
   position: relative;
   overflow: hidden;
+  flex: 0 0 calc(25% - 1.5px);
+  box-sizing: border-box;
+}
+
+/* Controles: ocultos en desktop (4 pasos caben), visibles <=1024px */
+#rl-home .rl-process-controls {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 20px;
+}
+
+#rl-home .rl-process-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #rl-home .rl-step-bg-num {
@@ -1141,10 +1429,11 @@ body { padding-top: 104px !important; }
 /* ══ RESPONSIVE ═══════════════════════════════ */
 @media (max-width: 1024px) {
   #rl-home .rl-services .rl-carousel { --rl-per-view: 2; }
-  #rl-home .rl-steps { grid-template-columns: repeat(2, 1fr); }
+  #rl-home .rl-step { flex: 0 0 calc(50% - 1px); }
+  #rl-home .rl-process-controls { display: flex; }
   #rl-home .rl-why-inner { grid-template-columns: 1fr; gap: 48px; }
-  #rl-home .rl-why-left { position: static; }
-  #rl-home .rl-why-img { height: 260px; }
+  #rl-home .rl-why-left { order: 0; min-height: 420px; }
+  #rl-home .rl-why-reasons { padding: 56px 32px; }
   #rl-home .rl-faq-inner { grid-template-columns: 1fr; gap: 40px; }
   #rl-home .rl-faq-left { position: static; }
 }
@@ -1162,8 +1451,9 @@ body { padding-top: 104px !important; }
 @media (max-width: 560px) {
   #rl-home .rl-container { padding: 0 20px; }
   #rl-home .rl-services .rl-carousel { --rl-per-view: 1; }
-  #rl-home .rl-steps { grid-template-columns: 1fr; }
+  #rl-home .rl-step { flex: 0 0 100%; }
   #rl-home .rl-hero h1 { font-size: 36px; }
+  #rl-home .rl-why-reasons { padding: 48px 20px; }
 }
 
 /* ══ SCROLL REVEAL ════════════════════════════
@@ -1175,7 +1465,6 @@ body { padding-top: 104px !important; }
   /* Subida + fundido (elementos sin transición propia) */
   #rl-home.rl-reveal-on .rl-welcome-text,
   #rl-home.rl-reveal-on .rl-services-head,
-  #rl-home.rl-reveal-on .rl-why-img,
   #rl-home.rl-reveal-on .rl-reason,
   #rl-home.rl-reveal-on .rl-areas-head,
   #rl-home.rl-reveal-on .rl-process-head,
@@ -1309,6 +1598,151 @@ body { padding-top: 104px !important; }
   from { opacity: 0; transform: translateY(26px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ══ HERO HEADLINE — BRILLO "FLASH" IZQ → DER ══════
+   Barre un destello sobre el titular conservando los dos
+   colores (línea blanca + línea verde). El glint cruza de
+   izquierda a derecha y luego hace una pausa antes de repetir.
+   Solo si el usuario NO prefiere movimiento reducido.
+══════════════════════════════════════════════════ */
+#rl-home .rl-hero h1 .rl-shine {
+  background-size: 220% 100%;
+  background-position: 100% 0;     /* arranca con el destello fuera, a la izquierda */
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Línea blanca: base blanco atenuado + banda blanca pura */
+#rl-home .rl-hero h1 .rl-shine-white {
+  color: #ffffff;  /* respaldo visible si el navegador no soporta background-clip:text */
+  background-image: linear-gradient(
+    110deg,
+    rgba(255,255,255,0.82) 0%,
+    rgba(255,255,255,0.82) 42%,
+    #ffffff 50%,
+    rgba(255,255,255,0.82) 58%,
+    rgba(255,255,255,0.82) 100%
+  );
+}
+
+/* Línea verde: base verde claro + banda casi blanca */
+#rl-home .rl-hero h1 .rl-shine-green {
+  color: var(--rl-green-light);  /* respaldo visible */
+  background-image: linear-gradient(
+    110deg,
+    var(--rl-green-light) 0%,
+    var(--rl-green-light) 42%,
+    #eaf6dc 50%,
+    var(--rl-green-light) 58%,
+    var(--rl-green-light) 100%
+  );
+}
+
+/* ══ HERO IZQUIERDA — EXTIENDE EL FLASH A TAGS Y SUBHEADLINE ══
+   Mismo barrido izq → der del titular, en cascada hacia abajo:
+   chips → headline → subheadline. En reposo se ve igual que antes,
+   porque la banda brillante queda fuera de cuadro.
+══════════════════════════════════════════════════ */
+#rl-home .rl-hero .rl-hero-tag {
+  background-image: linear-gradient(
+    110deg,
+    var(--rl-accent) 0%,
+    var(--rl-accent) 42%,
+    #d8b3b4 50%,
+    var(--rl-accent) 58%,
+    var(--rl-accent) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#rl-home .rl-hero .rl-hero-sub {
+  background-image: linear-gradient(
+    110deg,
+    rgba(255,255,255,0.72) 0%,
+    rgba(255,255,255,0.72) 42%,
+    #ffffff 50%,
+    rgba(255,255,255,0.72) 58%,
+    rgba(255,255,255,0.72) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Titular: las dos líneas, en loop tras la entrada del hero */
+  #rl-home .rl-hero h1 .rl-shine {
+    /* duración 5s · empieza tras la entrada del hero (1.2s) · en loop */
+    animation: rl-headline-shine 5s ease-in-out 1.2s infinite;
+  }
+  /* la segunda línea destella un pelín después, para un look más vivo */
+  #rl-home .rl-hero h1 .rl-shine-green { animation-delay: 1.45s; }
+
+  /* Chips: destellan juntos, ANTES que el titular */
+  #rl-home .rl-hero .rl-hero-tag {
+    animation: rl-headline-shine 5s ease-in-out 1.0s infinite;
+  }
+
+  /* Subheadline: conserva su animación de ENTRADA (rl-hero-rise con su
+     delay original 0.34s) y le SUMA el flash al final de la cascada.
+     Hay que repetir el rise aquí porque una sola propiedad 'animation'
+     no se puede partir entre dos reglas. */
+  #rl-home .rl-hero-copy .rl-hero-sub {
+    animation: rl-hero-rise 0.85s cubic-bezier(0.16, 0.84, 0.34, 1) 0.34s both,
+               rl-headline-shine 5s ease-in-out 1.7s infinite;
+  }
+}
+
+@keyframes rl-headline-shine {
+  0%   { background-position: 100% 0; }  /* destello fuera, a la izquierda */
+  40%  { background-position: 0% 0;   }  /* cruza el texto (izquierda → derecha) */
+  100% { background-position: 0% 0;   }  /* pausa antes de repetir */
+}
+
+/* ══ WHY RUIZ — FLASH EN LOS TÍTULOS (LADO DERECHO) ══════
+   Mismo barrido izq → der que el hero, aplicado a cada título
+   de razón, en cascada hacia abajo. En reposo se ve igual,
+   porque la banda brillante queda fuera de cuadro.
+══════════════════════════════════════════════════ */
+#rl-home .rl-why .rl-reason-title {
+  color: var(--rl-green-light);  /* respaldo visible */
+  background-image: linear-gradient(
+    110deg,
+    var(--rl-green-light) 0%,
+    var(--rl-green-light) 42%,
+    #eaf6dc 50%,
+    var(--rl-green-light) 58%,
+    var(--rl-green-light) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #rl-home .rl-why .rl-reason-title {
+    animation: rl-headline-shine 5s ease-in-out infinite;
+  }
+  /* Cascada hacia abajo: cada razón destella un poco después */
+  #rl-home .rl-why .rl-reason:nth-child(1) .rl-reason-title { animation-delay: 0.8s; }
+  #rl-home .rl-why .rl-reason:nth-child(2) .rl-reason-title { animation-delay: 1.0s; }
+  #rl-home .rl-why .rl-reason:nth-child(3) .rl-reason-title { animation-delay: 1.2s; }
+  #rl-home .rl-why .rl-reason:nth-child(4) .rl-reason-title { animation-delay: 1.4s; }
+  #rl-home .rl-why .rl-reason:nth-child(5) .rl-reason-title { animation-delay: 1.6s; }
+}
 </style>
 
 <!-- ══════════════════════════════════════════════
@@ -1328,7 +1762,10 @@ body { padding-top: 104px !important; }
           <span class="rl-hero-tag">Orange, LA &amp; Imperial Counties</span>
         </div>
 
-        <h1>Eco-conscious landscaping<br><span>for a greener tomorrow.</span></h1>
+        <h1>
+          <span class="rl-shine rl-shine-white">Eco-conscious landscaping</span><br>
+          <span class="rl-shine rl-shine-green">for a greener tomorrow.</span>
+        </h1>
 
         <p class="rl-hero-sub">
           Your outdoor space can be more than a yard — it can be a sanctuary. As a family-owned landscaping company serving Orange, Los Angeles, and Imperial counties, Ruiz Landscape designs, builds, and cares for beautiful, sustainable landscapes that work in harmony with California's climate.
@@ -1417,6 +1854,8 @@ body { padding-top: 104px !important; }
      SECTION 2 — SERVICES (CAROUSEL)
 ══════════════════════════════════════════════ -->
 <section class="rl-section rl-services" id="rl-services" aria-labelledby="services-heading">
+  <!-- Capa de textura papel (filtro SVG void-texture) -->
+  <div class="rl-services-paper" aria-hidden="true"></div>
   <div class="rl-container">
 
     <div class="rl-services-head">
@@ -1647,80 +2086,8 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-
-
-
-
 <!-- ══════════════════════════════════════════════
-     SECTION 4 — WHY CHOOSE US
-══════════════════════════════════════════════ -->
-<section class="rl-section rl-why" id="rl-why" aria-labelledby="why-heading">
-  <div class="rl-container">
-    <div class="rl-why-inner">
-
-      <div class="rl-why-left">
-        <span class="rl-eyebrow">Why Ruiz</span>
-        <h2 class="rl-h2" id="why-heading">Why homeowners choose Ruiz Landscape.</h2>
-        <div class="rl-divider"></div>
-        <p class="rl-body-text">
-          There are a lot of landscaping companies in Southern California. Here's what makes working with Ruiz different — and why our clients stay with us for years.
-        </p>
-        <?php if ( ! empty( $rl_images['why-photo'] ) ) : ?>
-          <img
-            src="<?php echo esc_url( $rl_images['why-photo'] ); ?>"
-            alt="Rafael Ruiz, President of Ruiz Landscape Service"
-            class="rl-why-img"
-            loading="lazy"
-            width="480" height="360"
-          />
-        <?php endif; ?>
-      </div>
-
-      <div class="rl-why-reasons">
-        <div class="rl-reason">
-          <div class="rl-reason-num">01</div>
-          <div>
-            <div class="rl-reason-title">Family-Owned &amp; Accountable</div>
-            <p class="rl-reason-body">We're a family-owned and operated business, which means the people who design your landscape are the same people accountable for it. We treat your home the way we'd treat our own — with trust, integrity, and personalized service from start to finish.</p>
-          </div>
-        </div>
-        <div class="rl-reason">
-          <div class="rl-reason-num">02</div>
-          <div>
-            <div class="rl-reason-title">Eco-Conscious by Design</div>
-            <p class="rl-reason-body">Sustainability is at the core of how we work. Water-wise designs, drought-tolerant plantings, eco-friendly materials, and organic lawn care let us build landscapes that are beautiful today and gentler on California's environment for years to come.</p>
-          </div>
-        </div>
-        <div class="rl-reason">
-          <div class="rl-reason-num">03</div>
-          <div>
-            <div class="rl-reason-title">Expertise Across Every Service</div>
-            <p class="rl-reason-body">With deep experience across design, installation, maintenance, trees, irrigation, turf, and lighting, our team can handle projects of any size or complexity — and keep them thriving long after installation.</p>
-          </div>
-        </div>
-        <div class="rl-reason">
-          <div class="rl-reason-num">04</div>
-          <div>
-            <div class="rl-reason-title">Attention to Detail</div>
-            <p class="rl-reason-body">Excellence lives in the details. From meticulous craftsmanship to clear communication and thorough follow-up, we care about every aspect of the work — because that's what turns a good landscape into a stunning one.</p>
-          </div>
-        </div>
-        <div class="rl-reason">
-          <div class="rl-reason-num">05</div>
-          <div>
-            <div class="rl-reason-title">Licensed &amp; Trusted</div>
-            <p class="rl-reason-body">Ruiz Landscape is fully licensed in California (CA ST Lic# 925207). You're working with a credentialed, established company that stands behind its work.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════════
-     SECTION 5 — AREAS WE SERVE
+     SECTION 4 — AREAS WE SERVE
 ══════════════════════════════════════════════ -->
 <section class="rl-section rl-areas" id="rl-areas" aria-labelledby="areas-heading">
   <div class="rl-container">
@@ -1771,6 +2138,75 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════════
+     SECTION 5 — WHY CHOOSE US
+══════════════════════════════════════════════ -->
+<section class="rl-section rl-why" id="rl-why" aria-labelledby="why-heading">
+  <div class="rl-container">
+    <div class="rl-why-inner">
+
+      <div class="rl-why-left">
+        <?php if ( ! empty( $rl_images['why-photo'] ) ) : ?>
+          <img
+            src="<?php echo esc_url( $rl_images['why-photo'] ); ?>"
+            alt="Rafael Ruiz, President of Ruiz Landscape Service"
+            class="rl-why-img"
+            loading="lazy"
+            width="760" height="900"
+          />
+        <?php endif; ?>
+
+        <div class="rl-why-card">
+          <span class="rl-eyebrow">Why Ruiz</span>
+          <h2 class="rl-h2" id="why-heading">Why homeowners choose Ruiz Landscape.</h2>
+          <div class="rl-divider"></div>
+          <p class="rl-body-text">
+            There are a lot of landscaping companies in Southern California. Here's what makes working with Ruiz different — and why our clients stay with us for years.
+          </p>
+        </div>
+      </div>
+
+      <div class="rl-why-reasons">
+        <div class="rl-reason">
+          <div class="rl-reason-num">01</div>
+          <div>
+            <div class="rl-reason-title">Family-Owned &amp; Accountable</div>
+            <p class="rl-reason-body">We're a family-owned and operated business, which means the people who design your landscape are the same people accountable for it. We treat your home the way we'd treat our own — with trust, integrity, and personalized service from start to finish.</p>
+          </div>
+        </div>
+        <div class="rl-reason">
+          <div class="rl-reason-num">02</div>
+          <div>
+            <div class="rl-reason-title">Eco-Conscious by Design</div>
+            <p class="rl-reason-body">Sustainability is at the core of how we work. Water-wise designs, drought-tolerant plantings, eco-friendly materials, and organic lawn care let us build landscapes that are beautiful today and gentler on California's environment for years to come.</p>
+          </div>
+        </div>
+        <div class="rl-reason">
+          <div class="rl-reason-num">03</div>
+          <div>
+            <div class="rl-reason-title">Expertise Across Every Service</div>
+            <p class="rl-reason-body">With deep experience across design, installation, maintenance, trees, irrigation, turf, and lighting, our team can handle projects of any size or complexity — and keep them thriving long after installation.</p>
+          </div>
+        </div>
+        <div class="rl-reason">
+          <div class="rl-reason-num">04</div>
+          <div>
+            <div class="rl-reason-title">Attention to Detail</div>
+            <p class="rl-reason-body">Excellence lives in the details. From meticulous craftsmanship to clear communication and thorough follow-up, we care about every aspect of the work — because that's what turns a good landscape into a stunning one.</p>
+          </div>
+        </div>
+        <div class="rl-reason">
+          <div class="rl-reason-num">05</div>
+          <div>
+            <div class="rl-reason-title">Licensed &amp; Trusted</div>
+            <p class="rl-reason-body">Ruiz Landscape is fully licensed in California (CA ST Lic# 925207). You're working with a credentialed, established company that stands behind its work.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════════
      SECTION 6 — HOW WE WORK
@@ -1785,30 +2221,43 @@ body { padding-top: 104px !important; }
       <p class="rl-body-text" style="margin:0 auto;">Four steps. One trusted team from beginning to end.</p>
     </div>
 
-    <div class="rl-steps">
-      <div class="rl-step">
-        <div class="rl-step-bg-num" aria-hidden="true">01</div>
-        <div class="rl-step-num">Step 01</div>
-        <h3 class="rl-step-title">Consultation</h3>
-        <p class="rl-step-body">We start with a free consultation — walking your space, understanding how you want to use it, and listening to your vision, your priorities, and your budget.</p>
+    <div class="rl-process-carousel">
+      <div class="rl-process-viewport">
+        <div class="rl-steps">
+          <div class="rl-step">
+            <div class="rl-step-bg-num" aria-hidden="true">01</div>
+            <div class="rl-step-num">Step 01</div>
+            <h3 class="rl-step-title">Consultation</h3>
+            <p class="rl-step-body">We start with a free consultation — walking your space, understanding how you want to use it, and listening to your vision, your priorities, and your budget.</p>
+          </div>
+          <div class="rl-step">
+            <div class="rl-step-bg-num" aria-hidden="true">02</div>
+            <div class="rl-step-num">Step 02</div>
+            <h3 class="rl-step-title">Design</h3>
+            <p class="rl-step-body">Our designers translate your vision into a plan that balances beauty, function, and sustainability — with water-wise choices built in from the start.</p>
+          </div>
+          <div class="rl-step">
+            <div class="rl-step-bg-num" aria-hidden="true">03</div>
+            <div class="rl-step-num">Step 03</div>
+            <h3 class="rl-step-title">Installation</h3>
+            <p class="rl-step-body">Our crews bring the design to life with careful craftsmanship and clear communication, keeping your project on track and your home respected throughout.</p>
+          </div>
+          <div class="rl-step">
+            <div class="rl-step-bg-num" aria-hidden="true">04</div>
+            <div class="rl-step-num">Step 04</div>
+            <h3 class="rl-step-title">Ongoing Care</h3>
+            <p class="rl-step-body">A landscape is a living investment. We offer maintenance, lawn care, irrigation service, and tree care to keep your space thriving for years to come.</p>
+          </div>
+        </div>
       </div>
-      <div class="rl-step">
-        <div class="rl-step-bg-num" aria-hidden="true">02</div>
-        <div class="rl-step-num">Step 02</div>
-        <h3 class="rl-step-title">Design</h3>
-        <p class="rl-step-body">Our designers translate your vision into a plan that balances beauty, function, and sustainability — with water-wise choices built in from the start.</p>
-      </div>
-      <div class="rl-step">
-        <div class="rl-step-bg-num" aria-hidden="true">03</div>
-        <div class="rl-step-num">Step 03</div>
-        <h3 class="rl-step-title">Installation</h3>
-        <p class="rl-step-body">Our crews bring the design to life with careful craftsmanship and clear communication, keeping your project on track and your home respected throughout.</p>
-      </div>
-      <div class="rl-step">
-        <div class="rl-step-bg-num" aria-hidden="true">04</div>
-        <div class="rl-step-num">Step 04</div>
-        <h3 class="rl-step-title">Ongoing Care</h3>
-        <p class="rl-step-body">A landscape is a living investment. We offer maintenance, lawn care, irrigation service, and tree care to keep your space thriving for years to come.</p>
+      <div class="rl-process-controls">
+        <button class="rl-carousel-btn" data-proc-dir="prev" aria-label="Previous step" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="rl-process-dots" aria-label="Process steps"></div>
+        <button class="rl-carousel-btn" data-proc-dir="next" aria-label="Next step" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
 
@@ -2002,8 +2451,8 @@ body { padding-top: 104px !important; }
     update();
   }
 
-  prevBtn.addEventListener('click', function () { go(index - 1); });
-  nextBtn.addEventListener('click', function () { go(index + 1); });
+  prevBtn.addEventListener('click', function () { pauseAutoplay(); go(index - 1); });
+  nextBtn.addEventListener('click', function () { pauseAutoplay(); go(index + 1); });
 
   // ── Touch / swipe support ──
   var startX = null;
@@ -2011,6 +2460,7 @@ body { padding-top: 104px !important; }
 
   viewport.addEventListener('touchstart', function (e) {
     startX = e.touches[0].clientX;
+    pauseAutoplay();
   }, { passive: true });
 
   viewport.addEventListener('touchend', function (e) {
@@ -2020,6 +2470,49 @@ body { padding-top: 104px !important; }
       go(index + (dx < 0 ? 1 : -1));
     }
     startX = null;
+    resumeAutoplay();
+  });
+
+  // ── Autoplay ──
+  var AUTOPLAY_INTERVAL = 2000; // ms entre avances
+  var AUTOPLAY_RESUME_DELAY = 6000; // ms de espera tras interacción manual
+  var autoplayTimer = null;
+  var resumeTimer  = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function autoplayTick() {
+    // Al llegar al final, vuelve al principio
+    go(index >= maxIndex() ? 0 : index + 1);
+  }
+
+  function startAutoplay() {
+    if (reduceMotion) return;
+    stopAutoplay();
+    autoplayTimer = setInterval(autoplayTick, AUTOPLAY_INTERVAL);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
+
+  function pauseAutoplay() {
+    stopAutoplay();
+    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+  }
+
+  function resumeAutoplay() {
+    if (reduceMotion) return;
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(startAutoplay, AUTOPLAY_RESUME_DELAY);
+  }
+
+  // Pausa mientras el cursor está sobre las tarjetas
+  viewport.addEventListener('mouseenter', stopAutoplay);
+  viewport.addEventListener('mouseleave', startAutoplay);
+
+  // Pausa si la pestaña queda oculta
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { stopAutoplay(); } else { startAutoplay(); }
   });
 
   // ── Recalculate on resize ──
@@ -2035,6 +2528,7 @@ body { padding-top: 104px !important; }
 
   buildDots();
   update();
+  startAutoplay();
 })();
 </script>
 

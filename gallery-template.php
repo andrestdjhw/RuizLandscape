@@ -31,27 +31,27 @@ $gallery_services = array(
 ══════════════════════════════════════════════ */
 $gallery_items = array(
   // ── Landscape Design & Installation (4) ──
-  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesign1-scaled.jpg', 'alt' => 'Landscape design and installation project' ),
-  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesign2-scaled.jpg', 'alt' => 'Landscape design and installation project' ),
-  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesign3-scaled.jpg', 'alt' => 'Landscape design and installation project' ),
-  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesign4-scaled.jpg', 'alt' => 'Landscape design and installation project' ),
+  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesignInstallation-1.jpg', 'alt' => 'Landscape design and installation project' ),
+  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesignRuiz1.jpg', 'alt' => 'Landscape design and installation project' ),
+  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesignRuiz2.jpg', 'alt' => 'Landscape design and installation project' ),
+  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg', 'alt' => 'Landscape design and installation project' ),
   // ── Lawn Care & Maintenance (2) ──
-  array( 'service' => 'lawn-care-maintenance', 'img' => '/wp-content/uploads/2026/06/LawnCare-scaled.jpeg', 'alt' => 'Lawn care and maintenance project' ),
-  array( 'service' => 'lawn-care-maintenance', 'img' => '/wp-content/uploads/2026/06/LawnCare2-scaled.jpg', 'alt' => 'Lawn care and maintenance project' ),
+  array( 'service' => 'lawn-care-maintenance', 'img' => '/wp-content/uploads/2026/06/LawnCareRuiz2.jpg', 'alt' => 'Lawn care and maintenance project' ),
+  array( 'service' => 'lawn-care-maintenance', 'img' => '/wp-content/uploads/2026/06/LawnCareMaintenance-1.jpg', 'alt' => 'Lawn care and maintenance project' ),
   // ── Tree & Shrub Care (2) ──
   array( 'service' => 'tree-shrub-care', 'img' => '/wp-content/uploads/2026/06/TreeShrub-scaled.jpg', 'alt' => 'Tree and shrub care project' ),
-  array( 'service' => 'tree-shrub-care', 'img' => '/wp-content/uploads/2026/06/TreeShrub2-scaled.jpg', 'alt' => 'Tree and shrub care project' ),
+  array( 'service' => 'tree-shrub-care', 'img' => '/wp-content/uploads/2026/06/TreeShrubRuiz.jpg', 'alt' => 'Tree and shrub care project' ),
   // ── Irrigation Systems (2) ──
   array( 'service' => 'irrigation-systems', 'img' => '/wp-content/uploads/2026/06/IrrigationSystem-scaled.jpeg', 'alt' => 'Irrigation system project' ),
   array( 'service' => 'irrigation-systems', 'img' => '/wp-content/uploads/2026/06/IrrigationSystem-scaled.jpg', 'alt' => 'Irrigation system project' ),
   // ── Synthetic Turf (2) ──
-  array( 'service' => 'synthetic-turf', 'img' => '/wp-content/uploads/2026/06/SyntheticTurf1-scaled.jpg', 'alt' => 'Synthetic turf project' ),
+  array( 'service' => 'synthetic-turf', 'img' => '/wp-content/uploads/2026/06/SyntheticTurfInstallation-scaled.webp', 'alt' => 'Synthetic turf project' ),
   array( 'service' => 'synthetic-turf', 'img' => '/wp-content/uploads/2026/06/SyntheticTurf2-scaled.jpg', 'alt' => 'Synthetic turf project' ),
   // ── Large Tree Installation (2) ──
-  array( 'service' => 'large-tree-installation', 'img' => '/wp-content/uploads/2026/06/TreeInstallation-scaled.jpg', 'alt' => 'Large tree installation project' ),
-  array( 'service' => 'large-tree-installation', 'img' => '/wp-content/uploads/2026/06/TreeInstallation1-scaled.jpg', 'alt' => 'Large tree installation project' ),
+  array( 'service' => 'large-tree-installation', 'img' => '/wp-content/uploads/2026/06/LargeTreeInstallationRuiz2.jpg', 'alt' => 'Large tree installation project' ),
+  array( 'service' => 'large-tree-installation', 'img' => '/wp-content/uploads/2026/06/LargeTreeInstallation.jpg', 'alt' => 'Large tree installation project' ),
   // ── Low Voltage Lighting (2) ──
-  array( 'service' => 'low-voltage-lighting', 'img' => '/wp-content/uploads/2026/06/LowVoltageLighting1-scaled.jpg', 'alt' => 'Low voltage lighting project' ),
+  array( 'service' => 'low-voltage-lighting', 'img' => '/wp-content/uploads/2026/06/LowVoltageLighting-1.jpg', 'alt' => 'Low voltage lighting project' ),
   array( 'service' => 'low-voltage-lighting', 'img' => '/wp-content/uploads/2026/06/LowVoltageLighting-scaled.jpg', 'alt' => 'Low voltage lighting project' ),
 );
 

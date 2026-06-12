@@ -196,7 +196,7 @@ function Footer() {
           letter-spacing: 0.1em;
           text-transform: uppercase;
           padding: 14px 30px;
-          border-radius: 4px;
+          border-radius: 0;            /* esquinas rectas — igual que el resto del proyecto */
           text-decoration: none;
           transition: background 0.2s, transform 0.15s;
         }
@@ -524,7 +524,7 @@ function Footer() {
             Schedule a consultation with our team and let us bring your landscaping vision to life — one landscape at a time.
           </p>
           <a href="/contact" className="rl-footer-cta-btn">
-            Get a Free Quote <ArrowRight />
+            Contact Us <ArrowRight />
           </a>
         </div>
 

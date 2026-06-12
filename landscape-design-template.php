@@ -17,7 +17,7 @@
    Pega las URL de la Biblioteca de Medios (Medios → "File URL").
 ══════════════════════════════════════════════ */
 $ld_images = array(
-  'hero-bg' => '/wp-content/uploads/2026/06/RuizLandscape-scaled.jpg', // fondo del hero
+  'hero-bg' => '/wp-content/uploads/2026/06/LandscapeDesign2-scaled.jpg', // fondo del hero
 );
 
 /* ── Qué diseñamos y construimos (Sección 2) ── */

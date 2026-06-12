@@ -17,7 +17,7 @@
    Pega las URL de la Biblioteca de Medios (Medios → "File URL").
 ══════════════════════════════════════════════ */
 $lc_images = array(
-  'hero-bg' => '/wp-content/uploads/2026/06/RuizLandscape-scaled.jpg', // fondo del hero
+  'hero-bg' => '/wp-content/uploads/2026/06/LawnCareMaintenance-scaled.jpg', // fondo del hero
 );
 
 /* ── Qué incluye (Sección 2) ── */

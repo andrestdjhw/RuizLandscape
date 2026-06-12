@@ -184,16 +184,30 @@ function ContactForm({
         }
         .rl-cform-btn:hover { background: var(--rl-accent-hover); }
 
-        /* Entrada al montar (solo si no hay movimiento reducido) */
+        /* Entrada al montar + flotación bouncy en loop (solo si no hay movimiento reducido) */
         @media (prefers-reduced-motion: no-preference) {
           .rl-cform {
             opacity: 0;
-            animation: rl-cform-in 0.9s cubic-bezier(0.16, 0.84, 0.34, 1) 0.1s both;
+            animation:
+              rl-cform-in 0.9s cubic-bezier(0.16, 0.84, 0.34, 1) 0.1s both,
+              rl-cform-float 5.5s ease-in-out 1.1s infinite;
+          }
+          /* Se detiene mientras el usuario interactúa, para no estorbar al escribir */
+          .rl-cform:hover,
+          .rl-cform:focus-within {
+            animation-play-state: paused;
           }
         }
         @keyframes rl-cform-in {
           from { opacity: 0; transform: translateY(30px) scale(0.98); }
           to   { opacity: 1; transform: none; }
+        }
+        @keyframes rl-cform-float {
+          0%   { transform: translateY(0); }
+          30%  { transform: translateY(-12px); }
+          45%  { transform: translateY(-6px); }
+          60%  { transform: translateY(-12px); }
+          100% { transform: translateY(0); }
         }
 
         @media (max-width: 480px) {
