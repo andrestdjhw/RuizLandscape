@@ -8,7 +8,6 @@ const services = [
   { label: "Synthetic Turf", href: "/services/synthetic-turf", key: "synthetic-turf", desc: "Always-green turf with zero mowing." },
   { label: "Large Trees Installation", href: "/services/large-tree-installation", key: "large-trees", desc: "Mature trees sourced & planted with care." },
   { label: "Low Voltage Lighting", href: "/services/low-voltage-lighting", key: "lighting", desc: "Showcase your yard with elegant night lighting." },
-  { label: "Landscape Design (2D / 3D)", href: "/services/landscape-design-2d", key: "landscape-design-2d", desc: "Plans to visualize your project before we build." },
 ]
 
 // SVG Icons
@@ -261,7 +260,12 @@ function Navbar() {
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
+          text-decoration: none;
+          cursor: pointer;
+          transition: color 0.15s;
         }
+
+        .rl-location-badge:hover { color: var(--rl-green); }
 
         .rl-social-link {
           display: flex;
@@ -705,23 +709,29 @@ function Navbar() {
             </a>
           </div>
 
-          {/* Center: location */}
+          {/* Center: location (clickeable → Google Maps) */}
           <div className="rl-topbar-center">
-            <div className="rl-location-badge">
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Ruiz%20Landscape%20Service%2C%206%20McLaren%2C%20Suite%20H%2C%20Irvine%2C%20CA%2092618"
+              target="_blank"
+              rel="noreferrer"
+              className="rl-location-badge"
+              aria-label="Ver nuestra ubicación en Google Maps"
+            >
               <LocationIcon />
               Irvine, CA &nbsp;·&nbsp; Serving LA, Orange &amp; Imperial Counties
-            </div>
+            </a>
           </div>
 
           {/* Right: socials */}
           <div className="rl-topbar-right">
-            <a href="https://facebook.com/ruiz.landscape.7" target="_blank" rel="noreferrer" className="rl-social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/ruizlandscapeserviceinc?mibextid=wwXIfr" target="_blank" rel="noreferrer" className="rl-social-link" aria-label="Facebook">
               <FacebookIcon />
             </a>
-            <a href="https://twitter.com/RuizLandscapeOC" target="_blank" rel="noreferrer" className="rl-social-link" aria-label="Twitter / X">
+            <a href="https://x.com/ruizlandscapeoc?s=11" target="_blank" rel="noreferrer" className="rl-social-link" aria-label="Twitter / X">
               <TwitterIcon />
             </a>
-            <a href="https://instagram.com/ruizlandscapeservices" target="_blank" rel="noreferrer" className="rl-social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/ruizlandscapeserviceinc/" target="_blank" rel="noreferrer" className="rl-social-link" aria-label="Instagram">
               <InstagramIcon />
             </a>
           </div>
@@ -803,6 +813,9 @@ function Navbar() {
 
             <li className="rl-nav-item">
               <a href="/gallery" className="rl-nav-link">Gallery</a>
+            </li>
+            <li className="rl-nav-item">
+              <a href="/locations" className="rl-nav-link">Locations</a>
             </li>
           </ul>
 

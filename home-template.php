@@ -16,7 +16,7 @@
 $rl_images = array(
 
   // ── Fondos de sección (CSS) ──
-  'hero-bg'          => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg', // Sección 1 — fondo del hero
+  'hero-bg'          => '/wp-content/uploads/2026/06/LawnCare-scaled.jpeg', // Sección 1 — fondo del hero
   'cta-bg'           => '', // Sección 8 — fondo del CTA final
 
   // ── Sección 2 · Welcome ──
@@ -1122,6 +1122,15 @@ body { padding-top: 104px !important; }
   line-height: 1.2;
 }
 
+/* El nombre del condado es clickeable → abre la ubicación en Google Maps */
+#rl-home .rl-area-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+#rl-home .rl-area-title-link:hover { color: var(--rl-green); }
+
 #rl-home .rl-area-body {
   font-size: 14px;
   line-height: 1.7;
@@ -2105,9 +2114,9 @@ body { padding-top: 104px !important; }
 
       <div class="rl-area-card">
         <span class="rl-area-badge">Headquarters</span>
-        <h3 class="rl-area-title">Orange County</h3>
+        <h3 class="rl-area-title"><a href="https://www.google.com/maps/search/?api=1&query=Orange%20County%2C%20CA" target="_blank" rel="noreferrer" class="rl-area-title-link">Orange County</a></h3>
         <p class="rl-area-body">Our home base. Headquartered in Irvine, serving Newport Beach, Irvine, Anaheim, Huntington Beach, and the full OC.</p>
-        <a href="/locations/orange-county" class="rl-area-link">
+        <a href="https://www.google.com/maps/search/?api=1&query=Orange%20County%2C%20CA" target="_blank" rel="noreferrer" class="rl-area-link">
           Landscaping in Orange County
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -2115,9 +2124,9 @@ body { padding-top: 104px !important; }
 
       <div class="rl-area-card">
         <span class="rl-area-badge" style="background:#5a7a3a;">Full Service</span>
-        <h3 class="rl-area-title">Los Angeles County</h3>
+        <h3 class="rl-area-title"><a href="https://www.google.com/maps/search/?api=1&query=Los%20Angeles%20County%2C%20CA" target="_blank" rel="noreferrer" class="rl-area-title-link">Los Angeles County</a></h3>
         <p class="rl-area-body">Full-service landscaping across the LA metro — from coastal communities to inland valleys.</p>
-        <a href="/locations/los-angeles-county" class="rl-area-link">
+        <a href="https://www.google.com/maps/search/?api=1&query=Los%20Angeles%20County%2C%20CA" target="_blank" rel="noreferrer" class="rl-area-link">
           Landscaping in Los Angeles County
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -2125,9 +2134,9 @@ body { padding-top: 104px !important; }
 
       <div class="rl-area-card">
         <span class="rl-area-badge" style="background:#7a6030;">Desert Climate</span>
-        <h3 class="rl-area-title">Imperial County</h3>
+        <h3 class="rl-area-title"><a href="https://www.google.com/maps/search/?api=1&query=Imperial%20County%2C%20CA" target="_blank" rel="noreferrer" class="rl-area-title-link">Imperial County</a></h3>
         <p class="rl-area-body">Desert-climate landscaping built for Imperial County's heat, with water-wise design front and center.</p>
-        <a href="/locations/imperial-county" class="rl-area-link">
+        <a href="https://www.google.com/maps/search/?api=1&query=Imperial%20County%2C%20CA" target="_blank" rel="noreferrer" class="rl-area-link">
           Landscaping in Imperial County
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>

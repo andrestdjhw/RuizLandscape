@@ -16,7 +16,7 @@
 ══════════════════════════════════════════════ */
 $rla_images = array(
   'hero-bg'       => '/wp-content/uploads/2026/06/RuizCrew.png', // fondo del hero
-  'story-img'     => '/wp-content/uploads/2026/06/OurStory-scaled.jpg', // Sección 2 — foto junto a "Our Story"
+  'story-img'     => '/wp-content/uploads/2026/06/Ruiz_LogoVariant.png', // Sección 2 — foto junto a "Our Story"
   'president-img' => '/wp-content/uploads/2026/06/CeoRuizLandscape.png', // Sección 3 — foto de Rafael Ruiz (brochure, on-site)
 );
 

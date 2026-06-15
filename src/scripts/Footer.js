@@ -546,15 +546,15 @@ function Footer() {
             </p>
 
             <div className="rl-footer-socials">
-              <a href="https://facebook.com/ruiz.landscape.7" target="_blank" rel="noreferrer"
+              <a href="https://www.facebook.com/ruizlandscapeserviceinc?mibextid=wwXIfr" target="_blank" rel="noreferrer"
                 className="rl-footer-social-btn" aria-label="Facebook">
                 <FacebookIcon />
               </a>
-              <a href="https://twitter.com/RuizLandscapeOC" target="_blank" rel="noreferrer"
+              <a href="https://x.com/ruizlandscapeoc?s=11" target="_blank" rel="noreferrer"
                 className="rl-footer-social-btn" aria-label="Twitter / X">
                 <TwitterIcon />
               </a>
-              <a href="https://instagram.com/ruizlandscapeservices" target="_blank" rel="noreferrer"
+              <a href="https://www.instagram.com/ruizlandscapeserviceinc/" target="_blank" rel="noreferrer"
                 className="rl-footer-social-btn" aria-label="Instagram">
                 <InstagramIcon />
               </a>
@@ -602,12 +602,12 @@ function Footer() {
               </li>
               <li className="rl-footer-contact-item">
                 <span className="rl-footer-contact-icon"><EmailIcon /></span>
-                <a href="mailto:office@RuizLandscape.com">office@RuizLandscape.com</a>
+                <a href="mailto:office@RuizLandscape.com">office@ruizlandscape.com</a>
               </li>
               <li className="rl-footer-contact-item">
                 <span className="rl-footer-contact-icon"><GlobeIcon /></span>
                 <a href="https://www.RuizLandscape.com" target="_blank" rel="noreferrer">
-                  www.RuizLandscape.com
+                  www.ruizlandscape.com
                 </a>
               </li>
             </ul>

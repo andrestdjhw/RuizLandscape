@@ -976,21 +976,21 @@ function Footer() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "rl-footer-socials",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-              href: "https://facebook.com/ruiz.landscape.7",
+              href: "https://www.facebook.com/ruizlandscapeserviceinc?mibextid=wwXIfr",
               target: "_blank",
               rel: "noreferrer",
               className: "rl-footer-social-btn",
               "aria-label": "Facebook",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(FacebookIcon, {})
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-              href: "https://twitter.com/RuizLandscapeOC",
+              href: "https://x.com/ruizlandscapeoc?s=11",
               target: "_blank",
               rel: "noreferrer",
               className: "rl-footer-social-btn",
               "aria-label": "Twitter / X",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TwitterIcon, {})
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-              href: "https://instagram.com/ruizlandscapeservices",
+              href: "https://www.instagram.com/ruizlandscapeserviceinc/",
               target: "_blank",
               rel: "noreferrer",
               className: "rl-footer-social-btn",
@@ -1057,7 +1057,7 @@ function Footer() {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(EmailIcon, {})
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                 href: "mailto:office@RuizLandscape.com",
-                children: "office@RuizLandscape.com"
+                children: "office@ruizlandscape.com"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
               className: "rl-footer-contact-item",
@@ -1068,7 +1068,7 @@ function Footer() {
                 href: "https://www.RuizLandscape.com",
                 target: "_blank",
                 rel: "noreferrer",
-                children: "www.RuizLandscape.com"
+                children: "www.ruizlandscape.com"
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -1158,11 +1158,6 @@ const services = [{
   href: "/services/low-voltage-lighting",
   key: "lighting",
   desc: "Showcase your yard with elegant night lighting."
-}, {
-  label: "Landscape Design (2D / 3D)",
-  href: "/services/landscape-design-2d",
-  key: "landscape-design-2d",
-  desc: "Plans to visualize your project before we build."
 }];
 
 // SVG Icons
@@ -1543,7 +1538,12 @@ function Navbar() {
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
+          text-decoration: none;
+          cursor: pointer;
+          transition: color 0.15s;
         }
+
+        .rl-location-badge:hover { color: var(--rl-green); }
 
         .rl-social-link {
           display: flex;
@@ -1995,28 +1995,32 @@ function Navbar() {
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           className: "rl-topbar-center",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
+            href: "https://www.google.com/maps/search/?api=1&query=Ruiz%20Landscape%20Service%2C%206%20McLaren%2C%20Suite%20H%2C%20Irvine%2C%20CA%2092618",
+            target: "_blank",
+            rel: "noreferrer",
             className: "rl-location-badge",
+            "aria-label": "Ver nuestra ubicaci\xF3n en Google Maps",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(LocationIcon, {}), "Irvine, CA \xA0\xB7\xA0 Serving LA, Orange & Imperial Counties"]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           className: "rl-topbar-right",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "https://facebook.com/ruiz.landscape.7",
+            href: "https://www.facebook.com/ruizlandscapeserviceinc?mibextid=wwXIfr",
             target: "_blank",
             rel: "noreferrer",
             className: "rl-social-link",
             "aria-label": "Facebook",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(FacebookIcon, {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "https://twitter.com/RuizLandscapeOC",
+            href: "https://x.com/ruizlandscapeoc?s=11",
             target: "_blank",
             rel: "noreferrer",
             className: "rl-social-link",
             "aria-label": "Twitter / X",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TwitterIcon, {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "https://instagram.com/ruizlandscapeservices",
+            href: "https://www.instagram.com/ruizlandscapeserviceinc/",
             target: "_blank",
             rel: "noreferrer",
             className: "rl-social-link",
@@ -2125,6 +2129,13 @@ function Navbar() {
               href: "/gallery",
               className: "rl-nav-link",
               children: "Gallery"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+            className: "rl-nav-item",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+              href: "/locations",
+              className: "rl-nav-link",
+              children: "Locations"
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
