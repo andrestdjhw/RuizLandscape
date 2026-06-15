@@ -16,7 +16,8 @@
 $rl_images = array(
 
   // ── Fondos de sección (CSS) ──
-  'hero-bg'          => '/wp-content/uploads/2026/06/LawnCare-scaled.jpeg', // Sección 1 — fondo del hero
+  'hero-bg'          => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg', // Sección 1 — póster/fallback del hero
+  'hero-video'       => '/wp-content/uploads/2026/06/RuizHero.mp4', // Sección 1 — video de fondo del hero (mp4)
   'cta-bg'           => '', // Sección 8 — fondo del CTA final
 
   // ── Sección 2 · Welcome ──
@@ -382,9 +383,9 @@ body { padding-top: 104px !important; }
 #rl-home .rl-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('<?php echo esc_url( $rl_images['hero-bg'] ); ?>');
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* el video cubre todo el hero, recortando lo que sobre */
   opacity: 1;
 }
 
@@ -537,12 +538,14 @@ body { padding-top: 104px !important; }
 #rl-home .rl-welcome-img {
   position: relative;
   height: 100%;
+  min-height: 440px;   /* piso de seguridad; por encima de esto la altura la marca el texto */
 }
 
 #rl-home .rl-welcome-img-main {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 560px;
   object-fit: cover;
   display: block;
 }
@@ -1450,7 +1453,7 @@ body { padding-top: 104px !important; }
 @media (max-width: 768px) {
   #rl-home .rl-section { padding: 64px 0; }
   #rl-home .rl-welcome-inner { grid-template-columns: 1fr; gap: 0; }
-  #rl-home .rl-welcome-img-main { min-height: 360px; }
+  #rl-home .rl-welcome-img { min-height: 360px; }
   #rl-home .rl-welcome-text { padding: 48px 24px; }
   #rl-home .rl-welcome-img-accent { display: none; }
   #rl-home .rl-areas-grid { grid-template-columns: 1fr; }
@@ -1758,7 +1761,18 @@ body { padding-top: 104px !important; }
      SECTION 1 — HERO
 ══════════════════════════════════════════════ -->
 <section class="rl-hero" aria-label="Hero">
-  <div class="rl-hero-bg" role="img" aria-label="Ruiz Landscape project photo"></div>
+  <video
+    class="rl-hero-bg"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    poster="<?php echo esc_url( $rl_images['hero-bg'] ); ?>"
+    aria-label="Ruiz Landscape project video"
+  >
+    <source src="<?php echo esc_url( $rl_images['hero-video'] ); ?>" type="video/mp4">
+  </video>
   <div class="rl-hero-overlay"></div>
   <div class="rl-hero-content">
     <div class="rl-hero-grid">
@@ -1782,7 +1796,7 @@ body { padding-top: 104px !important; }
 
         <div class="rl-hero-ctas">
           <a href="/contact?utm_source=home&utm_medium=hero&utm_campaign=cta" class="rl-btn-primary">
-            Schedule a free consultation
+            Schedule a free estimate
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#rl-services" class="rl-btn-secondary">Explore our work</a>
@@ -1830,6 +1844,10 @@ body { padding-top: 104px !important; }
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
           Better Business Bureau Accredited
         </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-2-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.8-4.1-2.9.1-4.3.7-5 1.5z"/></svg>
+          LiveRoof Certified
+        </span>
       </div>
 
       <div class="rl-marquee-group" aria-hidden="true">
@@ -1852,6 +1870,10 @@ body { padding-top: 104px !important; }
         <span class="rl-trust-chip">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
           Better Business Bureau Accredited
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-2-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.8-4.1-2.9.1-4.3.7-5 1.5z"/></svg>
+          LiveRoof Certified
         </span>
       </div>
 

@@ -542,8 +542,8 @@ body { padding-top: 104px !important; }
     <div class="rlg-map-frame rlg-reveal">
       <!-- Mapa con carga diferida (lazy) -->
       <iframe
-        title="Ruiz Landscape Service — 6 McLaren, Suite H, Irvine, CA 92618"
-        src="https://www.google.com/maps?q=6+McLaren+Suite+H,+Irvine,+CA+92618&output=embed"
+        title="Ruiz Landscape Service — 15791 Rockfield Blvd Ste O, Irvine, CA 92618"
+        src="https://www.google.com/maps?q=15791+Rockfield+Blvd+Ste+O,+Irvine,+CA+92618&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
         allowfullscreen></iframe>

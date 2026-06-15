@@ -498,6 +498,7 @@ body { padding-top: 104px !important; }
       <span>CA Lic# 925207</span>
       <span>Eco-Conscious Practices</span>
       <span>Serving Three Southern California Counties</span>
+      <span>LiveRoof Certified</span>
     </div>
   </div>
 </section>

@@ -21,7 +21,7 @@ const ArrowRight = () => (
 
 // ── Componente ────────────────────────────────────────
 function ContactForm({
-  heading = "Get your free consultation",
+  heading = "Request a Free Estimate",
   subheading = "Tell us about your project — we'll get back to you within one business day.",
   privacyHref = "/privacy-policy",
   termsHref = "/terms-and-conditions",
@@ -57,7 +57,7 @@ function ContactForm({
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
         .rl-cform * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -69,7 +69,7 @@ function ContactForm({
           --rl-on-accent:    #ffffff;
           --rl-green-dark:   #1a2410;
 
-          font-family: 'Barlow', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           width: 100%;
           color: #ffffff;
           background: rgba(16, 26, 8, 0.74);
@@ -83,7 +83,7 @@ function ContactForm({
         }
 
         .rl-cform-title {
-          font-family: 'Barlow Condensed', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 25px;
           font-weight: 800;
           text-transform: uppercase;
@@ -112,7 +112,7 @@ function ContactForm({
           background: rgba(255,255,255,0.06);
           border: 1px solid rgba(255,255,255,0.18);
           color: #ffffff;
-          font-family: 'Barlow', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 14px;
           padding: 12px 13px;
           border-radius: 0;
@@ -171,7 +171,7 @@ function ContactForm({
           cursor: pointer;
           background: var(--rl-accent);
           color: var(--rl-on-accent);
-          font-family: 'Barlow', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 12.5px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -248,7 +248,7 @@ function ContactForm({
             (p.ej. <div className="g-recaptcha" data-sitekey="..."></div>) */}
 
         <button type="submit" className="rl-cform-btn">
-          Request my consultation
+          Request a Free Estimate
           <ArrowRight />
         </button>
       </form>

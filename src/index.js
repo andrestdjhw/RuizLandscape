@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client"
 import Navbar from "./scripts/Navbar"
 import Footer from "./scripts/Footer"
 import ContactForm from "./scripts/ContactForm"
+import CallButton from "./scripts/CallButton"
 
 
 if (document.querySelector("#render-navbar-here")) {
@@ -21,3 +22,6 @@ if (document.querySelector("#render-contact-form-here")) {
   const root = ReactDOM.createRoot(document.querySelector("#render-contact-form-here"))
   root.render(<ContactForm />)
 }
+
+const callRoot = document.getElementById("render-call-button-here")
+if (callRoot) ReactDOM.createRoot(callRoot).render(<CallButton />)

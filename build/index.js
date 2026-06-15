@@ -2,6 +2,182 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/scripts/CallButton.js"
+/*!***********************************!*\
+  !*** ./src/scripts/CallButton.js ***!
+  \***********************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+// ── Ícono ─────────────────────────────────────────────
+
+const PhoneIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "22",
+  height: "22",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+    d: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.41 2 2 0 0 1 3.54 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.52-.52a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+  })
+});
+
+// ── Componente ────────────────────────────────────────
+// Props (todas opcionales):
+//   phone    → número para la llamada (solo dígitos)         · default "9493051605"
+//   display  → cómo se muestra el número                     · default "949-305-1605"
+//   label    → texto del botón al expandirse                 · default "Call Us"
+//   position → "right" | "left" — esquina donde se ancla      · default "right"
+function CallButton({
+  phone = "9493051605",
+  display = "949-305-1605",
+  label = "Call Us",
+  position = "right"
+}) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("style", {
+      children: `
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+
+        .rl-callbtn {
+          /* Paleta de marca */
+          --rl-accent:       #996a6c;   /* café (Smoky Rose) */
+          --rl-accent-rgb:   153, 106, 108;
+          --rl-accent-hover: #ab7d7f;
+
+          position: fixed;
+          bottom: 24px;
+          z-index: 990;            /* debajo del navbar (1000), encima del contenido */
+          display: inline-flex;
+          align-items: center;
+          height: 60px;
+          background: var(--rl-accent);
+          color: #ffffff;
+          border-radius: 999px;
+          text-decoration: none;
+          box-shadow: 0 10px 28px -8px rgba(0,0,0,0.45);
+          font-family: 'Montserrat', sans-serif;
+          transition: background 0.2s ease, box-shadow 0.2s ease, padding 0.28s ease;
+        }
+        .rl-callbtn--right { right: 24px; }
+        .rl-callbtn--left  { left: 24px; }
+
+        .rl-callbtn:hover {
+          background: var(--rl-accent-hover);
+          box-shadow: 0 16px 36px -8px rgba(0,0,0,0.55);
+          padding-right: 24px;     /* aire a la derecha cuando aparece el texto */
+        }
+
+        /* Ícono (siempre 60×60 → círculo en reposo) */
+        .rl-callbtn-icon {
+          width: 60px;
+          height: 60px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Texto: oculto en reposo, se despliega al hover */
+        .rl-callbtn-text {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 1.15;
+          max-width: 0;
+          opacity: 0;
+          overflow: hidden;
+          white-space: nowrap;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          transition: max-width 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+        }
+        .rl-callbtn-text small {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.03em;
+          text-transform: none;
+          opacity: 0.9;
+        }
+        .rl-callbtn:hover .rl-callbtn-text {
+          max-width: 220px;
+          opacity: 1;
+          margin-left: 4px;
+        }
+
+        /* Anillo de pulso (atención) — se pausa al hover y con movimiento reducido */
+        .rl-callbtn::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 999px;
+          pointer-events: none;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .rl-callbtn::after { animation: rl-callbtn-pulse 2.4s ease-out infinite; }
+        }
+        .rl-callbtn:hover::after { animation: none; }
+
+        @keyframes rl-callbtn-pulse {
+          0%   { box-shadow: 0 0 0 0 rgba(var(--rl-accent-rgb), 0.45); }
+          70%  { box-shadow: 0 0 0 16px rgba(var(--rl-accent-rgb), 0); }
+          100% { box-shadow: 0 0 0 0 rgba(var(--rl-accent-rgb), 0); }
+        }
+
+        /* Entrada suave al montar */
+        @media (prefers-reduced-motion: no-preference) {
+          .rl-callbtn {
+            animation: rl-callbtn-in 0.5s cubic-bezier(0.16, 0.84, 0.34, 1) 0.4s both;
+          }
+        }
+        @keyframes rl-callbtn-in {
+          from { opacity: 0; transform: translateY(16px) scale(0.9); }
+          to   { opacity: 1; transform: none; }
+        }
+
+        /* Móvil: un poco más compacto y pegado a la esquina */
+        @media (max-width: 560px) {
+          .rl-callbtn { height: 56px; bottom: 18px; }
+          .rl-callbtn--right { right: 18px; }
+          .rl-callbtn--left  { left: 18px; }
+          .rl-callbtn-icon { width: 56px; height: 56px; }
+        }
+      `
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
+      href: `tel:${phone}`,
+      className: `rl-callbtn rl-callbtn--${position}`,
+      "aria-label": `${label}: ${display}`,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "rl-callbtn-icon",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(PhoneIcon, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+        className: "rl-callbtn-text",
+        children: [label, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("small", {
+          children: display
+        })]
+      })]
+    })]
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CallButton);
+
+/***/ },
+
 /***/ "./src/scripts/ContactForm.js"
 /*!************************************!*\
   !*** ./src/scripts/ContactForm.js ***!
@@ -38,7 +214,7 @@ const ArrowRight = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MOD
 
 // ── Componente ────────────────────────────────────────
 function ContactForm({
-  heading = "Get your free consultation",
+  heading = "Request a Free Estimate",
   subheading = "Tell us about your project — we'll get back to you within one business day.",
   privacyHref = "/privacy-policy",
   termsHref = "/terms-and-conditions"
@@ -71,7 +247,7 @@ function ContactForm({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("style", {
       children: `
-        @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
         .rl-cform * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -83,7 +259,7 @@ function ContactForm({
           --rl-on-accent:    #ffffff;
           --rl-green-dark:   #1a2410;
 
-          font-family: 'Barlow', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           width: 100%;
           color: #ffffff;
           background: rgba(16, 26, 8, 0.74);
@@ -97,7 +273,7 @@ function ContactForm({
         }
 
         .rl-cform-title {
-          font-family: 'Barlow Condensed', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 25px;
           font-weight: 800;
           text-transform: uppercase;
@@ -126,7 +302,7 @@ function ContactForm({
           background: rgba(255,255,255,0.06);
           border: 1px solid rgba(255,255,255,0.18);
           color: #ffffff;
-          font-family: 'Barlow', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 14px;
           padding: 12px 13px;
           border-radius: 0;
@@ -185,7 +361,7 @@ function ContactForm({
           cursor: pointer;
           background: var(--rl-accent);
           color: var(--rl-on-accent);
-          font-family: 'Barlow', sans-serif;
+          font-family: 'Montserrat', sans-serif;
           font-size: 12.5px;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -294,7 +470,7 @@ function ContactForm({
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
         type: "submit",
         className: "rl-cform-btn",
-        children: ["Request my consultation", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowRight, {})]
+        children: ["Request a Free Estimate", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowRight, {})]
       })]
     })]
   });
@@ -467,14 +643,14 @@ const FacebookIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_M
     d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
   })
 });
-const TwitterIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+const TikTokIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "17",
   height: "17",
   viewBox: "0 0 24 24",
   fill: "currentColor",
   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
-    d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+    d: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
   })
 });
 const InstagramIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
@@ -955,7 +1131,7 @@ function Footer() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
           href: "/contact",
           className: "rl-footer-cta-btn",
-          children: ["Contact Us ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowRight, {})]
+          children: ["Request a Free Estimate ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowRight, {})]
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "rl-footer-body",
@@ -983,12 +1159,12 @@ function Footer() {
               "aria-label": "Facebook",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(FacebookIcon, {})
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-              href: "https://x.com/ruizlandscapeoc?s=11",
+              href: "https://www.tiktok.com/@ruizlandscapeserviceinc",
               target: "_blank",
               rel: "noreferrer",
               className: "rl-footer-social-btn",
-              "aria-label": "Twitter / X",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TwitterIcon, {})
+              "aria-label": "TikTok",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TikTokIcon, {})
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               href: "https://www.instagram.com/ruizlandscapeserviceinc/",
               target: "_blank",
@@ -1223,14 +1399,14 @@ const FacebookIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_M
     d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
   })
 });
-const TwitterIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+const TikTokIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "15",
   height: "15",
   viewBox: "0 0 24 24",
   fill: "currentColor",
   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
-    d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+    d: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
   })
 });
 const InstagramIcon = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
@@ -2013,12 +2189,12 @@ function Navbar() {
             "aria-label": "Facebook",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(FacebookIcon, {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-            href: "https://x.com/ruizlandscapeoc?s=11",
+            href: "https://www.tiktok.com/@ruizlandscapeserviceinc",
             target: "_blank",
             rel: "noreferrer",
             className: "rl-social-link",
-            "aria-label": "Twitter / X",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TwitterIcon, {})
+            "aria-label": "TikTok",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TikTokIcon, {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
             href: "https://www.instagram.com/ruizlandscapeserviceinc/",
             target: "_blank",
@@ -2114,7 +2290,7 @@ function Navbar() {
                     href: "/contact",
                     className: "rl-mega-btn",
                     onClick: () => setServicesOpen(false),
-                    children: "Contact Us"
+                    children: "Request a Free Estimate"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
                     href: "tel:9493051605",
                     className: "rl-mega-phone",
@@ -2143,7 +2319,7 @@ function Navbar() {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
             href: "/contact",
             className: "rl-nav-link cta rl-contact-desktop",
-            children: "Contact Us"
+            children: "Request a Free Estimate"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
             className: "rl-mobile-toggle",
             onClick: () => setMobileOpen(prev => !prev),
@@ -2196,7 +2372,7 @@ function Navbar() {
             href: "/contact",
             className: "rl-mobile-cta",
             onClick: () => setMobileOpen(false),
-            children: "Contact Us"
+            children: "Request a Free Estimate"
           })]
         })
       })]
@@ -2325,8 +2501,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scripts_Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./scripts/Navbar */ "./src/scripts/Navbar.js");
 /* harmony import */ var _scripts_Footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scripts/Footer */ "./src/scripts/Footer.js");
 /* harmony import */ var _scripts_ContactForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./scripts/ContactForm */ "./src/scripts/ContactForm.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _scripts_CallButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scripts/CallButton */ "./src/scripts/CallButton.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -2335,16 +2513,18 @@ __webpack_require__.r(__webpack_exports__);
 
 if (document.querySelector("#render-navbar-here")) {
   const root = react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(document.querySelector("#render-navbar-here"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_scripts_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {}));
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_scripts_Navbar__WEBPACK_IMPORTED_MODULE_2__["default"], {}));
 }
 if (document.querySelector("#render-footer-here")) {
   const root = react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(document.querySelector("#render-footer-here"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_scripts_Footer__WEBPACK_IMPORTED_MODULE_3__["default"], {}));
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_scripts_Footer__WEBPACK_IMPORTED_MODULE_3__["default"], {}));
 }
 if (document.querySelector("#render-contact-form-here")) {
   const root = react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(document.querySelector("#render-contact-form-here"));
-  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_scripts_ContactForm__WEBPACK_IMPORTED_MODULE_4__["default"], {}));
+  root.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_scripts_ContactForm__WEBPACK_IMPORTED_MODULE_4__["default"], {}));
 }
+const callRoot = document.getElementById("render-call-button-here");
+if (callRoot) react_dom_client__WEBPACK_IMPORTED_MODULE_1___default().createRoot(callRoot).render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_scripts_CallButton__WEBPACK_IMPORTED_MODULE_5__["default"], {}));
 })();
 
 /******/ })()
