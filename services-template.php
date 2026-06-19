@@ -21,6 +21,14 @@ $rls_images = array(
 );
 
 /* ══════════════════════════════════════════════
+   ENLACE PARA DEJAR RESEÑA EN GOOGLE
+   Reemplaza PLACE_ID_AQUI por el Place ID de tu Perfil de Empresa.
+   Cómo obtenerlo: https://developers.google.com/maps/documentation/places/web-service/place-id
+   (o pega aquí el enlace corto de tu perfil tipo https://g.page/r/XXXX/review)
+══════════════════════════════════════════════ */
+$rls_review_url = 'https://search.google.com/local/writereview?placeid=PLACE_ID_AQUI';
+
+/* ══════════════════════════════════════════════
    LOS 7 SERVICIOS
    El ícono es un SVG de línea (hereda el color con currentColor).
 ══════════════════════════════════════════════ */
@@ -373,36 +381,46 @@ body { padding-top: 104px !important; }
 #rl-services .rls-together .rl-divider { margin: 22px auto 26px; }
 #rl-services .rls-together .rl-body-text { font-size: 16.5px; }
 
-/* ══ SECTION 4 — FINAL CTA ═════════════════════ */
-#rl-services .rls-cta {
-  background: var(--rl-green);
-  position: relative;
-  overflow: hidden;
-}
-#rl-services .rls-cta-bg {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle at 20% 50%, rgba(var(--rl-accent-rgb),0.08) 0%, transparent 55%),
-                    radial-gradient(circle at 82% 50%, rgba(var(--rl-accent-rgb),0.08) 0%, transparent 55%);
-  pointer-events: none;
-}
-#rl-services .rls-cta-inner {
-  position: relative;
-  z-index: 1;
+/* ══ SECTION 4 — GOOGLE REVIEWS ════════════════ */
+#rl-services .rls-reviews { background: #ffffff; }
+#rl-services .rls-reviews-inner { max-width: 1180px; margin: 0 auto; }
+/* Espacio entre el encabezado y el widget de Trustindex */
+#rl-services .rls-reviews-widget { margin-top: 8px; }
+
+/* Invitación a dejar reseña (debajo del widget) */
+#rl-services .rls-review-cta {
   text-align: center;
-  padding: 92px 32px;
-  max-width: 720px;
-  margin: 0 auto;
+  margin-top: 40px;
 }
-#rl-services .rls-cta .rl-eyebrow { justify-content: center; color: var(--rl-green-light); }
-#rl-services .rls-cta .rl-eyebrow::before { background: var(--rl-accent); }
-#rl-services .rls-cta .rl-h2 { color: #ffffff; margin-bottom: 18px; }
-#rl-services .rls-cta .rl-body-text { color: rgba(255,255,255,0.78); max-width: 560px; margin: 0 auto 36px; }
-#rl-services .rls-cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
-#rl-services .rls-cta .rl-btn-primary { background: var(--rl-accent); border-color: var(--rl-accent); color: var(--rl-on-accent); }
-#rl-services .rls-cta .rl-btn-primary:hover { background: var(--rl-accent-hover); border-color: var(--rl-accent-hover); color: var(--rl-on-accent); }
-#rl-services .rls-cta .rl-btn-secondary { border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
-#rl-services .rls-cta .rl-btn-secondary:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.7); }
+#rl-services .rls-review-cta p {
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: #5a5a48;
+  max-width: 560px;
+  margin: 0 auto 20px;
+}
+#rl-services .rls-review-cta .rls-google-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 26px;
+  text-decoration: none;
+  color: var(--rl-on-accent);
+  background: var(--rl-accent);
+  border: 2px solid var(--rl-accent);
+  border-radius: 4px;
+  transition: background 0.18s, border-color 0.18s;
+}
+#rl-services .rls-review-cta .rls-google-btn:hover {
+  background: var(--rl-accent-hover);
+  border-color: var(--rl-accent-hover);
+}
+#rl-services .rls-review-cta .rls-google-btn svg { width: 18px; height: 18px; }
 
 /* ══ RESPONSIVE ════════════════════════════════ */
 @media (max-width: 980px) {
@@ -411,7 +429,6 @@ body { padding-top: 104px !important; }
 @media (max-width: 620px) {
   #rl-services .rls-section { padding: 68px 0; }
   #rl-services .rls-grid { grid-template-columns: 1fr; }
-  #rl-services .rls-cta-inner { padding: 72px 24px; }
 }
 
 /* ══ SCROLL REVEAL ═════════════════════════════
@@ -500,26 +517,28 @@ body { padding-top: 104px !important; }
 
 
 <!-- ══════════════════════════════════════════════
-     SECTION 4 — FINAL CTA
+     SECTION 4 — GOOGLE REVIEWS (Trustindex)
 ══════════════════════════════════════════════ -->
-<section class="rls-cta">
-  <div class="rls-cta-bg"></div>
-  <div class="rls-cta-inner rls-reveal">
-    <span class="rl-eyebrow">Let's Talk</span>
-    <h2 class="rl-h2">Not sure where to start? Let's talk.</h2>
-    <p class="rl-body-text">
-      Whether you need a full design or a single service, we'll build a plan around your property
-      and your goals. Schedule a free consultation to get started.
-    </p>
-    <div class="rls-cta-btns">
-      <a href="/contact" class="rl-btn-primary">
-        Schedule a Free Consultation
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="tel:9493051605" class="rl-btn-secondary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.41 2 2 0 0 1 3.54 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6.29 6.29l.52-.52a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        Call: 949-305-1605
-      </a>
+<section class="rls-section rls-reviews">
+  <div class="rls-container">
+    <div class="rls-head">
+      <span class="rl-eyebrow rls-reveal">Reviews</span>
+      <h2 class="rl-h2 rls-reveal">What our clients say.</h2>
+      <div class="rl-divider rls-reveal"></div>
+    </div>
+
+    <div class="rls-reviews-inner rls-reveal">
+      <div class="rls-reviews-widget">
+        <?php echo do_shortcode('[trustindex no-registration=google]'); ?>
+      </div>
+
+      <div class="rls-review-cta">
+        <p>Have we worked on your landscape? We'd love to hear about it your review helps other Southern California homeowners find us.</p>
+        <a href="<?php echo esc_url( $rls_review_url ); ?>" class="rls-google-btn" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 11v2.4h5.7c-.25 1.5-1.7 4.4-5.7 4.4-3.43 0-6.23-2.84-6.23-6.34S8.57 5.12 12 5.12c1.95 0 3.26.83 4.01 1.55l2.73-2.63C16.99 2.38 14.7 1.4 12 1.4 6.9 1.4 2.78 5.52 2.78 11.86S6.9 22.32 12 22.32c5.9 0 9.8-4.15 9.8-9.99 0-.67-.07-1.18-.16-1.69z"/></svg>
+          Leave us a Google review
+        </a>
+      </div>
     </div>
   </div>
 </section>

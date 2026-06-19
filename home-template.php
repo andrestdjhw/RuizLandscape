@@ -6,37 +6,21 @@
 
 /* ══════════════════════════════════════════════
    IMÁGENES DE LA PÁGINA
-   Pega aquí las URL de la Biblioteca de Medios de WordPress.
-   (Medios → clic en la imagen → copia la "File URL" / "URL del archivo")
-
-   • Deja un valor vacío ('') y ese elemento simplemente no muestra foto.
-   • Funciona con URL absolutas (https://...) o relativas a la raíz (/wp-content/...).
-   • Para el JSON-LD (logo y og-image) se recomienda URL absoluta.
 ══════════════════════════════════════════════ */
 $rl_images = array(
-
-  // ── Fondos de sección (CSS) ──
-  'hero-bg'          => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg', // Sección 1 — póster/fallback del hero
-  'hero-video'       => '/wp-content/uploads/2026/06/RuizHero.mp4', // Sección 1 — video de fondo del hero (mp4)
-  'cta-bg'           => '', // Sección 8 — fondo del CTA final
-
-  // ── Sección 2 · Welcome ──
+  'hero-bg'          => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg',
+  'hero-video'       => '/wp-content/uploads/2026/06/RuizHero.mp4',
+  'cta-bg'           => '',
   'welcome-main'     => '/wp-content/uploads/2026/06/RuizAtWork.png',
-  'welcome-accent'   => '/wp-content/uploads/2026/06/Ruiz_LogoVariant.png', // foto pequeña sobrepuesta (esquina)
-
-  // ── Sección 3 · Tarjetas de servicios ──
+  'welcome-accent'   => '/wp-content/uploads/2026/06/Ruiz_LogoVariant.png',
   'landscape-design' => '/wp-content/uploads/2026/06/LandscapeDesignInstallation-1.jpg',
   'lawn-care'        => '/wp-content/uploads/2026/06/LawnCareMaintenance-1.jpg',
   'tree-shrub'       => '/wp-content/uploads/2026/06/TreeShrubRuiz.jpg',
   'irrigation'       => '/wp-content/uploads/2026/06/IrrigationSystem-scaled.jpg',
-  'synthetic-turf'   => '/wp-content/uploads/2026/06/SyntheticTurfInstallation-scaled.webp',
+  'synthetic-turf'   => '/wp-content/uploads/2026/06/ArtificialTurf1.png',
   'large-trees'      => '/wp-content/uploads/2026/06/LargeTreeInstallation.jpg',
   'lighting'         => '/wp-content/uploads/2026/06/LowVoltageLighting-1.jpg',
-
-  // ── Sección 4 · Why Choose Us ──
-  'why-photo'        => '/wp-content/uploads/2026/06/WhySectionRuiz.png', // retrato / foto del equipo
-
-  // ── Marca / Schema (JSON-LD) ──
+  'why-photo'        => '/wp-content/uploads/2026/06/WhySectionRuiz.png',
   'logo'             => 'https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/logo.png',
   'og-image'         => 'https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/og-image.jpg',
 );
@@ -210,11 +194,6 @@ get_header(); ?>
 }
 </script>
 
-<!-- ══════════════════════════════════════════════
-     SVG FILTER — VOID TEXTURE (para el estampado de servicios)
-     Se declara aquí, invisible, para que el filtro esté disponible
-     en toda la página sin repetirlo dentro de la sección.
-══════════════════════════════════════════════ -->
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
   <defs>
     <filter id="void-texture" x="0%" y="0%" width="100%" height="100%">
@@ -228,9 +207,6 @@ get_header(); ?>
 
 <main id="rl-home">
 <script>
-/* Marca el contenedor ANTES de que se pinten las secciones, de modo que
-   nazcan ocultas (sin parpadeo). Si el usuario prefiere movimiento
-   reducido, no se activa y todo se muestra normal. */
 (function () {
   try {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -241,36 +217,25 @@ get_header(); ?>
 })();
 </script>
 <style>
-/* ══════════════════════════════════════════════
-   HOME PAGE STYLES
-══════════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
 
-/* ── Body offset for fixed navbar ── */
 body { padding-top: 104px !important; }
 
-/* ── Scoped reset: only direct children of #rl-home sections ── */
 #rl-home {
-  /* ══ PALETA (basada en el logo) ════════════════
-     Cambia un valor aquí y se actualiza todo el home. */
-  --rl-green:        #3d5a2a;   /* verde principal · alterno del logo (Turf Green): #237756 */
-  --rl-green-dark:   #1a2410;   /* verde casi negro — fondos oscuros y texto display */
-  --rl-green-mid:    #4a6e32;   /* verde medio — eyebrows y divisor sobre oscuro */
-  --rl-green-light:  #8fb870;   /* verde claro — acentos sobre fondos oscuros */
-
-  --rl-accent:       #996a6c;   /* CAFÉ (Smoky Rose) — reemplaza al dorado */
+  --rl-green:        #3d5a2a;
+  --rl-green-dark:   #1a2410;
+  --rl-green-mid:    #4a6e32;
+  --rl-green-light:  #8fb870;
+  --rl-accent:       #996a6c;
   --rl-accent-rgb:   153, 106, 108;
-  --rl-accent-hover: #ab7d7f;   /* café un poco más claro para hovers */
-  --rl-on-accent:    #ffffff;   /* texto sobre el café (botones sólidos) */
-
-  --rl-cream:        #f4f1ea;   /* fondo crema de secciones claras */
-
+  --rl-accent-hover: #ab7d7f;
+  --rl-on-accent:    #ffffff;
+  --rl-cream:        #f4f1ea;
   font-family: 'Montserrat', sans-serif;
   color: #2a2a20;
   overflow-x: hidden;
 }
 
-/* ── Shared layout ── */
 #rl-home .rl-section { padding: 88px 0; }
 #rl-home .rl-section-sm { padding: 64px 0; }
 #rl-home .rl-container {
@@ -293,7 +258,6 @@ body { padding-top: 104px !important; }
   color: var(--rl-green-mid);
   margin-bottom: 16px;
 }
-
 #rl-home .rl-eyebrow::before {
   content: '';
   display: block;
@@ -335,11 +299,7 @@ body { padding-top: 104px !important; }
   border: 2px solid var(--rl-green);
   transition: background 0.18s, color 0.18s;
 }
-
-#rl-home .rl-btn-primary:hover {
-  background: transparent;
-  color: var(--rl-green);
-}
+#rl-home .rl-btn-primary:hover { background: transparent; color: var(--rl-green); }
 
 #rl-home .rl-btn-secondary {
   display: inline-flex;
@@ -357,11 +317,7 @@ body { padding-top: 104px !important; }
   border: 2px solid var(--rl-green);
   transition: background 0.18s, color 0.18s;
 }
-
-#rl-home .rl-btn-secondary:hover {
-  background: var(--rl-green);
-  color: #fff;
-}
+#rl-home .rl-btn-secondary:hover { background: var(--rl-green); color: #fff; }
 
 #rl-home .rl-divider {
   width: 48px;
@@ -370,7 +326,7 @@ body { padding-top: 104px !important; }
   margin: 20px 0;
 }
 
-/* ══ SECTION 1 — HERO ══════════════════════════ */
+/* HERO */
 #rl-home .rl-hero {
   position: relative;
   min-height: 92vh;
@@ -379,19 +335,14 @@ body { padding-top: 104px !important; }
   background-color: var(--rl-green-dark);
   overflow: hidden;
 }
-
 #rl-home .rl-hero-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* el video cubre todo el hero, recortando lo que sobre */
+  object-fit: cover;
   opacity: 1;
 }
-
-/* Overlay diagonal: oscuro a la izquierda (para que el texto se lea),
-   medio a la derecha (para que la foto se vea). Sube/baja estos valores
-   para oscurecer u aclarar el overlay. */
 #rl-home .rl-hero-overlay {
   position: absolute;
   inset: 0;
@@ -403,7 +354,6 @@ body { padding-top: 104px !important; }
     rgba(20,32,10,0.34) 100%
   );
 }
-
 #rl-home .rl-hero-content {
   position: relative;
   z-index: 2;
@@ -413,14 +363,12 @@ body { padding-top: 104px !important; }
   padding: 80px clamp(28px, 4.5vw, 64px);
   width: 100%;
 }
-
 #rl-home .rl-hero-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 28px;
 }
-
 #rl-home .rl-hero-tag {
   font-size: 11px;
   font-weight: 700;
@@ -430,7 +378,6 @@ body { padding-top: 104px !important; }
   border: 1px solid rgba(var(--rl-accent-rgb),0.4);
   padding: 5px 12px;
 }
-
 #rl-home .rl-hero h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(31px, 4.8vw, 56px);
@@ -442,11 +389,7 @@ body { padding-top: 104px !important; }
   max-width: 720px;
   margin-bottom: 24px;
 }
-
-#rl-home .rl-hero h1 span {
-  color: var(--rl-green-light);
-}
-
+#rl-home .rl-hero h1 span { color: var(--rl-green-light); }
 #rl-home .rl-hero-sub {
   font-size: clamp(15px, 1.8vw, 17px);
   line-height: 1.75;
@@ -454,36 +397,27 @@ body { padding-top: 104px !important; }
   max-width: 560px;
   margin-bottom: 24px;
 }
-
 #rl-home .rl-hero-ctas {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   margin-bottom: 48px;
 }
-
 #rl-home .rl-hero-ctas .rl-btn-primary {
   background: var(--rl-accent);
   border-color: var(--rl-accent);
   color: var(--rl-on-accent);
 }
-
-#rl-home .rl-hero-ctas .rl-btn-primary:hover {
-  background: transparent;
-  color: var(--rl-accent);
-}
-
+#rl-home .rl-hero-ctas .rl-btn-primary:hover { background: transparent; color: var(--rl-accent); }
 #rl-home .rl-hero-ctas .rl-btn-secondary {
   border-color: rgba(255,255,255,0.4);
   color: rgba(255,255,255,0.85);
 }
-
 #rl-home .rl-hero-ctas .rl-btn-secondary:hover {
   background: rgba(255,255,255,0.1);
   color: #fff;
   border-color: rgba(255,255,255,0.7);
 }
-
 #rl-home .rl-trust-strip {
   display: flex;
   flex-wrap: wrap;
@@ -491,7 +425,6 @@ body { padding-top: 104px !important; }
   border-top: 1px solid rgba(255,255,255,0.12);
   padding-top: 28px;
 }
-
 #rl-home .rl-trust-item {
   display: flex;
   align-items: center;
@@ -505,42 +438,27 @@ body { padding-top: 104px !important; }
   margin-right: 28px;
   border-right: 1px solid rgba(255,255,255,0.12);
 }
-
-#rl-home .rl-trust-item:last-child {
-  border-right: none;
-  margin-right: 0;
-  padding-right: 0;
-}
-
+#rl-home .rl-trust-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
 #rl-home .rl-trust-item svg { color: var(--rl-accent); flex-shrink: 0; }
 
-/* ══ SECTION 2 — WELCOME ═══════════════════════ */
+/* WELCOME */
 #rl-home .rl-welcome {
   background: #ffffff;
   border-top: 4px solid var(--rl-accent);
-  padding: 0;            /* anula el padding vertical de .rl-section */
+  padding: 0;
 }
-
-/* La franja Welcome rompe el contenedor para ir de borde a borde */
-#rl-home .rl-welcome .rl-container {
-  max-width: none;
-  padding-left: 0;
-  padding-right: 0;
-}
-
+#rl-home .rl-welcome .rl-container { max-width: none; padding-left: 0; padding-right: 0; }
 #rl-home .rl-welcome-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
   align-items: stretch;
 }
-
 #rl-home .rl-welcome-img {
   position: relative;
   height: 100%;
-  min-height: 440px;   /* piso de seguridad; por encima de esto la altura la marca el texto */
+  min-height: 440px;
 }
-
 #rl-home .rl-welcome-img-main {
   position: absolute;
   inset: 0;
@@ -549,7 +467,6 @@ body { padding-top: 104px !important; }
   object-fit: cover;
   display: block;
 }
-
 #rl-home .rl-welcome-img-accent {
   position: absolute;
   bottom: -24px;
@@ -560,7 +477,6 @@ body { padding-top: 104px !important; }
   border: 5px solid #fff;
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
 }
-
 #rl-home .rl-welcome-badge {
   position: absolute;
   top: 24px;
@@ -575,7 +491,6 @@ body { padding-top: 104px !important; }
   text-transform: uppercase;
   line-height: 1.3;
 }
-
 #rl-home .rl-welcome-text {
   display: flex;
   flex-direction: column;
@@ -583,9 +498,7 @@ body { padding-top: 104px !important; }
   gap: 20px;
   padding: 80px clamp(40px, 5vw, 88px);
 }
-
 #rl-home .rl-welcome-text .rl-body-text + .rl-body-text { margin-top: -8px; }
-
 #rl-home .rl-text-link {
   display: inline-flex;
   align-items: center;
@@ -602,74 +515,34 @@ body { padding-top: 104px !important; }
   width: fit-content;
   margin-top: 8px;
 }
-
 #rl-home .rl-text-link:hover { color: var(--rl-accent); }
 
-/* ══ SECTION 3 — SERVICES ══════════════════════ */
-
-/* ── Estampado geométrico (Uiverse · AatreyuShau, adaptado a la paleta verde/crema)
-   Capas:
-   1. Puntos pequeños (#4a6e32 semitransparente sobre crema)
-   2. Radial suave (crema con velo dorado)
-   3. Diagonal izq-der (crema con línea verde muy tenue)
-   4. Diagonal der-izq (crema con acento café muy tenue)
-   5. Diagonal central (crema base)
-   La capa .rl-services-paper aplica el filtro void-texture (ruido de papel)
-   para suavizar el patrón y que no compita con las tarjetas.
-── */
+/* SERVICES */
 #rl-home .rl-services {
   position: relative;
   isolation: isolate;
   background:
     radial-gradient(circle, rgba(74,110,50,0.18) 2px, transparent 2px),
     radial-gradient(circle, var(--rl-cream) 10px, transparent 32px),
-    linear-gradient(
-      -45deg,
-      var(--rl-cream) 0%,
-      transparent 49%,
-      transparent 50%,
-      transparent 51%,
-      var(--rl-cream) 100%
-    ),
-    linear-gradient(
-      45deg,
-      var(--rl-cream) 0%,
-      transparent 49%,
-      rgba(153,106,108,0.22) 50%,
-      transparent 51%,
-      var(--rl-cream) 100%
-    ),
+    linear-gradient(-45deg, var(--rl-cream) 0%, transparent 49%, transparent 50%, transparent 51%, var(--rl-cream) 100%),
+    linear-gradient(45deg, var(--rl-cream) 0%, transparent 49%, rgba(153,106,108,0.22) 50%, transparent 51%, var(--rl-cream) 100%),
     linear-gradient(-45deg, transparent 49%, rgba(74,110,50,0.18) 50%, transparent 51%);
   background-size: 8rem 8rem;
   background-repeat: repeat;
 }
-
-/* Capa paper: misma textura dorada del original, con el filtro SVG void-texture */
 #rl-home .rl-services-paper {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   filter: url(#void-texture);
-  background: linear-gradient(
-    to bottom,
-    rgba(61, 90, 42, 0.07) 0%,
-    rgba(74, 110, 50, 0.10) 100%
-  );
+  background: linear-gradient(to bottom, rgba(61, 90, 42, 0.07) 0%, rgba(74, 110, 50, 0.10) 100%);
 }
-
-/* El contenido de la sección debe quedar POR ENCIMA de la capa paper */
 #rl-home .rl-services > .rl-container { position: relative; z-index: 1; }
-
-#rl-home .rl-services-head {
-  text-align: center;
-  margin-bottom: 56px;
-}
-
+#rl-home .rl-services-head { text-align: center; margin-bottom: 56px; }
 #rl-home .rl-services-head .rl-eyebrow { justify-content: center; }
 #rl-home .rl-services-head .rl-divider { margin: 20px auto; }
 #rl-home .rl-services-head .rl-body-text { margin: 0 auto; text-align: center; }
-
 #rl-home .rl-service-card {
   background: #ffffff;
   display: flex;
@@ -678,16 +551,12 @@ body { padding-top: 104px !important; }
   overflow: hidden;
   transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s ease, border-color 0.22s ease, opacity 0.65s ease;
 }
-
 #rl-home .rl-services .rl-service-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 26px 38px -16px rgba(26, 36, 16, 0.45);
   border-color: var(--rl-green);
 }
-
 #rl-home .rl-service-card:hover .rl-service-title { color: var(--rl-green); }
-
-/* Card photo */
 #rl-home .rl-service-media {
   position: relative;
   z-index: 1;
@@ -696,7 +565,6 @@ body { padding-top: 104px !important; }
   background: #e9e5dc;
   overflow: hidden;
 }
-
 #rl-home .rl-service-media img {
   width: 100%;
   height: 100%;
@@ -704,8 +572,6 @@ body { padding-top: 104px !important; }
   display: block;
   transition: transform 0.45s ease;
 }
-
-/* Green wash that fades in over the photo on hover */
 #rl-home .rl-service-media::after {
   content: '';
   position: absolute;
@@ -715,11 +581,8 @@ body { padding-top: 104px !important; }
   transition: opacity 0.32s ease;
   z-index: 1;
 }
-
 #rl-home .rl-service-card:hover .rl-service-media::after { opacity: 1; }
 #rl-home .rl-service-card:hover .rl-service-media img { transform: scale(1.08); }
-
-/* Card content */
 #rl-home .rl-service-body {
   display: flex;
   flex-direction: column;
@@ -727,7 +590,6 @@ body { padding-top: 104px !important; }
   padding: 0 32px 36px;
   flex: 1;
 }
-
 #rl-home .rl-service-icon {
   width: 48px;
   height: 48px;
@@ -743,13 +605,11 @@ body { padding-top: 104px !important; }
   margin-top: -24px;
   transition: border-color 0.18s, background 0.18s, color 0.18s;
 }
-
 #rl-home .rl-service-card:hover .rl-service-icon {
   border-color: var(--rl-green);
   background: var(--rl-green);
   color: #ffffff;
 }
-
 #rl-home .rl-service-num {
   font-family: 'Montserrat', sans-serif;
   font-size: 11px;
@@ -758,7 +618,6 @@ body { padding-top: 104px !important; }
   text-transform: uppercase;
   color: var(--rl-accent);
 }
-
 #rl-home .rl-service-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
@@ -768,14 +627,12 @@ body { padding-top: 104px !important; }
   color: var(--rl-green-dark);
   line-height: 1.2;
 }
-
 #rl-home .rl-service-desc {
   font-size: 14px;
   line-height: 1.65;
   color: #5a5a48;
   flex: 1;
 }
-
 #rl-home .rl-service-link {
   display: inline-flex;
   align-items: center;
@@ -789,35 +646,20 @@ body { padding-top: 104px !important; }
   margin-top: 4px;
   transition: gap 0.15s;
 }
-
 #rl-home .rl-service-link:hover { gap: 10px; }
-
-/* ── Services carousel ── */
-#rl-home .rl-carousel {
-  --rl-gap: 24px;
-  --rl-per-view: 3;
-  position: relative;
-}
-
-#rl-home .rl-carousel-viewport {
-  overflow: hidden;
-  padding: 12px 0 36px;
-}
-
+#rl-home .rl-carousel { --rl-gap: 24px; --rl-per-view: 3; position: relative; }
+#rl-home .rl-carousel-viewport { overflow: hidden; padding: 12px 0 36px; }
 #rl-home .rl-carousel-track {
   display: flex;
   gap: var(--rl-gap);
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
-
-/* each card occupies an equal fraction of the viewport based on --rl-per-view */
 #rl-home .rl-services .rl-service-card {
   flex: 0 0 calc((100% - (var(--rl-per-view) - 1) * var(--rl-gap)) / var(--rl-per-view));
   box-sizing: border-box;
   border: 1px solid #e0dbd0;
 }
-
 #rl-home .rl-carousel-controls {
   display: flex;
   align-items: center;
@@ -825,7 +667,6 @@ body { padding-top: 104px !important; }
   gap: 22px;
   margin-top: 16px;
 }
-
 #rl-home .rl-carousel-btn {
   width: 48px;
   height: 48px;
@@ -839,16 +680,9 @@ body { padding-top: 104px !important; }
   flex-shrink: 0;
   transition: background 0.18s, color 0.18s, opacity 0.18s;
 }
-
 #rl-home .rl-carousel-btn:hover:not(:disabled) { background: var(--rl-green); color: #ffffff; }
 #rl-home .rl-carousel-btn:disabled { opacity: 0.3; cursor: default; }
-
-#rl-home .rl-carousel-dots {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+#rl-home .rl-carousel-dots { display: flex; align-items: center; gap: 8px; }
 #rl-home .rl-carousel-dot {
   width: 10px;
   height: 10px;
@@ -858,46 +692,26 @@ body { padding-top: 104px !important; }
   cursor: pointer;
   transition: background 0.18s, border-color 0.18s;
 }
-
 #rl-home .rl-carousel-dot:hover { border-color: var(--rl-green); }
 #rl-home .rl-carousel-dot.active { background: var(--rl-accent); border-color: var(--rl-accent); }
 
-/* ══ SECTION 4 — WHY CHOOSE US ═════════════════ */
+/* WHY */
 #rl-home .rl-why {
-  /* Estampado tejido (Uiverse · marcelodolza, adaptado a la paleta) — igual que el footer/about */
   --s: 90px;
   --c1: #1b2912;
   --c2: #121b0b;
-  --_g: var(--c2) 4% 14%, var(--c1) 14% 24%, var(--c2) 22% 34%,
-    var(--c1) 34% 44%, var(--c2) 44% 56%, var(--c1) 56% 66%, var(--c2) 66% 76%,
-    var(--c1) 76% 86%, var(--c2) 86% 96%;
-  background-color: var(--rl-green-dark); /* respaldo */
+  --_g: var(--c2) 4% 14%, var(--c1) 14% 24%, var(--c2) 22% 34%, var(--c1) 34% 44%, var(--c2) 44% 56%, var(--c1) 56% 66%, var(--c2) 66% 76%, var(--c1) 76% 86%, var(--c2) 86% 96%;
+  background-color: var(--rl-green-dark);
   background:
     radial-gradient(100% 100% at 100% 0, var(--c1) 4%, var(--_g), #0008 96%, #0000),
-    radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--c1) 96%)
-      var(--c1);
+    radial-gradient(100% 100% at 0 100%, #0000, #0008 4%, var(--_g), var(--c1) 96%) var(--c1);
   background-size: var(--s) var(--s);
   color: #fff;
-  padding-top: 0;       /* el aire vertical pasa a las razones; la imagen va full-height */
+  padding-top: 0;
   padding-bottom: 0;
 }
-
-/* Esta sección rompe el contenedor: la imagen va full-bleed al borde derecho */
-#rl-home .rl-why .rl-container {
-  max-width: none;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-#rl-home .rl-why-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;   /* media pantalla cada uno */
-  gap: 0;
-  align-items: stretch;
-}
-
-/* Razones (izquierda): alineadas al contenido del sitio, con aire antes de la imagen.
-   Llevan el padding vertical que antes tenía la sección, para que la imagen quede full-height. */
+#rl-home .rl-why .rl-container { max-width: none; padding-left: 0; padding-right: 0; }
+#rl-home .rl-why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; }
 #rl-home .rl-why-reasons {
   display: flex;
   flex-direction: column;
@@ -907,17 +721,14 @@ body { padding-top: 104px !important; }
   padding-left: max(32px, calc((100vw - 1760px) / 2 + 32px));
   padding-right: 64px;
 }
-
 #rl-home .rl-why-left {
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: flex-start;  /* cartita arriba de la foto */
-  min-height: 460px;       /* respaldo por si la otra columna es corta */
-  order: 1;                /* imagen + cartita van a la DERECHA */
+  align-items: flex-start;
+  min-height: 460px;
+  order: 1;
 }
-
-/* La imagen llena toda la mitad izquierda */
 #rl-home .rl-why-img {
   position: absolute;
   inset: 0;
@@ -927,8 +738,6 @@ body { padding-top: 104px !important; }
   display: block;
   z-index: 0;
 }
-
-/* Velo sutil para que la cartita siempre tenga contraste sobre la foto */
 #rl-home .rl-why-left::after {
   content: '';
   position: absolute;
@@ -937,8 +746,6 @@ body { padding-top: 104px !important; }
   z-index: 0;
   pointer-events: none;
 }
-
-/* Cartita translúcida color acento, por encima de la imagen */
 #rl-home .rl-why-card {
   position: relative;
   z-index: 1;
@@ -951,23 +758,14 @@ body { padding-top: 104px !important; }
   box-shadow: 0 18px 44px -20px rgba(0,0,0,0.55);
   transition: box-shadow 0.4s ease, background 0.3s ease;
 }
-
-/* Flote en loop — mismo efecto que el ContactForm; se pausa al pasar el cursor */
 @media (prefers-reduced-motion: no-preference) {
-  #rl-home .rl-why-card {
-    animation: rl-why-card-float 5.5s ease-in-out 1.1s infinite;
-  }
-  #rl-home .rl-why-left:hover .rl-why-card {
-    animation-play-state: paused;
-  }
+  #rl-home .rl-why-card { animation: rl-why-card-float 5.5s ease-in-out 1.1s infinite; }
+  #rl-home .rl-why-left:hover .rl-why-card { animation-play-state: paused; }
 }
-
-/* Realce sutil al pasar el cursor (sin transform, para no chocar con el flote) */
 #rl-home .rl-why-left:hover .rl-why-card {
   box-shadow: 0 26px 56px -22px rgba(0,0,0,0.62);
   background: rgba(var(--rl-accent-rgb), 0.9);
 }
-
 @keyframes rl-why-card-float {
   0%   { transform: translateY(0); }
   30%  { transform: translateY(-12px); }
@@ -975,16 +773,12 @@ body { padding-top: 104px !important; }
   60%  { transform: translateY(-12px); }
   100% { transform: translateY(0); }
 }
-
-/* Texto dentro de la cartita (sobre el café → todo claro) */
 #rl-home .rl-why-card .rl-eyebrow { color: #ffffff; }
 #rl-home .rl-why-card .rl-eyebrow::before { background: #ffffff; }
 #rl-home .rl-why-card .rl-h2 { color: #ffffff; }
 #rl-home .rl-why-card .rl-divider { background: rgba(255,255,255,0.85); }
 #rl-home .rl-why-card .rl-body-text { color: rgba(255,255,255,0.92); font-size: 15px; margin-bottom: 0; }
-
 #rl-home .rl-why-reasons { display: flex; flex-direction: column; }
-
 #rl-home .rl-reason {
   padding: 32px 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -993,9 +787,7 @@ body { padding-top: 104px !important; }
   gap: 24px;
   align-items: start;
 }
-
 #rl-home .rl-reason:first-child { padding-top: 0; }
-
 #rl-home .rl-reason-num {
   font-family: 'Montserrat', sans-serif;
   font-size: 36px;
@@ -1004,7 +796,6 @@ body { padding-top: 104px !important; }
   line-height: 1;
   padding-top: 4px;
 }
-
 #rl-home .rl-reason-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 17px;
@@ -1014,26 +805,15 @@ body { padding-top: 104px !important; }
   color: var(--rl-green-light);
   margin-bottom: 10px;
 }
+#rl-home .rl-reason-body { font-size: 14.5px; line-height: 1.7; color: rgba(255,255,255,0.6); }
 
-#rl-home .rl-reason-body {
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.6);
-}
-
-/* ══ SECTION 5 — AREAS WE SERVE ═══════════════ */
+/* AREAS */
 #rl-home .rl-areas {
   position: relative;
   overflow: hidden;
-  background: var(--rl-cream);   /* base bajo el resplandor */
-  isolation: isolate;            /* contiene el z-index de los pseudo-elementos */
+  background: var(--rl-cream);
+  isolation: isolate;
 }
-
-/* Resplandor cónico giratorio (Uiverse · ariba_9087, adaptado a la paleta).
-   Dos capas que giran en sentidos opuestos para dar profundidad.
-   ► Para el original PASTEL, reemplaza el conic-gradient de abajo por:
-     conic-gradient(from 0deg, #ff9aa2, #ffb7b2, #ffdac1, #e2f0cb,
-                    #a2e4ff, #c9afff, #ffb7b2, #ff9aa2) */
 #rl-home .rl-areas::before,
 #rl-home .rl-areas::after {
   content: '';
@@ -1043,49 +823,21 @@ body { padding-top: 104px !important; }
   width: 200%;
   height: 200%;
   transform: translate(-50%, -50%);
-  background: conic-gradient(
-    from 0deg,
-    var(--rl-green),
-    var(--rl-green-mid),
-    var(--rl-green-light),
-    var(--rl-cream),
-    var(--rl-accent),
-    var(--rl-green-light),
-    var(--rl-green-mid),
-    var(--rl-green)
-  );
-  filter: blur(60px);            /* resplandor suave */
+  background: conic-gradient(from 0deg, var(--rl-green), var(--rl-green-mid), var(--rl-green-light), var(--rl-cream), var(--rl-accent), var(--rl-green-light), var(--rl-green-mid), var(--rl-green));
+  filter: blur(60px);
   opacity: 0.45;
   z-index: 0;
   pointer-events: none;
 }
-
-/* Segunda capa: un poco más pequeña y tenue */
-#rl-home .rl-areas::after {
-  width: 180%;
-  height: 180%;
-  opacity: 0.3;
-}
-
+#rl-home .rl-areas::after { width: 180%; height: 180%; opacity: 0.3; }
 @media (prefers-reduced-motion: no-preference) {
   #rl-home .rl-areas::before { animation: rl-areas-rotate 18s linear infinite; }
   #rl-home .rl-areas::after  { animation: rl-areas-rotate-rev 22s linear infinite; }
 }
-
-@keyframes rl-areas-rotate {
-  0%   { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-@keyframes rl-areas-rotate-rev {
-  0%   { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(-360deg); }
-}
-
-/* El contenido por encima del resplandor */
+@keyframes rl-areas-rotate { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes rl-areas-rotate-rev { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(-360deg); } }
 #rl-home .rl-areas .rl-container { position: relative; z-index: 1; }
-
 #rl-home .rl-areas-head { margin-bottom: 52px; }
-
 #rl-home .rl-areas-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1093,15 +845,12 @@ body { padding-top: 104px !important; }
   background: #e0dbd0;
   margin-bottom: 48px;
 }
-
 #rl-home .rl-area-card {
   background: #fff;
   padding: 40px 32px;
   transition: background 0.18s, opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 0.84, 0.34, 1);
 }
-
 #rl-home .rl-area-card:hover { background: #f7f5f0; }
-
 #rl-home .rl-area-badge {
   display: inline-block;
   background: var(--rl-green);
@@ -1113,7 +862,6 @@ body { padding-top: 104px !important; }
   padding: 4px 10px;
   margin-bottom: 20px;
 }
-
 #rl-home .rl-area-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 22px;
@@ -1124,23 +872,9 @@ body { padding-top: 104px !important; }
   margin-bottom: 14px;
   line-height: 1.2;
 }
-
-/* El nombre del condado es clickeable → abre la ubicación en Google Maps */
-#rl-home .rl-area-title-link {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-
+#rl-home .rl-area-title-link { color: inherit; text-decoration: none; transition: color 0.15s; }
 #rl-home .rl-area-title-link:hover { color: var(--rl-green); }
-
-#rl-home .rl-area-body {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #5a5a48;
-  margin-bottom: 20px;
-}
-
+#rl-home .rl-area-body { font-size: 14px; line-height: 1.7; color: #5a5a48; margin-bottom: 20px; }
 #rl-home .rl-area-link {
   display: inline-flex;
   align-items: center;
@@ -1155,38 +889,21 @@ body { padding-top: 104px !important; }
   padding-bottom: 2px;
   transition: color 0.15s;
 }
-
 #rl-home .rl-area-link:hover { color: var(--rl-accent); }
 
-/* ══ SECTION 6 — HOW WE WORK ══════════════════ */
+/* PROCESS */
 #rl-home .rl-process {
   position: relative;
   isolation: isolate;
   background:
     radial-gradient(circle, rgba(74,110,50,0.18) 2px, transparent 2px),
     radial-gradient(circle, var(--rl-cream) 10px, transparent 32px),
-    linear-gradient(
-      -45deg,
-      var(--rl-cream) 0%,
-      transparent 49%,
-      transparent 50%,
-      transparent 51%,
-      var(--rl-cream) 100%
-    ),
-    linear-gradient(
-      45deg,
-      var(--rl-cream) 0%,
-      transparent 49%,
-      rgba(153,106,108,0.22) 50%,
-      transparent 51%,
-      var(--rl-cream) 100%
-    ),
+    linear-gradient(-45deg, var(--rl-cream) 0%, transparent 49%, transparent 50%, transparent 51%, var(--rl-cream) 100%),
+    linear-gradient(45deg, var(--rl-cream) 0%, transparent 49%, rgba(153,106,108,0.22) 50%, transparent 51%, var(--rl-cream) 100%),
     linear-gradient(-45deg, transparent 49%, rgba(74,110,50,0.18) 50%, transparent 51%);
   background-size: 8rem 8rem;
   background-repeat: repeat;
 }
-
-/* Capa paper sobre el estampado */
 #rl-home .rl-process::before {
   content: '';
   position: absolute;
@@ -1194,27 +911,14 @@ body { padding-top: 104px !important; }
   z-index: 0;
   pointer-events: none;
   filter: url(#void-texture);
-  background: linear-gradient(
-    to bottom,
-    rgba(61, 90, 42, 0.07) 0%,
-    rgba(74, 110, 50, 0.10) 100%
-  );
+  background: linear-gradient(to bottom, rgba(61, 90, 42, 0.07) 0%, rgba(74, 110, 50, 0.10) 100%);
 }
-
 #rl-home .rl-process > .rl-container { position: relative; z-index: 1; }
-
 #rl-home .rl-process-head { text-align: center; margin-bottom: 64px; }
 #rl-home .rl-process-head .rl-eyebrow { justify-content: center; }
 #rl-home .rl-process-head .rl-divider { margin: 20px auto; }
-
-/* ── Process carousel wrapper ── */
 #rl-home .rl-process-carousel { position: relative; }
-
-#rl-home .rl-process-viewport {
-  overflow: hidden;
-  padding-bottom: 4px;
-}
-
+#rl-home .rl-process-viewport { overflow: hidden; padding-bottom: 4px; }
 #rl-home .rl-steps {
   display: flex;
   gap: 2px;
@@ -1222,7 +926,6 @@ body { padding-top: 104px !important; }
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
-
 #rl-home .rl-step {
   background: #fff;
   padding: 40px 28px;
@@ -1231,22 +934,8 @@ body { padding-top: 104px !important; }
   flex: 0 0 calc(25% - 1.5px);
   box-sizing: border-box;
 }
-
-/* Controles: ocultos en desktop (4 pasos caben), visibles <=1024px */
-#rl-home .rl-process-controls {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  margin-top: 20px;
-}
-
-#rl-home .rl-process-dots {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
+#rl-home .rl-process-controls { display: none; align-items: center; justify-content: center; gap: 22px; margin-top: 20px; }
+#rl-home .rl-process-dots { display: flex; align-items: center; gap: 8px; }
 #rl-home .rl-step-bg-num {
   position: absolute;
   top: -10px;
@@ -1259,7 +948,6 @@ body { padding-top: 104px !important; }
   pointer-events: none;
   user-select: none;
 }
-
 #rl-home .rl-step-num {
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
@@ -1272,14 +960,7 @@ body { padding-top: 104px !important; }
   align-items: center;
   gap: 8px;
 }
-
-#rl-home .rl-step-num::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #e0dbd0;
-}
-
+#rl-home .rl-step-num::after { content: ''; flex: 1; height: 1px; background: #e0dbd0; }
 #rl-home .rl-step-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
@@ -1289,33 +970,15 @@ body { padding-top: 104px !important; }
   color: var(--rl-green-dark);
   margin-bottom: 14px;
 }
+#rl-home .rl-step-body { font-size: 14px; line-height: 1.7; color: #5a5a48; }
 
-#rl-home .rl-step-body {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #5a5a48;
-}
-
-/* ══ SECTION 7 — FAQ ══════════════════════════ */
+/* FAQ */
 #rl-home .rl-faq { background: #ffffff; }
-
-#rl-home .rl-faq-inner {
-  display: grid;
-  grid-template-columns: 1fr 1.8fr;
-  gap: 80px;
-  align-items: start;
-}
-
+#rl-home .rl-faq-inner { display: grid; grid-template-columns: 1fr 1.8fr; gap: 80px; align-items: start; }
 #rl-home .rl-faq-left { position: sticky; top: 120px; }
 #rl-home .rl-faq-left .rl-body-text { font-size: 15px; }
-
 #rl-home .rl-faq-list { display: flex; flex-direction: column; gap: 2px; }
-
-#rl-home .rl-faq-item {
-  border: 1px solid #e8e4da;
-  background: #fff;
-}
-
+#rl-home .rl-faq-item { border: 1px solid #e8e4da; background: #fff; }
 #rl-home .rl-faq-q {
   width: 100%;
   display: flex;
@@ -1333,9 +996,7 @@ body { padding-top: 104px !important; }
   color: var(--rl-green-dark);
   transition: background 0.15s;
 }
-
 #rl-home .rl-faq-q:hover { background: #f7f5f0; }
-
 #rl-home .rl-faq-icon {
   width: 22px;
   height: 22px;
@@ -1351,12 +1012,7 @@ body { padding-top: 104px !important; }
   transition: background 0.15s, color 0.15s;
   user-select: none;
 }
-
-#rl-home .rl-faq-item.open .rl-faq-icon {
-  background: var(--rl-green);
-  color: #fff;
-}
-
+#rl-home .rl-faq-item.open .rl-faq-icon { background: var(--rl-green); color: #fff; }
 #rl-home .rl-faq-a {
   display: none;
   padding: 0 24px 20px;
@@ -1365,16 +1021,10 @@ body { padding-top: 104px !important; }
   color: #5a5a48;
   border-top: 1px solid #e8e4da;
 }
-
 #rl-home .rl-faq-item.open .rl-faq-a { display: block; padding-top: 18px; }
 
-/* ══ SECTION 8 — FINAL CTA ════════════════════ */
-#rl-home .rl-final-cta {
-  background: var(--rl-green);
-  position: relative;
-  overflow: hidden;
-}
-
+/* FINAL CTA */
+#rl-home .rl-final-cta { background: var(--rl-green); position: relative; overflow: hidden; }
 #rl-home .rl-final-cta-bg {
   position: absolute;
   inset: 0;
@@ -1383,7 +1033,6 @@ body { padding-top: 104px !important; }
   background-position: center;
   opacity: 0.12;
 }
-
 #rl-home .rl-final-cta-inner {
   position: relative;
   z-index: 1;
@@ -1393,52 +1042,17 @@ body { padding-top: 104px !important; }
   margin-left: auto;
   margin-right: auto;
 }
-
 #rl-home .rl-final-cta .rl-eyebrow { justify-content: center; color: var(--rl-green-light); }
 #rl-home .rl-final-cta .rl-eyebrow::before { background: var(--rl-accent); }
+#rl-home .rl-final-cta .rl-h2 { color: #ffffff; margin-bottom: 20px; }
+#rl-home .rl-final-cta .rl-body-text { color: rgba(255,255,255,0.72); margin: 0 auto 40px; text-align: center; max-width: 560px; }
+#rl-home .rl-final-cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+#rl-home .rl-final-cta .rl-btn-primary { background: var(--rl-accent); border-color: var(--rl-accent); color: var(--rl-on-accent); }
+#rl-home .rl-final-cta .rl-btn-primary:hover { background: transparent; color: var(--rl-accent); }
+#rl-home .rl-final-cta .rl-btn-secondary { border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
+#rl-home .rl-final-cta .rl-btn-secondary:hover { background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.7); }
 
-#rl-home .rl-final-cta .rl-h2 {
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-
-#rl-home .rl-final-cta .rl-body-text {
-  color: rgba(255,255,255,0.72);
-  margin: 0 auto 40px;
-  text-align: center;
-  max-width: 560px;
-}
-
-#rl-home .rl-final-cta-btns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-}
-
-#rl-home .rl-final-cta .rl-btn-primary {
-  background: var(--rl-accent);
-  border-color: var(--rl-accent);
-  color: var(--rl-on-accent);
-}
-
-#rl-home .rl-final-cta .rl-btn-primary:hover {
-  background: transparent;
-  color: var(--rl-accent);
-}
-
-#rl-home .rl-final-cta .rl-btn-secondary {
-  border-color: rgba(255,255,255,0.4);
-  color: rgba(255,255,255,0.85);
-}
-
-#rl-home .rl-final-cta .rl-btn-secondary:hover {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  border-color: rgba(255,255,255,0.7);
-}
-
-/* ══ RESPONSIVE ═══════════════════════════════ */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
   #rl-home .rl-services .rl-carousel { --rl-per-view: 2; }
   #rl-home .rl-step { flex: 0 0 calc(50% - 1px); }
@@ -1449,7 +1063,6 @@ body { padding-top: 104px !important; }
   #rl-home .rl-faq-inner { grid-template-columns: 1fr; gap: 40px; }
   #rl-home .rl-faq-left { position: static; }
 }
-
 @media (max-width: 768px) {
   #rl-home .rl-section { padding: 64px 0; }
   #rl-home .rl-welcome-inner { grid-template-columns: 1fr; gap: 0; }
@@ -1459,7 +1072,6 @@ body { padding-top: 104px !important; }
   #rl-home .rl-areas-grid { grid-template-columns: 1fr; }
   #rl-home .rl-trust-item { border-right: none; margin-right: 0; padding-right: 0; }
 }
-
 @media (max-width: 560px) {
   #rl-home .rl-container { padding: 0 20px; }
   #rl-home .rl-services .rl-carousel { --rl-per-view: 1; }
@@ -1468,13 +1080,8 @@ body { padding-top: 104px !important; }
   #rl-home .rl-why-reasons { padding: 48px 20px; }
 }
 
-/* ══ SCROLL REVEAL ════════════════════════════
-   Activo solo si JS añade .rl-reveal-on al contenedor
-   y el usuario NO prefiere movimiento reducido.
-══════════════════════════════════════════════ */
+/* SCROLL REVEAL */
 @media (prefers-reduced-motion: no-preference) {
-
-  /* Subida + fundido (elementos sin transición propia) */
   #rl-home.rl-reveal-on .rl-welcome-text,
   #rl-home.rl-reveal-on .rl-services-head,
   #rl-home.rl-reveal-on .rl-reason,
@@ -1485,51 +1092,22 @@ body { padding-top: 104px !important; }
   #rl-home.rl-reveal-on .rl-final-cta-inner {
     opacity: 0;
     transform: translateY(34px);
-    transition: opacity 0.7s cubic-bezier(0.16, 0.84, 0.34, 1),
-                transform 0.7s cubic-bezier(0.16, 0.84, 0.34, 1);
+    transition: opacity 0.7s cubic-bezier(0.16, 0.84, 0.34, 1), transform 0.7s cubic-bezier(0.16, 0.84, 0.34, 1);
   }
-
-  /* Tarjetas con transición propia: solo fijamos el estado inicial;
-     la transición la aporta su propia regla (el hover sigue rápido). */
   #rl-home.rl-reveal-on .rl-service-card,
-  #rl-home.rl-reveal-on .rl-area-card {
-    opacity: 0;
-    transform: translateY(34px);
-  }
-
-  /* Solo fundido (imagen full-bleed y columnas sticky: evitan
-     huecos por el desplazamiento y no rompen el position:sticky) */
+  #rl-home.rl-reveal-on .rl-area-card { opacity: 0; transform: translateY(34px); }
   #rl-home.rl-reveal-on .rl-welcome-img,
   #rl-home.rl-reveal-on .rl-why-left,
-  #rl-home.rl-reveal-on .rl-faq-left {
-    opacity: 0;
-    transition: opacity 0.85s ease;
-  }
-
-  /* Estado revelado */
-  #rl-home.rl-reveal-on .rl-in {
-    opacity: 1;
-    transform: none;
-  }
+  #rl-home.rl-reveal-on .rl-faq-left { opacity: 0; transition: opacity 0.85s ease; }
+  #rl-home.rl-reveal-on .rl-in { opacity: 1; transform: none; }
 }
 
-/* ══ HERO SPLIT + CONTACT FORM ════════════════ */
-#rl-home .rl-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: start;
-  width: 100%;
-}
-
+/* HERO SPLIT */
+#rl-home .rl-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; width: 100%; }
 #rl-home .rl-hero-copy h1 { max-width: none; }
 #rl-home .rl-hero-copy .rl-hero-ctas { margin-bottom: 0; }
 
-/* El formulario de contacto vive ahora en el componente React
-   src/scripts/ContactForm.js (se monta en #render-contact-form-here).
-   Sus estilos van dentro del propio componente. */
-
-/* ══ TRUST BAR — MARQUEE ══════════════════════ */
+/* TRUST BAR MARQUEE */
 #rl-home .rl-trustbar {
   background: var(--rl-green-dark);
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -1537,29 +1115,19 @@ body { padding-top: 104px !important; }
   padding: 18px 0;
   overflow: hidden;
 }
-
 #rl-home .rl-marquee {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
-
-#rl-home .rl-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: rl-marquee 40s linear infinite;
-}
-
-/* Pausa al pasar el cursor */
+#rl-home .rl-marquee-track { display: flex; width: max-content; animation: rl-marquee 40s linear infinite; }
 #rl-home .rl-marquee:hover .rl-marquee-track { animation-play-state: paused; }
-
 #rl-home .rl-marquee-group { display: flex; }
-
 #rl-home .rl-trust-chip {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-right: 64px;     /* separación uniforme (incl. el último) → loop sin saltos */
+  margin-right: 64px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -1567,105 +1135,46 @@ body { padding-top: 104px !important; }
   color: rgba(255,255,255,0.62);
   white-space: nowrap;
 }
-
 #rl-home .rl-trust-chip svg { color: var(--rl-accent); flex-shrink: 0; }
+@keyframes rl-marquee { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { #rl-home .rl-marquee-track { animation: none; } }
 
-@keyframes rl-marquee {
-  from { transform: translateX(-50%); }  /* el contenido se mueve hacia la DERECHA */
-  to   { transform: translateX(0); }
-}
-/* Para invertir el sentido (derecha → izquierda):
-   from { transform: translateX(0); } to { transform: translateX(-50%); } */
-
-@media (prefers-reduced-motion: reduce) {
-  #rl-home .rl-marquee-track { animation: none; }
-}
-
-/* ── Hero responsive ── */
 @media (max-width: 900px) {
   #rl-home .rl-hero { min-height: auto; }
   #rl-home .rl-hero-content { padding-top: 64px; padding-bottom: 64px; }
   #rl-home .rl-hero-grid { grid-template-columns: 1fr; gap: 36px; }
 }
 
-/* ══ HERO — ANIMACIÓN DE ENTRADA (al cargar) ══════
-   Aparece escalonado el headline y, un poco después, el
-   formulario. Solo si el usuario NO prefiere movimiento reducido.
-══════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: no-preference) {
   #rl-home .rl-hero-tags,
   #rl-home .rl-hero-copy h1,
   #rl-home .rl-hero-copy .rl-hero-sub,
-  #rl-home .rl-hero-ctas {
-    opacity: 0;
-    animation: rl-hero-rise 0.85s cubic-bezier(0.16, 0.84, 0.34, 1) both;
-  }
+  #rl-home .rl-hero-ctas { opacity: 0; animation: rl-hero-rise 0.85s cubic-bezier(0.16, 0.84, 0.34, 1) both; }
   #rl-home .rl-hero-tags              { animation-delay: 0.10s; }
   #rl-home .rl-hero-copy h1           { animation-delay: 0.22s; }
   #rl-home .rl-hero-copy .rl-hero-sub { animation-delay: 0.34s; }
   #rl-home .rl-hero-ctas              { animation-delay: 0.46s; }
 }
+@keyframes rl-hero-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes rl-hero-rise {
-  from { opacity: 0; transform: translateY(26px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ══ HERO HEADLINE — BRILLO "FLASH" IZQ → DER ══════
-   Barre un destello sobre el titular conservando los dos
-   colores (línea blanca + línea verde). El glint cruza de
-   izquierda a derecha y luego hace una pausa antes de repetir.
-   Solo si el usuario NO prefiere movimiento reducido.
-══════════════════════════════════════════════════ */
 #rl-home .rl-hero h1 .rl-shine {
   background-size: 220% 100%;
-  background-position: 100% 0;     /* arranca con el destello fuera, a la izquierda */
+  background-position: 100% 0;
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-/* Línea blanca: base blanco atenuado + banda blanca pura */
 #rl-home .rl-hero h1 .rl-shine-white {
-  color: #ffffff;  /* respaldo visible si el navegador no soporta background-clip:text */
-  background-image: linear-gradient(
-    110deg,
-    rgba(255,255,255,0.82) 0%,
-    rgba(255,255,255,0.82) 42%,
-    #ffffff 50%,
-    rgba(255,255,255,0.82) 58%,
-    rgba(255,255,255,0.82) 100%
-  );
+  color: #ffffff;
+  background-image: linear-gradient(110deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.82) 42%, #ffffff 50%, rgba(255,255,255,0.82) 58%, rgba(255,255,255,0.82) 100%);
 }
-
-/* Línea verde: base verde claro + banda casi blanca */
 #rl-home .rl-hero h1 .rl-shine-green {
-  color: var(--rl-green-light);  /* respaldo visible */
-  background-image: linear-gradient(
-    110deg,
-    var(--rl-green-light) 0%,
-    var(--rl-green-light) 42%,
-    #eaf6dc 50%,
-    var(--rl-green-light) 58%,
-    var(--rl-green-light) 100%
-  );
+  color: var(--rl-green-light);
+  background-image: linear-gradient(110deg, var(--rl-green-light) 0%, var(--rl-green-light) 42%, #eaf6dc 50%, var(--rl-green-light) 58%, var(--rl-green-light) 100%);
 }
-
-/* ══ HERO IZQUIERDA — EXTIENDE EL FLASH A TAGS Y SUBHEADLINE ══
-   Mismo barrido izq → der del titular, en cascada hacia abajo:
-   chips → headline → subheadline. En reposo se ve igual que antes,
-   porque la banda brillante queda fuera de cuadro.
-══════════════════════════════════════════════════ */
 #rl-home .rl-hero .rl-hero-tag {
-  background-image: linear-gradient(
-    110deg,
-    var(--rl-accent) 0%,
-    var(--rl-accent) 42%,
-    #d8b3b4 50%,
-    var(--rl-accent) 58%,
-    var(--rl-accent) 100%
-  );
+  background-image: linear-gradient(110deg, var(--rl-accent) 0%, var(--rl-accent) 42%, #d8b3b4 50%, var(--rl-accent) 58%, var(--rl-accent) 100%);
   background-size: 220% 100%;
   background-position: 100% 0;
   background-repeat: no-repeat;
@@ -1673,16 +1182,8 @@ body { padding-top: 104px !important; }
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 #rl-home .rl-hero .rl-hero-sub {
-  background-image: linear-gradient(
-    110deg,
-    rgba(255,255,255,0.72) 0%,
-    rgba(255,255,255,0.72) 42%,
-    #ffffff 50%,
-    rgba(255,255,255,0.72) 58%,
-    rgba(255,255,255,0.72) 100%
-  );
+  background-image: linear-gradient(110deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.72) 42%, #ffffff 50%, rgba(255,255,255,0.72) 58%, rgba(255,255,255,0.72) 100%);
   background-size: 220% 100%;
   background-position: 100% 0;
   background-repeat: no-repeat;
@@ -1690,52 +1191,19 @@ body { padding-top: 104px !important; }
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 @media (prefers-reduced-motion: no-preference) {
-  /* Titular: las dos líneas, en loop tras la entrada del hero */
-  #rl-home .rl-hero h1 .rl-shine {
-    /* duración 5s · empieza tras la entrada del hero (1.2s) · en loop */
-    animation: rl-headline-shine 5s ease-in-out 1.2s infinite;
-  }
-  /* la segunda línea destella un pelín después, para un look más vivo */
+  #rl-home .rl-hero h1 .rl-shine { animation: rl-headline-shine 5s ease-in-out 1.2s infinite; }
   #rl-home .rl-hero h1 .rl-shine-green { animation-delay: 1.45s; }
-
-  /* Chips: destellan juntos, ANTES que el titular */
-  #rl-home .rl-hero .rl-hero-tag {
-    animation: rl-headline-shine 5s ease-in-out 1.0s infinite;
-  }
-
-  /* Subheadline: conserva su animación de ENTRADA (rl-hero-rise con su
-     delay original 0.34s) y le SUMA el flash al final de la cascada.
-     Hay que repetir el rise aquí porque una sola propiedad 'animation'
-     no se puede partir entre dos reglas. */
+  #rl-home .rl-hero .rl-hero-tag { animation: rl-headline-shine 5s ease-in-out 1.0s infinite; }
   #rl-home .rl-hero-copy .rl-hero-sub {
-    animation: rl-hero-rise 0.85s cubic-bezier(0.16, 0.84, 0.34, 1) 0.34s both,
-               rl-headline-shine 5s ease-in-out 1.7s infinite;
+    animation: rl-hero-rise 0.85s cubic-bezier(0.16, 0.84, 0.34, 1) 0.34s both, rl-headline-shine 5s ease-in-out 1.7s infinite;
   }
 }
+@keyframes rl-headline-shine { 0% { background-position: 100% 0; } 40% { background-position: 0% 0; } 100% { background-position: 0% 0; } }
 
-@keyframes rl-headline-shine {
-  0%   { background-position: 100% 0; }  /* destello fuera, a la izquierda */
-  40%  { background-position: 0% 0;   }  /* cruza el texto (izquierda → derecha) */
-  100% { background-position: 0% 0;   }  /* pausa antes de repetir */
-}
-
-/* ══ WHY RUIZ — FLASH EN LOS TÍTULOS (LADO DERECHO) ══════
-   Mismo barrido izq → der que el hero, aplicado a cada título
-   de razón, en cascada hacia abajo. En reposo se ve igual,
-   porque la banda brillante queda fuera de cuadro.
-══════════════════════════════════════════════════ */
 #rl-home .rl-why .rl-reason-title {
-  color: var(--rl-green-light);  /* respaldo visible */
-  background-image: linear-gradient(
-    110deg,
-    var(--rl-green-light) 0%,
-    var(--rl-green-light) 42%,
-    #eaf6dc 50%,
-    var(--rl-green-light) 58%,
-    var(--rl-green-light) 100%
-  );
+  color: var(--rl-green-light);
+  background-image: linear-gradient(110deg, var(--rl-green-light) 0%, var(--rl-green-light) 42%, #eaf6dc 50%, var(--rl-green-light) 58%, var(--rl-green-light) 100%);
   background-size: 220% 100%;
   background-position: 100% 0;
   background-repeat: no-repeat;
@@ -1743,12 +1211,8 @@ body { padding-top: 104px !important; }
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 @media (prefers-reduced-motion: no-preference) {
-  #rl-home .rl-why .rl-reason-title {
-    animation: rl-headline-shine 5s ease-in-out infinite;
-  }
-  /* Cascada hacia abajo: cada razón destella un poco después */
+  #rl-home .rl-why .rl-reason-title { animation: rl-headline-shine 5s ease-in-out infinite; }
   #rl-home .rl-why .rl-reason:nth-child(1) .rl-reason-title { animation-delay: 0.8s; }
   #rl-home .rl-why .rl-reason:nth-child(2) .rl-reason-title { animation-delay: 1.0s; }
   #rl-home .rl-why .rl-reason:nth-child(3) .rl-reason-title { animation-delay: 1.2s; }
@@ -1757,9 +1221,7 @@ body { padding-top: 104px !important; }
 }
 </style>
 
-<!-- ══════════════════════════════════════════════
-     SECTION 1 — HERO
-══════════════════════════════════════════════ -->
+<!-- SECTION 1 — HERO -->
 <section class="rl-hero" aria-label="Hero">
   <video
     class="rl-hero-bg"
@@ -1777,7 +1239,6 @@ body { padding-top: 104px !important; }
   <div class="rl-hero-content">
     <div class="rl-hero-grid">
 
-      <!-- ── Mitad izquierda: headline ── -->
       <div class="rl-hero-copy">
         <div class="rl-hero-tags">
           <span class="rl-hero-tag">Family-Owned</span>
@@ -1791,7 +1252,7 @@ body { padding-top: 104px !important; }
         </h1>
 
         <p class="rl-hero-sub">
-          Your outdoor space can be more than a yard — it can be a sanctuary. As a family-owned landscaping company serving Orange, Los Angeles, and Imperial counties, Ruiz Landscape designs, builds, and cares for beautiful, sustainable landscapes that work in harmony with California's climate.
+          Your outdoor space can be more than a yard it can be a sanctuary. As a family-owned landscaping company serving Orange, Los Angeles, and Imperial counties, Ruiz Landscape designs, builds, and cares for beautiful, sustainable landscapes that work in harmony with California's climate.
         </p>
 
         <div class="rl-hero-ctas">
@@ -1803,8 +1264,6 @@ body { padding-top: 104px !important; }
         </div>
       </div>
 
-      <!-- ── Mitad derecha: formulario de contacto (componente React) ── -->
-      <!-- Se monta aquí ContactForm desde src/index.js → #render-contact-form-here -->
       <div id="render-contact-form-here"></div>
 
     </div>
@@ -1812,17 +1271,11 @@ body { padding-top: 104px !important; }
 </section>
 
 
-<!-- ══════════════════════════════════════════════
-     TRUST BAR — MARQUEE (sección aparte)
-══════════════════════════════════════════════ -->
+<!-- TRUST BAR — MARQUEE -->
 <section class="rl-trustbar" aria-label="Trust highlights">
   <div class="rl-marquee">
     <div class="rl-marquee-track">
 
-      <?php
-      /* Un solo grupo de chips; se duplica abajo (aria-hidden) para que
-         el desplazamiento sea infinito y sin saltos. */
-      ?>
       <div class="rl-marquee-group">
         <span class="rl-trust-chip">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -1881,11 +1334,8 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════
-     SECTION 2 — SERVICES (CAROUSEL)
-══════════════════════════════════════════════ -->
+<!-- SECTION 2 — SERVICES (CAROUSEL) -->
 <section class="rl-section rl-services" id="rl-services" aria-labelledby="services-heading">
-  <!-- Capa de textura papel (filtro SVG void-texture) -->
   <div class="rl-services-paper" aria-hidden="true"></div>
   <div class="rl-container">
 
@@ -1902,7 +1352,6 @@ body { padding-top: 104px !important; }
       <div class="rl-carousel-viewport">
         <div class="rl-carousel-track">
 
-          <!-- Card 1 — Landscape Design & Installation (compass) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
               <?php if ( ! empty( $rl_images['landscape-design'] ) ) : ?>
@@ -1923,7 +1372,6 @@ body { padding-top: 104px !important; }
             </div>
           </article>
 
-          <!-- Card 2 — Lawn Care & Maintenance (sprout) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
               <?php if ( ! empty( $rl_images['lawn-care'] ) ) : ?>
@@ -1944,7 +1392,6 @@ body { padding-top: 104px !important; }
             </div>
           </article>
 
-          <!-- Card 3 — Tree & Shrub Care (tree) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
               <?php if ( ! empty( $rl_images['tree-shrub'] ) ) : ?>
@@ -1965,7 +1412,6 @@ body { padding-top: 104px !important; }
             </div>
           </article>
 
-          <!-- Card 4 — Irrigation Systems (droplet) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
               <?php if ( ! empty( $rl_images['irrigation'] ) ) : ?>
@@ -1986,7 +1432,6 @@ body { padding-top: 104px !important; }
             </div>
           </article>
 
-          <!-- Card 5 — Synthetic Turf (turf grid) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
               <?php if ( ! empty( $rl_images['synthetic-turf'] ) ) : ?>
@@ -2007,7 +1452,6 @@ body { padding-top: 104px !important; }
             </div>
           </article>
 
-          <!-- Card 6 — Large Tree Installation (pine) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
               <?php if ( ! empty( $rl_images['large-trees'] ) ) : ?>
@@ -2028,7 +1472,6 @@ body { padding-top: 104px !important; }
             </div>
           </article>
 
-          <!-- Card 7 — Low Voltage Lighting (lightbulb) -->
           <article class="rl-service-card">
             <div class="rl-service-media">
               <?php if ( ! empty( $rl_images['lighting'] ) ) : ?>
@@ -2066,31 +1509,17 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════
-     SECTION 3 — ABOUT RUIZ LANDSCAPE
-══════════════════════════════════════════════ -->
+<!-- SECTION 3 — ABOUT/WELCOME -->
 <section class="rl-section rl-welcome" id="rl-welcome">
   <div class="rl-container">
     <div class="rl-welcome-inner">
 
       <div class="rl-welcome-img">
         <?php if ( ! empty( $rl_images['welcome-main'] ) ) : ?>
-          <img
-            src="<?php echo esc_url( $rl_images['welcome-main'] ); ?>"
-            alt="Ruiz Landscape team at a completed landscape project in Orange County"
-            class="rl-welcome-img-main"
-            loading="eager"
-            width="580" height="480"
-          />
+          <img src="<?php echo esc_url( $rl_images['welcome-main'] ); ?>" alt="Ruiz Landscape team at a completed landscape project in Orange County" class="rl-welcome-img-main" loading="eager" width="580" height="480" />
         <?php endif; ?>
         <?php if ( ! empty( $rl_images['welcome-accent'] ) ) : ?>
-          <img
-            src="<?php echo esc_url( $rl_images['welcome-accent'] ); ?>"
-            alt="Detail of eco-conscious garden design by Ruiz Landscape"
-            class="rl-welcome-img-accent"
-            loading="lazy"
-            width="200" height="200"
-          />
+          <img src="<?php echo esc_url( $rl_images['welcome-accent'] ); ?>" alt="Detail of eco-conscious garden design by Ruiz Landscape" class="rl-welcome-img-accent" loading="lazy" width="200" height="200" />
         <?php endif; ?>
         <div class="rl-welcome-badge">
           Family-Owned<br>Since Day One
@@ -2117,9 +1546,7 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════
-     SECTION 4 — AREAS WE SERVE
-══════════════════════════════════════════════ -->
+<!-- SECTION 4 — AREAS WE SERVE -->
 <section class="rl-section rl-areas" id="rl-areas" aria-labelledby="areas-heading">
   <div class="rl-container">
 
@@ -2169,22 +1596,14 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════
-     SECTION 5 — WHY CHOOSE US
-══════════════════════════════════════════════ -->
+<!-- SECTION 5 — WHY CHOOSE US -->
 <section class="rl-section rl-why" id="rl-why" aria-labelledby="why-heading">
   <div class="rl-container">
     <div class="rl-why-inner">
 
       <div class="rl-why-left">
         <?php if ( ! empty( $rl_images['why-photo'] ) ) : ?>
-          <img
-            src="<?php echo esc_url( $rl_images['why-photo'] ); ?>"
-            alt="Rafael Ruiz, President of Ruiz Landscape Service"
-            class="rl-why-img"
-            loading="lazy"
-            width="760" height="900"
-          />
+          <img src="<?php echo esc_url( $rl_images['why-photo'] ); ?>" alt="Rafael Ruiz, President of Ruiz Landscape Service" class="rl-why-img" loading="lazy" width="760" height="900" />
         <?php endif; ?>
 
         <div class="rl-why-card">
@@ -2239,9 +1658,7 @@ body { padding-top: 104px !important; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════
-     SECTION 6 — HOW WE WORK
-══════════════════════════════════════════════ -->
+<!-- SECTION 6 — HOW WE WORK -->
 <section class="rl-section rl-process" id="rl-process" aria-labelledby="process-heading">
   <div class="rl-container">
 
@@ -2296,9 +1713,7 @@ body { padding-top: 104px !important; }
 </section>
 
 
-<!-- ══════════════════════════════════════════════
-     SECTION 7 — FAQ
-══════════════════════════════════════════════ -->
+<!-- SECTION 7 — FAQ -->
 <section class="rl-section rl-faq" id="rl-faq" aria-labelledby="faq-heading">
   <div class="rl-container">
     <div class="rl-faq-inner">
@@ -2381,24 +1796,17 @@ body { padding-top: 104px !important; }
 
 </main>
 
-<!-- ══════════════════════════════════════════════
-     FAQ ACCORDION — VANILLA JS
-══════════════════════════════════════════════ -->
 <script>
 (function () {
   document.querySelectorAll('.rl-faq-q').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var item = this.closest('.rl-faq-item');
       var isOpen = item.classList.contains('open');
-
-      // Close all
       document.querySelectorAll('.rl-faq-item').forEach(function (el) {
         el.classList.remove('open');
         el.querySelector('.rl-faq-q').setAttribute('aria-expanded', 'false');
         el.querySelector('.rl-faq-icon').textContent = '+';
       });
-
-      // Open clicked if it was closed
       if (!isOpen) {
         item.classList.add('open');
         this.setAttribute('aria-expanded', 'true');
@@ -2409,14 +1817,10 @@ body { padding-top: 104px !important; }
 })();
 </script>
 
-<!-- ══════════════════════════════════════════════
-     SERVICES CAROUSEL — VANILLA JS
-══════════════════════════════════════════════ -->
 <script>
 (function () {
   var root = document.querySelector('#rl-services .rl-carousel');
   if (!root) return;
-
   var track    = root.querySelector('.rl-carousel-track');
   var cards    = Array.prototype.slice.call(track.children);
   var dotsWrap = root.querySelector('.rl-carousel-dots');
@@ -2424,29 +1828,18 @@ body { padding-top: 104px !important; }
   var prevBtn  = root.querySelector('[data-dir="prev"]');
   var nextBtn  = root.querySelector('[data-dir="next"]');
   var index    = 0;
-
   if (!cards.length) return;
-
-  // How many cards are visible — must match the CSS media queries above.
   function perView() {
     var w = window.innerWidth;
     if (w <= 560) return 1;
     if (w <= 1024) return 2;
     return 3;
   }
-
-  function maxIndex() {
-    return Math.max(0, cards.length - perView());
-  }
-
-  // Width of one card + the gap, measured from the live layout.
+  function maxIndex() { return Math.max(0, cards.length - perView()); }
   function step() {
-    if (cards.length > 1) {
-      return cards[1].offsetLeft - cards[0].offsetLeft;
-    }
+    if (cards.length > 1) { return cards[1].offsetLeft - cards[0].offsetLeft; }
     return cards[0].getBoundingClientRect().width;
   }
-
   function buildDots() {
     dotsWrap.innerHTML = '';
     var count = maxIndex() + 1;
@@ -2455,98 +1848,178 @@ body { padding-top: 104px !important; }
       dot.type = 'button';
       dot.className = 'rl-carousel-dot' + (i === index ? ' active' : '');
       dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      (function (i) {
-        dot.addEventListener('click', function () { go(i); });
-      })(i);
+      (function (i) { dot.addEventListener('click', function () { go(i); }); })(i);
+      dotsWrap.appendChild(dot);
+    }
+  }
+  function update() {
+    track.style.transform = 'translateX(' + (-index * step()) + 'px)';
+    var dots = dotsWrap.querySelectorAll('.rl-carousel-dot');
+    Array.prototype.forEach.call(dots, function (d, i) { d.classList.toggle('active', i === index); });
+    prevBtn.disabled = index <= 0;
+    nextBtn.disabled = index >= maxIndex();
+    controls.style.display = (maxIndex() === 0) ? 'none' : 'flex';
+  }
+  function go(i) { index = Math.max(0, Math.min(i, maxIndex())); update(); }
+  prevBtn.addEventListener('click', function () { pauseAutoplay(); go(index - 1); });
+  nextBtn.addEventListener('click', function () { pauseAutoplay(); go(index + 1); });
+  var startX = null;
+  var viewport = root.querySelector('.rl-carousel-viewport');
+  viewport.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; pauseAutoplay(); }, { passive: true });
+  viewport.addEventListener('touchend', function (e) {
+    if (startX === null) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) { go(index + (dx < 0 ? 1 : -1)); }
+    startX = null;
+    resumeAutoplay();
+  });
+  var AUTOPLAY_INTERVAL = 2000;
+  var AUTOPLAY_RESUME_DELAY = 6000;
+  var autoplayTimer = null;
+  var resumeTimer  = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function autoplayTick() { go(index >= maxIndex() ? 0 : index + 1); }
+  function startAutoplay() { if (reduceMotion) return; stopAutoplay(); autoplayTimer = setInterval(autoplayTick, AUTOPLAY_INTERVAL); }
+  function stopAutoplay() { if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } }
+  function pauseAutoplay() { stopAutoplay(); if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; } }
+  function resumeAutoplay() { if (reduceMotion) return; if (resumeTimer) clearTimeout(resumeTimer); resumeTimer = setTimeout(startAutoplay, AUTOPLAY_RESUME_DELAY); }
+  viewport.addEventListener('mouseenter', stopAutoplay);
+  viewport.addEventListener('mouseleave', startAutoplay);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) { stopAutoplay(); } else { startAutoplay(); } });
+  var rafId;
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(function () { index = Math.min(index, maxIndex()); buildDots(); update(); });
+  });
+  buildDots();
+  update();
+  startAutoplay();
+})();
+</script>
+
+<script>
+(function () {
+  var root = document.getElementById('rl-home');
+  if (!root || !root.classList.contains('rl-reveal-on')) return;
+  var SELECTOR = [
+    '.rl-welcome-img', '.rl-welcome-text',
+    '.rl-services-head', '.rl-service-card',
+    '.rl-why-left', '.rl-why-img', '.rl-reason',
+    '.rl-areas-head', '.rl-area-card',
+    '.rl-process-head', '.rl-step',
+    '.rl-faq-left', '.rl-faq-item',
+    '.rl-final-cta-inner'
+  ].join(',');
+  var targets = Array.prototype.slice.call(root.querySelectorAll(SELECTOR));
+  if (!targets.length) return;
+  function revealAll() { targets.forEach(function (el) { el.classList.add('rl-in'); }); }
+  if (!('IntersectionObserver' in window)) { revealAll(); return; }
+  try {
+    targets.forEach(function (el) {
+      var i = 0, sib = el.previousElementSibling;
+      while (sib) {
+        if (sib.matches && sib.matches(SELECTOR)) i++;
+        sib = sib.previousElementSibling;
+      }
+      el._rlDelay = Math.min(i, 6) * 90;
+    });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        el.style.transitionDelay = el._rlDelay + 'ms';
+        el.classList.add('rl-in');
+        el.addEventListener('transitionend', function clear() {
+          el.style.transitionDelay = '';
+          el.removeEventListener('transitionend', clear);
+        });
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el) { observer.observe(el); });
+  } catch (e) { revealAll(); }
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════
+     PROCESS CAROUSEL — VANILLA JS
+══════════════════════════════════════════════ -->
+<script>
+(function () {
+  var root = document.querySelector('#rl-process .rl-process-carousel');
+  if (!root) return;
+
+  var track    = root.querySelector('.rl-steps');
+  var steps    = track ? Array.prototype.slice.call(track.children) : [];
+  var dotsWrap = root.querySelector('.rl-process-dots');
+  var controls = root.querySelector('.rl-process-controls');
+  var prevBtn  = root.querySelector('[data-proc-dir="prev"]');
+  var nextBtn  = root.querySelector('[data-proc-dir="next"]');
+  var index    = 0;
+
+  if (!steps.length || !prevBtn || !nextBtn) return;
+
+  // Cuántos pasos se ven — debe coincidir con las media queries del CSS.
+  function perView() {
+    var w = window.innerWidth;
+    if (w <= 560) return 1;
+    if (w <= 1024) return 2;
+    return 4; // en escritorio caben los 4
+  }
+
+  function maxIndex() { return Math.max(0, steps.length - perView()); }
+
+  // Ancho de un paso + el gap, medido del layout real.
+  function step() {
+    if (steps.length > 1) { return steps[1].offsetLeft - steps[0].offsetLeft; }
+    return steps[0].getBoundingClientRect().width;
+  }
+
+  function buildDots() {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = '';
+    var count = maxIndex() + 1;
+    for (var i = 0; i < count; i++) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'rl-carousel-dot' + (i === index ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to step group ' + (i + 1));
+      (function (i) { dot.addEventListener('click', function () { go(i); }); })(i);
       dotsWrap.appendChild(dot);
     }
   }
 
   function update() {
     track.style.transform = 'translateX(' + (-index * step()) + 'px)';
-
-    var dots = dotsWrap.querySelectorAll('.rl-carousel-dot');
-    Array.prototype.forEach.call(dots, function (d, i) {
-      d.classList.toggle('active', i === index);
-    });
-
+    if (dotsWrap) {
+      var dots = dotsWrap.querySelectorAll('.rl-carousel-dot');
+      Array.prototype.forEach.call(dots, function (d, i) { d.classList.toggle('active', i === index); });
+    }
     prevBtn.disabled = index <= 0;
     nextBtn.disabled = index >= maxIndex();
-
-    // Hide controls entirely when every card already fits.
-    controls.style.display = (maxIndex() === 0) ? 'none' : 'flex';
+    // Si todos los pasos ya caben, ocultamos los controles.
+    if (controls) controls.style.display = (maxIndex() === 0) ? 'none' : 'flex';
   }
 
-  function go(i) {
-    index = Math.max(0, Math.min(i, maxIndex()));
-    update();
-  }
+  function go(i) { index = Math.max(0, Math.min(i, maxIndex())); update(); }
 
-  prevBtn.addEventListener('click', function () { pauseAutoplay(); go(index - 1); });
-  nextBtn.addEventListener('click', function () { pauseAutoplay(); go(index + 1); });
+  prevBtn.addEventListener('click', function () { go(index - 1); });
+  nextBtn.addEventListener('click', function () { go(index + 1); });
 
-  // ── Touch / swipe support ──
+  // ── Swipe táctil ──
   var startX = null;
-  var viewport = root.querySelector('.rl-carousel-viewport');
-
-  viewport.addEventListener('touchstart', function (e) {
-    startX = e.touches[0].clientX;
-    pauseAutoplay();
-  }, { passive: true });
-
-  viewport.addEventListener('touchend', function (e) {
-    if (startX === null) return;
-    var dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 40) {
-      go(index + (dx < 0 ? 1 : -1));
-    }
-    startX = null;
-    resumeAutoplay();
-  });
-
-  // ── Autoplay ──
-  var AUTOPLAY_INTERVAL = 2000; // ms entre avances
-  var AUTOPLAY_RESUME_DELAY = 6000; // ms de espera tras interacción manual
-  var autoplayTimer = null;
-  var resumeTimer  = null;
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function autoplayTick() {
-    // Al llegar al final, vuelve al principio
-    go(index >= maxIndex() ? 0 : index + 1);
+  var viewport = root.querySelector('.rl-process-viewport');
+  if (viewport) {
+    viewport.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    viewport.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) { go(index + (dx < 0 ? 1 : -1)); }
+      startX = null;
+    });
   }
 
-  function startAutoplay() {
-    if (reduceMotion) return;
-    stopAutoplay();
-    autoplayTimer = setInterval(autoplayTick, AUTOPLAY_INTERVAL);
-  }
-
-  function stopAutoplay() {
-    if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
-  }
-
-  function pauseAutoplay() {
-    stopAutoplay();
-    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
-  }
-
-  function resumeAutoplay() {
-    if (reduceMotion) return;
-    if (resumeTimer) clearTimeout(resumeTimer);
-    resumeTimer = setTimeout(startAutoplay, AUTOPLAY_RESUME_DELAY);
-  }
-
-  // Pausa mientras el cursor está sobre las tarjetas
-  viewport.addEventListener('mouseenter', stopAutoplay);
-  viewport.addEventListener('mouseleave', startAutoplay);
-
-  // Pausa si la pestaña queda oculta
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) { stopAutoplay(); } else { startAutoplay(); }
-  });
-
-  // ── Recalculate on resize ──
+  // ── Recalcular al cambiar tamaño ──
   var rafId;
   window.addEventListener('resize', function () {
     cancelAnimationFrame(rafId);
@@ -2559,76 +2032,6 @@ body { padding-top: 104px !important; }
 
   buildDots();
   update();
-  startAutoplay();
-})();
-</script>
-
-<!-- ══════════════════════════════════════════════
-     SCROLL REVEAL — VANILLA JS
-══════════════════════════════════════════════ -->
-<script>
-(function () {
-  var root = document.getElementById('rl-home');
-  if (!root || !root.classList.contains('rl-reveal-on')) return; // reduce-motion u off
-
-  var SELECTOR = [
-    '.rl-welcome-img', '.rl-welcome-text',
-    '.rl-services-head', '.rl-service-card',
-    '.rl-why-left', '.rl-why-img', '.rl-reason',
-    '.rl-areas-head', '.rl-area-card',
-    '.rl-process-head', '.rl-step',
-    '.rl-faq-left', '.rl-faq-item',
-    '.rl-final-cta-inner'
-  ].join(',');
-
-  var targets = Array.prototype.slice.call(root.querySelectorAll(SELECTOR));
-  if (!targets.length) return;
-
-  function revealAll() {
-    targets.forEach(function (el) { el.classList.add('rl-in'); });
-  }
-
-  // Sin soporte de IntersectionObserver: mostrar todo de inmediato.
-  if (!('IntersectionObserver' in window)) { revealAll(); return; }
-
-  try {
-    // Escalonado: el retraso de cada elemento según su posición dentro
-    // del mismo grupo (hermanos que también son objetivos).
-    targets.forEach(function (el) {
-      var i = 0, sib = el.previousElementSibling;
-      while (sib) {
-        if (sib.matches && sib.matches(SELECTOR)) i++;
-        sib = sib.previousElementSibling;
-      }
-      el._rlDelay = Math.min(i, 6) * 90; // ms, con tope para no alargar de más
-    });
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var el = entry.target;
-
-        el.style.transitionDelay = el._rlDelay + 'ms';
-        el.classList.add('rl-in');
-
-        // Limpiar el delay tras la animación para no retrasar el hover.
-        el.addEventListener('transitionend', function clear() {
-          el.style.transitionDelay = '';
-          el.removeEventListener('transitionend', clear);
-        });
-
-        observer.unobserve(el);
-      });
-    }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -8% 0px'
-    });
-
-    targets.forEach(function (el) { observer.observe(el); });
-  } catch (e) {
-    // Cualquier fallo: revelar todo para que nunca quede contenido oculto.
-    revealAll();
-  }
 })();
 </script>
 

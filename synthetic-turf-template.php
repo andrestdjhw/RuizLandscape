@@ -6,7 +6,7 @@
  * SEO (configúralo en tu plugin de SEO / Yoast / Rank Math):
  *   Title:       Synthetic Turf Installation in Orange County, CA | Ruiz Landscape
  *   Description: Water-saving synthetic turf installation in Orange, LA & Imperial counties —
- *                pet-friendly, kid-safe, low-maintenance lawns. Schedule a free consultation.
+ *                pet-friendly, kid-safe, low-maintenance lawns. Request a free Estimate.
  *   Keywords:    synthetic turf installation Orange County, artificial grass Irvine,
  *                pet-friendly turf Southern California, low-maintenance lawn Orange County,
  *                water-saving lawn alternative
@@ -414,7 +414,7 @@ body { padding-top: 104px !important; }
     </p>
     <div class="rsv-reveal">
       <a href="/contact" class="rl-btn-primary">
-        Schedule a Free Consultation
+        Request a Free Estimate
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>

@@ -594,7 +594,7 @@ function Footer() {
             <ul className="rl-footer-contact-list">
               <li className="rl-footer-contact-item">
                 <span className="rl-footer-contact-icon"><LocationIcon /></span>
-                <span>6 McLaren, Suite H<br />Irvine, CA 92618</span>
+                <span>15791 Rockfield Blvd, <br />Irvine, CA 92618, EE. UU.</span>
               </li>
               <li className="rl-footer-contact-item">
                 <span className="rl-footer-contact-icon"><PhoneIcon /></span>
