@@ -31,7 +31,7 @@ $gallery_services = array(
 ══════════════════════════════════════════════ */
 $gallery_items = array(
   // ── Landscape Design & Installation (4) ──
-  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesignInstallation-1.jpg', 'alt' => 'Landscape design and installation project' ),
+  array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesign1After.png', 'alt' => 'Landscape design and installation project' ),
   array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesignRuiz1.jpg', 'alt' => 'Landscape design and installation project' ),
   array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/LandscapeDesignRuiz2.jpg', 'alt' => 'Landscape design and installation project' ),
   array( 'service' => 'landscape-design-installation', 'img' => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg', 'alt' => 'Landscape design and installation project' ),
@@ -53,6 +53,32 @@ $gallery_items = array(
   // ── Low Voltage Lighting (2) ──
   array( 'service' => 'low-voltage-lighting', 'img' => '/wp-content/uploads/2026/06/LowVoltageLighting-1.jpg', 'alt' => 'Low voltage lighting project' ),
   array( 'service' => 'low-voltage-lighting', 'img' => '/wp-content/uploads/2026/06/LowVoltage2.jpg', 'alt' => 'Low voltage lighting project' ),
+);
+
+/* ══════════════════════════════════════════════
+   IMÁGENES "BEFORE" (comparador antes/después)
+   Pega la URL de la foto "antes" del MISMO proyecto, usando el número
+   de índice de la lista de arriba (empieza en 0).
+   • Deja '' y ese proyecto NO muestra el comparador (solo el lightbox normal).
+   • La foto del array de arriba ($gallery_items) es el "después".
+══════════════════════════════════════════════ */
+$gallery_before = array(
+  0  => '/wp-content/uploads/2026/06/LandscapeDesign1Before.png', // Landscape Design — LandscapeDesign1
+  1  => '', // Landscape Design — LandscapeDesignRuiz1
+  2  => '', // Landscape Design — LandscapeDesignRuiz2
+  3  => '', // Landscape Design — HeroRuizLandscape
+  4  => '', // Lawn Care — LawnCareRuiz2
+  5  => '', // Lawn Care — LawnCareMaintenance-1
+  6  => '', // Tree & Shrub — TreeShrub2
+  7  => '', // Tree & Shrub — TreeShrubRuiz
+  8  => '', // Irrigation — IrrigationRuiz1
+  9  => '', // Irrigation — IrrigationRuiz2
+  10 => '', // Synthetic Turf — ArtificialTurf1
+  11 => '', // Synthetic Turf — ArtificialTurf2
+  12 => '', // Large Trees — LargeTreeInstallationRuiz2
+  13 => '', // Large Trees — LargeTreeInstallation
+  14 => '', // Lighting — LowVoltageLighting-1
+  15 => '', // Lighting — LowVoltage2
 );
 
 /* ── FAQ del home (mismas 6 preguntas) ── */
@@ -363,6 +389,239 @@ body { padding-top: 104px !important; }
 /* En cards sin imagen no mostramos el overlay (ya se ve la etiqueta del marcador) */
 #rl-gallery .rlg-card.is-empty:hover .rlg-card-tag { opacity: 0; }
 
+/* Badge de categoría (siempre visible, esquina superior) */
+#rl-gallery .rlg-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, var(--rl-green-dark), var(--rl-green));
+  padding: 5px 10px;
+  border-radius: 40px;
+  pointer-events: none;
+}
+
+/* Contador de resultados */
+#rl-gallery .rlg-count {
+  font-size: 13px;
+  color: var(--rl-green-mid);
+  text-align: center;
+  margin-bottom: 24px;
+}
+#rl-gallery .rlg-count strong { color: var(--rl-green-dark); font-weight: 700; }
+
+/* La card ahora abre el lightbox: cursor de zoom */
+#rl-gallery .rlg-card { cursor: zoom-in; }
+
+/* Badge "Before & After" (esquina superior derecha) */
+#rl-gallery .rlg-card-ba {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(20,32,10,0.62);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  padding: 5px 9px;
+  border-radius: 40px;
+  pointer-events: none;
+}
+#rl-gallery .rlg-card-ba svg { width: 12px; height: 12px; }
+
+/* ══ LIGHTBOX ══════════════════════════════════ */
+#rl-gallery .rlg-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;            /* por encima del navbar (1000) */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(20,32,10,0.93);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+#rl-gallery .rlg-lb.is-open { display: flex; }
+
+#rl-gallery .rlg-lb-panel {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6);
+}
+
+#rl-gallery .rlg-lb-imgwrap {
+  position: relative;
+  width: 100%;
+  background: var(--rl-cream);
+  line-height: 0;
+}
+#rl-gallery .rlg-lb-img {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #11180a;
+}
+#rl-gallery .rlg-lb-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 360px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rl-green-mid);
+  background:
+    repeating-linear-gradient(45deg, rgba(var(--rl-accent-rgb),0.05) 0 10px, transparent 10px 20px),
+    var(--rl-cream);
+}
+#rl-gallery .rlg-lb-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, var(--rl-green-dark), var(--rl-green));
+  padding: 6px 12px;
+  border-radius: 40px;
+}
+
+/* ── Pestañas Before / After (toggle segmentado; clic cambia la foto) ── */
+#rl-gallery .rlg-lb-tabs {
+  position: absolute;
+  top: 14px;
+  right: 14px;                 /* a la derecha → no choca con el badge de categoría */
+  z-index: 3;
+  display: none;               /* JS las pone en flex si el proyecto tiene "before" */
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(20,32,10,0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 40px;
+}
+#rl-gallery .rlg-lb-tab {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+  background: transparent;
+  border: none;
+  border-radius: 40px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+#rl-gallery .rlg-lb-tab:hover { color: #fff; }
+#rl-gallery .rlg-lb-tab.is-active {
+  background: var(--rl-accent);
+  color: var(--rl-on-accent);
+  box-shadow: 0 2px 8px -2px rgba(0,0,0,0.4);
+}
+
+/* Barra inferior: caption + posición + enlace al servicio */
+#rl-gallery .rlg-lb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 22px;
+}
+#rl-gallery .rlg-lb-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+#rl-gallery .rlg-lb-cap {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--rl-green-dark);
+  line-height: 1.3;
+}
+#rl-gallery .rlg-lb-pos {
+  font-size: 12px;
+  color: var(--rl-green-mid);
+  letter-spacing: 0.04em;
+}
+#rl-gallery .rlg-lb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rl-on-accent);
+  background: var(--rl-accent);
+  border: 2px solid var(--rl-accent);
+  border-radius: 4px;
+  padding: 11px 20px;
+  text-decoration: none;
+  transition: background 0.18s, border-color 0.18s;
+}
+#rl-gallery .rlg-lb-link:hover { background: var(--rl-accent-hover); border-color: var(--rl-accent-hover); }
+#rl-gallery .rlg-lb-link svg { width: 14px; height: 14px; }
+
+/* Controles del lightbox */
+#rl-gallery .rlg-lb-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.18s, border-color 0.18s;
+}
+#rl-gallery .rlg-lb-btn:hover { background: rgba(var(--rl-accent-rgb),0.55); border-color: rgba(255,255,255,0.4); }
+#rl-gallery .rlg-lb-btn svg { width: 18px; height: 18px; }
+#rl-gallery .rlg-lb-close { top: 18px; right: 18px; }
+#rl-gallery .rlg-lb-prev  { left: 18px;  top: 50%; transform: translateY(-50%); }
+#rl-gallery .rlg-lb-next  { right: 18px; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 620px) {
+  #rl-gallery .rlg-lb { padding: 12px; }
+  #rl-gallery .rlg-lb-prev { left: 8px; }
+  #rl-gallery .rlg-lb-next { right: 8px; }
+  #rl-gallery .rlg-lb-bar { padding: 16px; }
+  #rl-gallery .rlg-lb-link { width: 100%; justify-content: center; }
+}
+
 /* ══ SECTION 3 — MAPA ══════════════════════════ */
 #rl-gallery .rlg-map-sec { background: var(--rl-cream); }
 #rl-gallery .rlg-map-text { max-width: 720px; margin: 0 auto 38px; text-align: center; }
@@ -496,17 +755,34 @@ body { padding-top: 104px !important; }
       <?php endforeach; ?>
     </div>
 
+    <!-- Contador de resultados -->
+    <p class="rlg-count rlg-reveal">Showing <strong id="rlg-count"><?php echo count( $gallery_items ); ?></strong> projects</p>
+
     <!-- Grid -->
     <div class="rlg-grid">
-      <?php foreach ( $gallery_items as $item ) :
-        $slug  = $item['service'];
-        $label = isset( $gallery_services[ $slug ] ) ? $gallery_services[ $slug ] : '';
-        $has   = ! empty( $item['img'] );
+      <?php foreach ( $gallery_items as $idx => $item ) :
+        $slug   = $item['service'];
+        $label  = isset( $gallery_services[ $slug ] ) ? $gallery_services[ $slug ] : '';
+        $has    = ! empty( $item['img'] );
+        $before = isset( $gallery_before[ $idx ] ) ? $gallery_before[ $idx ] : '';
+        $has_ba = ( $has && ! empty( $before ) );
       ?>
         <a href="<?php echo esc_url( '/services/' . $slug ); ?>"
            class="rlg-card<?php echo $has ? '' : ' is-empty'; ?>"
            data-service="<?php echo esc_attr( $slug ); ?>"
+           data-img="<?php echo esc_url( $item['img'] ); ?>"
+           data-before="<?php echo esc_url( $before ); ?>"
+           data-alt="<?php echo esc_attr( $item['alt'] ); ?>"
+           data-label="<?php echo esc_attr( $label ); ?>"
+           data-href="<?php echo esc_url( '/services/' . $slug ); ?>"
            aria-label="<?php echo esc_attr( $label ); ?>">
+          <span class="rlg-card-badge"><?php echo esc_html( $label ); ?></span>
+          <?php if ( $has_ba ) : ?>
+            <span class="rlg-card-ba" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 21L3 16.5 7.5 12M3 16.5h13.5M16.5 3L21 7.5 16.5 12M21 7.5H7.5"/></svg>
+              Before &amp; After
+            </span>
+          <?php endif; ?>
           <?php if ( $has ) : ?>
             <img src="<?php echo esc_url( $item['img'] ); ?>" alt="<?php echo esc_attr( $item['alt'] ); ?>" loading="lazy" />
           <?php else : ?>
@@ -586,6 +862,46 @@ body { padding-top: 104px !important; }
 
 
 <!-- ══════════════════════════════════════════════
+     LIGHTBOX (popup de imagen)
+══════════════════════════════════════════════ -->
+<div id="rlg-lightbox" class="rlg-lb" role="dialog" aria-modal="true" aria-label="Project image" aria-hidden="true">
+  <button class="rlg-lb-btn rlg-lb-close" type="button" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6M6 6l12 12"/></svg>
+  </button>
+  <button class="rlg-lb-btn rlg-lb-prev" type="button" aria-label="Previous">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="rlg-lb-btn rlg-lb-next" type="button" aria-label="Next">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+
+  <div class="rlg-lb-panel">
+    <div class="rlg-lb-imgwrap">
+      <span class="rlg-lb-badge" id="rlg-lb-badge"></span>
+
+      <!-- Pestañas Before / After (solo si el proyecto tiene foto "before") -->
+      <div class="rlg-lb-tabs" id="rlg-lb-tabs">
+        <button class="rlg-lb-tab is-active" type="button" data-tab="after">After</button>
+        <button class="rlg-lb-tab" type="button" data-tab="before">Before</button>
+      </div>
+
+      <img class="rlg-lb-img" id="rlg-lb-img" src="" alt="" />
+    </div>
+    <div class="rlg-lb-bar">
+      <div class="rlg-lb-meta">
+        <span class="rlg-lb-cap" id="rlg-lb-cap"></span>
+        <span class="rlg-lb-pos" id="rlg-lb-pos"></span>
+      </div>
+      <a class="rlg-lb-link" id="rlg-lb-link" href="#">
+        View service
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
      FILTROS DE GALERÍA — VANILLA JS
 ══════════════════════════════════════════════ -->
 <script>
@@ -594,6 +910,7 @@ body { padding-top: 104px !important; }
   if (!root) return;
   var filters = root.querySelectorAll('.rlg-filter');
   var cards = root.querySelectorAll('.rlg-card');
+  var countEl = document.getElementById('rlg-count');
 
   filters.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -605,10 +922,14 @@ body { padding-top: 104px !important; }
         b.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
 
+      var shown = 0;
       cards.forEach(function (card) {
         var show = (f === 'all') || (card.getAttribute('data-service') === f);
         card.classList.toggle('is-hidden', !show);
+        if (show) shown++;
       });
+
+      if (countEl) countEl.textContent = shown;
     });
   });
 })();
@@ -684,6 +1005,165 @@ body { padding-top: 104px !important; }
   } catch (e) {
     revealAll();
   }
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════
+     LIGHTBOX — VANILLA JS
+══════════════════════════════════════════════ -->
+<script>
+(function () {
+  var root = document.getElementById('rl-gallery');
+  if (!root) return;
+
+  var lb     = document.getElementById('rlg-lightbox');
+  var imgEl  = document.getElementById('rlg-lb-img');
+  var badge  = document.getElementById('rlg-lb-badge');
+  var cap    = document.getElementById('rlg-lb-cap');
+  var pos    = document.getElementById('rlg-lb-pos');
+  var link   = document.getElementById('rlg-lb-link');
+  if (!lb) return;
+
+  var prevBtn  = lb.querySelector('.rlg-lb-prev');
+  var nextBtn  = lb.querySelector('.rlg-lb-next');
+  var closeBtn = lb.querySelector('.rlg-lb-close');
+  var imgWrap  = lb.querySelector('.rlg-lb-imgwrap');
+
+  // Pestañas Before / After
+  var tabsWrap = document.getElementById('rlg-lb-tabs');
+  var tabs     = lb.querySelectorAll('.rlg-lb-tab');
+
+  var current = -1;     // índice dentro de la lista visible actual
+  var list = [];        // cards visibles en el momento de abrir
+  var activeTab = 'after';
+
+  // Solo las cards que no están ocultas por el filtro
+  function visibleCards() {
+    return Array.prototype.filter.call(
+      root.querySelectorAll('.rlg-card'),
+      function (c) { return !c.classList.contains('is-hidden'); }
+    );
+  }
+
+  function render() {
+    var card = list[current];
+    if (!card) return;
+
+    var img    = card.getAttribute('data-img');
+    var before = card.getAttribute('data-before');
+    var alt    = card.getAttribute('data-alt') || '';
+    var label  = card.getAttribute('data-label') || '';
+    var href   = card.getAttribute('data-href') || '#';
+
+    badge.textContent = label;
+    cap.textContent   = alt;
+    pos.textContent   = 'Project ' + (current + 1) + ' of ' + list.length;
+    link.setAttribute('href', href);
+
+    // ¿Tiene foto "before"? → mostrar pestañas
+    var hasBA = !!(img && before);
+    tabsWrap.style.display = hasBA ? 'flex' : 'none';
+    if (!hasBA) activeTab = 'after';
+
+    // Marcar pestaña activa
+    tabs.forEach(function (t) {
+      t.classList.toggle('is-active', t.getAttribute('data-tab') === activeTab);
+    });
+
+    // Quitar cualquier placeholder previo
+    var ph = imgWrap.querySelector('.rlg-lb-ph');
+    if (ph) ph.parentNode.removeChild(ph);
+
+    // Foto a mostrar según la pestaña
+    var src = (activeTab === 'before' && before) ? before : img;
+
+    if (src) {
+      imgEl.style.display = '';
+      imgEl.src = src;
+      imgEl.alt = (activeTab === 'before') ? (alt + ' — before') : alt;
+    } else {
+      imgEl.style.display = 'none';
+      var div = document.createElement('div');
+      div.className = 'rlg-lb-ph';
+      div.textContent = label;
+      imgWrap.appendChild(div);
+    }
+
+    // Un solo elemento visible → ocultar prev/next
+    var solo = list.length <= 1;
+    prevBtn.style.display = solo ? 'none' : '';
+    nextBtn.style.display = solo ? 'none' : '';
+  }
+
+  function open(card) {
+    list = visibleCards();
+    current = list.indexOf(card);
+    if (current === -1) return;
+    activeTab = 'after';
+    render();
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    current = -1;
+    activeTab = 'after';
+  }
+
+  function go(step) {
+    if (!list.length) return;
+    current = (current + step + list.length) % list.length;
+    activeTab = 'after';   // al cambiar de proyecto, volvemos a "After"
+    render();
+  }
+
+  // Clic en pestañas
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function (e) {
+      e.stopPropagation();
+      activeTab = t.getAttribute('data-tab');
+      render();
+    });
+  });
+
+  // Clic en una card → abrir lightbox (sin navegar).
+  // Respetamos clic medio / Ctrl / Cmd para abrir el servicio en pestaña nueva.
+  root.querySelectorAll('.rlg-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+      e.preventDefault();
+      open(card);
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function (e) { e.stopPropagation(); go(-1); });
+  nextBtn.addEventListener('click', function (e) { e.stopPropagation(); go(1); });
+
+  // Clic fuera del panel → cerrar
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+
+  // Teclado
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') go(-1);
+    else if (e.key === 'ArrowRight') go(1);
+  });
+
+  // Swipe táctil
+  var tx = null;
+  lb.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+    tx = null;
+  });
 })();
 </script>
 
