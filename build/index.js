@@ -219,31 +219,31 @@ function ContactForm({
   privacyHref = "/privacy-policy",
   termsHref = "/terms-and-conditions"
 }) {
-  /* ───────────────────────────────────────────────────────────────
-     ENVÍO DEL FORMULARIO
-     Tal cual, hace un POST normal a la misma URL (action=""). Tienes
-     dos caminos para que envíe de verdad:
-      1) Plugin (Contact Form 7, WPForms…): renderiza el shortcode del
-        plugin en el template y deja este componente solo para páginas
-        donde quieras el formulario propio. O reemplaza el <form> de
-        abajo por el markup/embed del plugin.
-      2) Manejarlo en React sin recargar — descomenta handleSubmit,
-        ponlo en <form onSubmit={handleSubmit}> y apúntalo a tu
-        endpoint (REST API o admin-ajax):
-      // const [status, setStatus] = React.useState("idle")
-     // async function handleSubmit(e) {
-     //   e.preventDefault()
-     //   setStatus("sending")
-     //   const data = Object.fromEntries(new FormData(e.currentTarget).entries())
-     //   const res = await fetch("/wp-json/ruiz/v1/contact", {
-     //     method: "POST",
-     //     headers: { "Content-Type": "application/json" },
-     //     body: JSON.stringify(data),
-     //   })
-     //   setStatus(res.ok ? "done" : "error")
-     // }
-  ─────────────────────────────────────────────────────────────── */
+  const [status, setStatus] = react__WEBPACK_IMPORTED_MODULE_0___default().useState("idle"); // idle | sending | done | error
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setStatus("sending");
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      const res = await fetch("/wp-json/ruiz/v1/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        setStatus("done");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("style", {
       children: `
@@ -353,6 +353,15 @@ function ContactForm({
         }
         .rl-cform-check a { color: var(--rl-accent); text-decoration: underline; }
 
+        /* Honeypot anti-bot: fuera de pantalla, invisible para humanos */
+        .rl-cform-hp {
+          position: absolute !important;
+          left: -9999px !important;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+        }
+
         .rl-cform-btn {
           margin-top: 4px;
           width: 100%;
@@ -373,6 +382,16 @@ function ContactForm({
           transition: background 0.18s;
         }
         .rl-cform-btn:hover { background: var(--rl-accent-hover); }
+        .rl-cform-btn:disabled { opacity: 0.6; cursor: default; }
+
+        /* Mensajes de estado */
+        .rl-cform-status {
+          font-size: 13px;
+          line-height: 1.5;
+          margin-top: 2px;
+        }
+        .rl-cform-status.is-done  { color: #cfe3b8; }
+        .rl-cform-status.is-error { color: #f0b8b8; }
 
         /* Entrada al montar + flotación bouncy en loop (solo si no hay movimiento reducido) */
         @media (prefers-reduced-motion: no-preference) {
@@ -408,9 +427,15 @@ function ContactForm({
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
       className: "rl-cform",
       name: "ruiz_hero_contact",
-      method: "post",
-      action: "",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      onSubmit: handleSubmit,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+        type: "text",
+        name: "rl_company",
+        className: "rl-cform-hp",
+        tabIndex: -1,
+        autoComplete: "off",
+        "aria-hidden": "true"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "rl-cform-title",
         children: heading
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
@@ -470,7 +495,14 @@ function ContactForm({
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
         type: "submit",
         className: "rl-cform-btn",
-        children: ["Request a Free Estimate", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowRight, {})]
+        disabled: status === "sending",
+        children: [status === "sending" ? "Sending…" : "Request a Free Estimate", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ArrowRight, {})]
+      }), status === "done" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "rl-cform-status is-done",
+        children: "Thanks! We'll get back to you within one business day."
+      }), status === "error" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "rl-cform-status is-error",
+        children: "Something went wrong \u2014 please call us or try again."
       })]
     })]
   });
@@ -1215,7 +1247,7 @@ function Footer() {
                 className: "rl-footer-contact-icon",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(LocationIcon, {})
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
-                children: ["15791 Rockfield Blvd, ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), "Irvine, CA 92618, EE. UU."]
+                children: ["15791 Rockfield Blvd Suite O, ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), "Irvine, CA 92618, USA"]
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
               className: "rl-footer-contact-item",

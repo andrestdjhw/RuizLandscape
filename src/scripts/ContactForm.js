@@ -26,33 +26,31 @@ function ContactForm({
   privacyHref = "/privacy-policy",
   termsHref = "/terms-and-conditions",
 }) {
-  /* ───────────────────────────────────────────────────────────────
-     ENVÍO DEL FORMULARIO
-     Tal cual, hace un POST normal a la misma URL (action=""). Tienes
-     dos caminos para que envíe de verdad:
+  const [status, setStatus] = React.useState("idle") // idle | sending | done | error
 
-     1) Plugin (Contact Form 7, WPForms…): renderiza el shortcode del
-        plugin en el template y deja este componente solo para páginas
-        donde quieras el formulario propio. O reemplaza el <form> de
-        abajo por el markup/embed del plugin.
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const form = e.currentTarget
+    setStatus("sending")
 
-     2) Manejarlo en React sin recargar — descomenta handleSubmit,
-        ponlo en <form onSubmit={handleSubmit}> y apúntalo a tu
-        endpoint (REST API o admin-ajax):
+    const data = Object.fromEntries(new FormData(form).entries())
 
-     // const [status, setStatus] = React.useState("idle")
-     // async function handleSubmit(e) {
-     //   e.preventDefault()
-     //   setStatus("sending")
-     //   const data = Object.fromEntries(new FormData(e.currentTarget).entries())
-     //   const res = await fetch("/wp-json/ruiz/v1/contact", {
-     //     method: "POST",
-     //     headers: { "Content-Type": "application/json" },
-     //     body: JSON.stringify(data),
-     //   })
-     //   setStatus(res.ok ? "done" : "error")
-     // }
-  ─────────────────────────────────────────────────────────────── */
+    try {
+      const res = await fetch("/wp-json/ruiz/v1/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        setStatus("done")
+        form.reset()
+      } else {
+        setStatus("error")
+      }
+    } catch {
+      setStatus("error")
+    }
+  }
 
   return (
     <>
@@ -163,6 +161,15 @@ function ContactForm({
         }
         .rl-cform-check a { color: var(--rl-accent); text-decoration: underline; }
 
+        /* Honeypot anti-bot: fuera de pantalla, invisible para humanos */
+        .rl-cform-hp {
+          position: absolute !important;
+          left: -9999px !important;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+        }
+
         .rl-cform-btn {
           margin-top: 4px;
           width: 100%;
@@ -183,6 +190,16 @@ function ContactForm({
           transition: background 0.18s;
         }
         .rl-cform-btn:hover { background: var(--rl-accent-hover); }
+        .rl-cform-btn:disabled { opacity: 0.6; cursor: default; }
+
+        /* Mensajes de estado */
+        .rl-cform-status {
+          font-size: 13px;
+          line-height: 1.5;
+          margin-top: 2px;
+        }
+        .rl-cform-status.is-done  { color: #cfe3b8; }
+        .rl-cform-status.is-error { color: #f0b8b8; }
 
         /* Entrada al montar + flotación bouncy en loop (solo si no hay movimiento reducido) */
         @media (prefers-reduced-motion: no-preference) {
@@ -216,7 +233,17 @@ function ContactForm({
         }
       `}</style>
 
-      <form className="rl-cform" name="ruiz_hero_contact" method="post" action="">
+      <form className="rl-cform" name="ruiz_hero_contact" onSubmit={handleSubmit}>
+        {/* Honeypot: los bots lo llenan, los humanos no lo ven. El servidor descarta si viene lleno. */}
+        <input
+          type="text"
+          name="rl_company"
+          className="rl-cform-hp"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+        />
+
         <div className="rl-cform-title">{heading}</div>
         <p className="rl-cform-sub">{subheading}</p>
 
@@ -247,10 +274,21 @@ function ContactForm({
         {/* reCAPTCHA: monta aquí el widget cuando lo integres
             (p.ej. <div className="g-recaptcha" data-sitekey="..."></div>) */}
 
-        <button type="submit" className="rl-cform-btn">
-          Request a Free Estimate
+        <button type="submit" className="rl-cform-btn" disabled={status === "sending"}>
+          {status === "sending" ? "Sending…" : "Request a Free Estimate"}
           <ArrowRight />
         </button>
+
+        {status === "done" && (
+          <p className="rl-cform-status is-done">
+            Thanks! We&apos;ll get back to you within one business day.
+          </p>
+        )}
+        {status === "error" && (
+          <p className="rl-cform-status is-error">
+            Something went wrong — please call us or try again.
+          </p>
+        )}
       </form>
     </>
   )

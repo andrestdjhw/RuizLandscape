@@ -493,7 +493,7 @@ body { padding-top: 104px !important; }
             </span>
             <div>
               <div class="rlc-info-label">Office</div>
-              <div class="rlc-info-value">15791 Rockfield Blvd, <br>Irvine, CA 92618, EE. UU.</div>
+              <div class="rlc-info-value">15791 Rockfield Blvd Suite O, <br>Irvine, CA 92618, USA</div>
             </div>
           </li>
 
