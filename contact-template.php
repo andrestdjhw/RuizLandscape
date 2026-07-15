@@ -20,8 +20,8 @@
    Deja '' y ese bloque simplemente no se muestra.
 ══════════════════════════════════════════════ */
 $rlc_images = array(
-  'hero-bg' => '/wp-content/uploads/2026/06/ContactUSRuizLandscape-scaled.jpg', // fondo del hero
-  'team'    => '', // foto del equipo o proyecto estrella (columna derecha) — opcional
+  'hero-bg' => '/wp-content/uploads/2026/07/Ruiz-Landscaping-10-scaled.png', // fondo del hero
+  'team'    => '/wp-content/uploads/2026/07/Ruiz-Landscaping-7-scaled.png', // foto del equipo o proyecto estrella (columna derecha) — opcional
 );
 
 $rlc_has_photo = ! empty( $rlc_images['team'] );

@@ -247,7 +247,7 @@ body { padding-top: 104px !important; }
 #rl-gallery .rlg-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('/wp-content/uploads/2026/06/RuizLandscape-scaled.jpg');
+  background-image: url('/wp-content/uploads/2026/07/Ruiz-Landscaping-1-scaled.png');
   background-size: cover;
   background-position: center;
 }

@@ -9,9 +9,9 @@
 ══════════════════════════════════════════════ */
 $rl_images = array(
   'hero-bg'          => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg',
-  'hero-video'       => '/wp-content/uploads/2026/06/RuizHero.mp4',
+  'hero-video'       => '/wp-content/uploads/2026/07/RuizHeroPanel.mp4',
   'cta-bg'           => '',
-  'welcome-main'     => '/wp-content/uploads/2026/06/RuizAtWork.png',
+  'welcome-main'     => '/wp-content/uploads/2026/07/Ruiz-Landscaping-5-scaled.png',
   'welcome-accent'   => '/wp-content/uploads/2026/06/Ruiz_LogoVariant.png',
   'landscape-design' => '/wp-content/uploads/2026/06/LandscapeDesignInstallation-1.jpg',
   'lawn-care'        => '/wp-content/uploads/2026/06/LawnCareMaintenance-1.jpg',
@@ -20,7 +20,7 @@ $rl_images = array(
   'synthetic-turf'   => '/wp-content/uploads/2026/06/ArtificialTurf1.png',
   'large-trees'      => '/wp-content/uploads/2026/06/LargeTreeInstallation.jpg',
   'lighting'         => '/wp-content/uploads/2026/06/LowVoltageLighting-1.jpg',
-  'why-photo'        => '/wp-content/uploads/2026/06/WhySectionRuiz.png',
+  'why-photo'        => '/wp-content/uploads/2026/07/Ruiz-Landscaping-8-scaled.png',
   'logo'             => 'https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/logo.png',
   'og-image'         => 'https://www.ruizlandscape.com/wp-content/themes/ruizlandscape/assets/og-image.jpg',
 );

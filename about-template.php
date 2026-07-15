@@ -15,10 +15,22 @@
    Deja '' y ese bloque simplemente no muestra foto.
 ══════════════════════════════════════════════ */
 $rla_images = array(
-  'hero-bg'       => '/wp-content/uploads/2026/06/FamiliaRuiz.png', // fondo del hero
-  'story-img'     => '/wp-content/uploads/2026/06/Ruiz_LogoVariant.png', // Sección 2 — foto junto a "Our Story"
-  'president-img' => '/wp-content/uploads/2026/06/CeoRuizLandscape.png', // Sección 3 — foto de Rafael Ruiz (brochure, on-site)
+  'hero-bg'       => '/wp-content/uploads/2026/07/Ruiz-Landscaping-2-scaled.png', // fondo del hero
+  'story-img'     => '/wp-content/uploads/2026/07/Ruiz-Landscaping-9-scaled.png', // Sección 2 — foto junto a "Our Story"
+  'president-img' => '/wp-content/uploads/2026/07/Ruiz-Landscaping-6-scaled.png', // Sección 3 — foto de Rafael Ruiz (brochure, on-site)
 );
+
+/* ── Imágenes de la galería masonry (Sección 4.5). Agrega o quita URLs libremente. ── */
+$rla_gallery = array(
+  '/wp-content/uploads/2026/07/Ruiz-Landscaping-7-scaled.png',
+  '/wp-content/uploads/2026/07/Ruiz-Landscaping-3-scaled.png',
+  '/wp-content/uploads/2026/07/Ruiz-Landscaping-9-scaled.png',
+  '/wp-content/uploads/2026/07/Ruiz-Landscaping-4-scaled.png',
+  '/wp-content/uploads/2026/07/Ruiz-Landscaping-2-scaled.png',
+  '/wp-content/uploads/2026/07/Ruiz-Landscaping-8-scaled.png',
+  '/wp-content/uploads/2026/07/Ruiz-Landscaping-11-scaled.png',
+);
+$rla_gallery = array_values( array_filter( $rla_gallery ) );
 
 $rla_has_story = ! empty( $rla_images['story-img'] );
 
@@ -374,6 +386,41 @@ body { padding-top: 104px !important; }
   color: rgba(255,255,255,0.65);
 }
 
+/* ══ SECTION 4.5 — TEAM / MASONRY GALLERY ══════ */
+#rl-about .rla-gallery { background: var(--rl-cream); }
+#rl-about .rla-masonry {
+  column-count: 3;
+  column-gap: 16px;
+}
+#rl-about .rla-mason-item {
+  break-inside: avoid;
+  margin: 0 0 16px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e0dbd0;
+  border-top: 3px solid var(--rl-accent);
+}
+#rl-about .rla-mason-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 0.84, 0.34, 1);
+}
+#rl-about .rla-mason-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,32,10,0) 45%, rgba(20,32,10,0.42) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+#rl-about .rla-mason-item:hover img { transform: scale(1.06); }
+#rl-about .rla-mason-item:hover::after { opacity: 1; }
+
+@media (max-width: 900px) { #rl-about .rla-masonry { column-count: 2; } }
+@media (max-width: 520px) { #rl-about .rla-masonry { column-count: 1; } }
+
 /* ══ SECTION 5 — WHAT DEFINES US ═══════════════ */
 #rl-about .rla-defines { background: #ffffff; }
 #rl-about .rla-defines-grid {
@@ -595,6 +642,32 @@ body { padding-top: 104px !important; }
 
   </div>
 </section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 4.5 — TEAM / MASONRY GALLERY
+══════════════════════════════════════════════ -->
+<?php if ( ! empty( $rla_gallery ) ) : ?>
+<section class="rla-section rla-gallery" aria-labelledby="gallery-heading">
+  <div class="rla-container">
+
+    <div class="rla-head">
+      <span class="rl-eyebrow rla-reveal">The People Behind the Work</span>
+      <h2 class="rl-h2 rla-reveal" id="gallery-heading">Our team, out in the field.</h2>
+      <div class="rl-divider rla-reveal"></div>
+    </div>
+
+    <div class="rla-masonry" role="list" aria-label="Ruiz Landscape team on the job">
+      <?php foreach ( $rla_gallery as $img ) : ?>
+        <figure class="rla-mason-item rla-reveal" role="listitem">
+          <img src="<?php echo esc_url( $img ); ?>" alt="Ruiz Landscape team member on a job site" loading="lazy">
+        </figure>
+      <?php endforeach; ?>
+    </div>
+
+  </div>
+</section>
+<?php endif; ?>
 
 
 <!-- ══════════════════════════════════════════════
