@@ -197,6 +197,14 @@ __webpack_require__.r(__webpack_exports__);
 // ── Datos (edítalos aquí) ─────────────────────────────
 
 const services = ["Landscape Design & Installation", "Lawn Care & Maintenance", "Tree & Shrub Care", "Irrigation Systems", "Synthetic Turf", "Large Tree Installation", "Low Voltage Lighting", "Something else"];
+
+// ── EmailJS ───────────────────────────────────────────
+// El Public Key es seguro de exponer en el front-end (así funciona EmailJS).
+// Las variables del template deben coincidir con los names de los campos:
+// {{rl_name}}, {{rl_phone}}, {{rl_email}}, {{rl_service}}, {{rl_message}}
+const EMAILJS_SERVICE_ID = "service_dryazfe";
+const EMAILJS_TEMPLATE_ID = "template_l9hvbae";
+const EMAILJS_PUBLIC_KEY = "k19cmsXnIMJX-yylZ";
 const ArrowRight = () => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "14",
@@ -224,15 +232,31 @@ function ContactForm({
   async function handleSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget;
-    setStatus("sending");
     const data = Object.fromEntries(new FormData(form).entries());
+
+    // Honeypot: si un bot lo llenó, simulamos éxito y no enviamos nada
+    if (data.rl_company) {
+      setStatus("done");
+      form.reset();
+      return;
+    }
+    delete data.rl_company;
+
+    // Contexto útil en el email (desde qué página se envió)
+    data.rl_page = window.location.pathname;
+    setStatus("sending");
     try {
-      const res = await fetch("/wp-json/ruiz/v1/contact", {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: data
+        })
       });
       if (res.ok) {
         setStatus("done");
@@ -502,7 +526,7 @@ function ContactForm({
         children: "Thanks! We'll get back to you within one business day."
       }), status === "error" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
         className: "rl-cform-status is-error",
-        children: "Something went wrong \u2014 please call us or try again."
+        children: "Something went wrong \u2014 please call us at 949-305-1605 or try again."
       })]
     })]
   });

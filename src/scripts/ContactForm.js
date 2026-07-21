@@ -12,6 +12,14 @@ const services = [
   "Something else",
 ]
 
+// ── EmailJS ───────────────────────────────────────────
+// El Public Key es seguro de exponer en el front-end (así funciona EmailJS).
+// Las variables del template deben coincidir con los names de los campos:
+// {{rl_name}}, {{rl_phone}}, {{rl_email}}, {{rl_service}}, {{rl_message}}
+const EMAILJS_SERVICE_ID  = "service_dryazfe"
+const EMAILJS_TEMPLATE_ID = "template_l9hvbae"
+const EMAILJS_PUBLIC_KEY  = "k19cmsXnIMJX-yylZ"
+
 const ArrowRight = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
     fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -31,15 +39,32 @@ function ContactForm({
   async function handleSubmit(e) {
     e.preventDefault()
     const form = e.currentTarget
-    setStatus("sending")
 
     const data = Object.fromEntries(new FormData(form).entries())
 
+    // Honeypot: si un bot lo llenó, simulamos éxito y no enviamos nada
+    if (data.rl_company) {
+      setStatus("done")
+      form.reset()
+      return
+    }
+    delete data.rl_company
+
+    // Contexto útil en el email (desde qué página se envió)
+    data.rl_page = window.location.pathname
+
+    setStatus("sending")
+
     try {
-      const res = await fetch("/wp-json/ruiz/v1/contact", {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: data,
+        }),
       })
       if (res.ok) {
         setStatus("done")
@@ -234,7 +259,7 @@ function ContactForm({
       `}</style>
 
       <form className="rl-cform" name="ruiz_hero_contact" onSubmit={handleSubmit}>
-        {/* Honeypot: los bots lo llenan, los humanos no lo ven. El servidor descarta si viene lleno. */}
+        {/* Honeypot: los bots lo llenan, los humanos no lo ven. Se descarta antes de enviar. */}
         <input
           type="text"
           name="rl_company"
@@ -271,9 +296,6 @@ function ContactForm({
           </span>
         </label>
 
-        {/* reCAPTCHA: monta aquí el widget cuando lo integres
-            (p.ej. <div className="g-recaptcha" data-sitekey="..."></div>) */}
-
         <button type="submit" className="rl-cform-btn" disabled={status === "sending"}>
           {status === "sending" ? "Sending…" : "Request a Free Estimate"}
           <ArrowRight />
@@ -286,7 +308,7 @@ function ContactForm({
         )}
         {status === "error" && (
           <p className="rl-cform-status is-error">
-            Something went wrong — please call us or try again.
+            Something went wrong — please call us at 949-305-1605 or try again.
           </p>
         )}
       </form>
