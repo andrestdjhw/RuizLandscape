@@ -46,7 +46,7 @@ get_header(); ?>
       "email": "office@RuizLandscape.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "6 McLaren, Suite H",
+        "streetAddress": "15791 Rockfield Blvd Ste O",
         "addressLocality": "Irvine",
         "addressRegion": "CA",
         "postalCode": "92618",

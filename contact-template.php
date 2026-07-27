@@ -62,7 +62,7 @@ get_header(); ?>
       "image": "https://www.ruizlandscape.com/wp-content/uploads/2026/06/Ruiz_Landscape_HD_Transparent-scaled.png",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "6 McLaren, Suite H",
+        "streetAddress": "https://www.google.com/search?q=Ruiz+Landscape+Service%2C+Inc.&oq=Ruiz+Landscape+Service%2C+Inc.&sourceid=chrome&ie=UTF-8",
         "addressLocality": "Irvine",
         "addressRegion": "CA",
         "postalCode": "92618",
@@ -570,7 +570,7 @@ body { padding-top: 104px !important; }
       <h2 class="rl-h2 rlc-reveal">Visit our office.</h2>
       <div class="rl-divider rlc-reveal" style="margin:20px auto 26px;"></div>
       <p class="rl-body-text rlc-reveal">
-        Our headquarters is in Irvine at 6 McLaren, Suite H. We work primarily on-site at client
+        Our headquarters is in Irvine at 15791 Rockfield Blvd Ste O. We work primarily on-site at client
         properties, so please call ahead to make sure someone's available to meet you.
       </p>
     </div>

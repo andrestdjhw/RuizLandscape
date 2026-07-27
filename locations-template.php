@@ -55,7 +55,7 @@ get_header(); ?>
   "telephone": "+1-949-305-1605",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "6 McLaren, Suite H",
+    "streetAddress": "15791 Rockfield Blvd Ste O",
     "addressLocality": "Irvine",
     "addressRegion": "CA",
     "postalCode": "92618",

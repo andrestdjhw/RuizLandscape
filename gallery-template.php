@@ -141,7 +141,7 @@ get_header(); ?>
       "email": "office@RuizLandscape.com",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "6 McLaren, Suite H",
+        "streetAddress": "15791 Rockfield Blvd Ste O",
         "addressLocality": "Irvine",
         "addressRegion": "CA",
         "postalCode": "92618",
@@ -810,7 +810,7 @@ body { padding-top: 104px !important; }
       <h2 class="rl-h2 rlg-reveal">Serving Orange County &amp; beyond.</h2>
       <div class="rl-divider rlg-reveal" style="margin:20px auto 26px;"></div>
       <p class="rl-body-text rlg-reveal">
-        Our headquarters is in Irvine at 6 McLaren, Suite H. We work on-site across Orange, Los
+        Our headquarters is in Irvine at 15791 Rockfield Blvd Ste O. We work on-site across Orange, Los
         Angeles, and Imperial counties — call ahead before visiting the office.
       </p>
     </div>
