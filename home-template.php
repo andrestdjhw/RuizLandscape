@@ -8,7 +8,7 @@
    IMÁGENES DE LA PÁGINA
 ══════════════════════════════════════════════ */
 $rl_images = array(
-  'hero-bg'          => '/wp-content/uploads/2026/06/HeroRuizLandscape.jpg',
+  'hero-bg'          => '/wp-content/uploads/2026/07/Ruiz-Landscaping-2-scaled.png',
   'hero-video'       => '/wp-content/uploads/2026/07/RuizHeroPanel.mp4',
   'cta-bg'           => '',
   'welcome-main'     => '/wp-content/uploads/2026/07/Ruiz-Landscaping-5-scaled.png',
@@ -43,7 +43,7 @@ get_header(); ?>
       "image": "<?php echo esc_url( $rl_images['og-image'] ); ?>",
       "description": "Family-owned, eco-conscious landscaping company serving Orange, Los Angeles, and Imperial counties in Southern California.",
       "telephone": "+1-949-305-1605",
-      "email": "office@RuizLandscape.com",
+      "email": "leads@RuizLandscape.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "15791 Rockfield Blvd Ste O",
@@ -459,6 +459,11 @@ body { padding-top: 104px !important; }
   height: 100%;
   min-height: 440px;
 }
+#rl-home .rl-welcome-img-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
 #rl-home .rl-welcome-img-main {
   position: absolute;
   inset: 0;
@@ -598,7 +603,7 @@ body { padding-top: 104px !important; }
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--rl-green);
+  color: var(--rl-svc, var(--rl-green));
   flex-shrink: 0;
   position: relative;
   z-index: 2;
@@ -606,8 +611,8 @@ body { padding-top: 104px !important; }
   transition: border-color 0.18s, background 0.18s, color 0.18s;
 }
 #rl-home .rl-service-card:hover .rl-service-icon {
-  border-color: var(--rl-green);
-  background: var(--rl-green);
+  border-color: var(--rl-svc, var(--rl-green));
+  background: var(--rl-svc, var(--rl-green));
   color: #ffffff;
 }
 #rl-home .rl-service-num {
@@ -1100,6 +1105,17 @@ body { padding-top: 104px !important; }
   #rl-home.rl-reveal-on .rl-why-left,
   #rl-home.rl-reveal-on .rl-faq-left { opacity: 0; transition: opacity 0.85s ease; }
   #rl-home.rl-reveal-on .rl-in { opacity: 1; transform: none; }
+
+  /* Depth: feature photos zoom out into place as they reveal */
+  #rl-home.rl-reveal-on .rl-welcome-img-main,
+  #rl-home.rl-reveal-on .rl-why-img {
+    transform: scale(1.16);
+    transition: transform 1.7s cubic-bezier(0.16, 0.84, 0.34, 1);
+  }
+  #rl-home.rl-reveal-on .rl-welcome-img.rl-in .rl-welcome-img-main,
+  #rl-home.rl-reveal-on .rl-why-left.rl-in .rl-why-img {
+    transform: scale(1);
+  }
 }
 
 /* HERO SPLIT */
@@ -1286,6 +1302,10 @@ body { padding-top: 104px !important; }
           CA Lic# 925207
         </span>
         <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          Pesticide Lic# 38717
+        </span>
+        <span class="rl-trust-chip">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 8 17 8 17 8z"/></svg>
           Eco-Conscious Practices
         </span>
@@ -1311,6 +1331,10 @@ body { padding-top: 104px !important; }
         <span class="rl-trust-chip">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
           CA Lic# 925207
+        </span>
+        <span class="rl-trust-chip">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          Pesticide Lic# 38717
         </span>
         <span class="rl-trust-chip">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2C14 8 17 8 17 8z"/></svg>
@@ -1359,7 +1383,7 @@ body { padding-top: 104px !important; }
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
-              <div class="rl-service-icon" aria-hidden="true">
+              <div class="rl-service-icon" aria-hidden="true" style="--rl-svc:#4a6e32;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="14.8 9.2 13.2 13.2 9.2 14.8 10.8 10.8"/></svg>
               </div>
               <span class="rl-service-num">01</span>
@@ -1379,7 +1403,7 @@ body { padding-top: 104px !important; }
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
-              <div class="rl-service-icon" aria-hidden="true">
+              <div class="rl-service-icon" aria-hidden="true" style="--rl-svc:#7fae4a;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20c4-1.5 1-5 2.5-8.5"/><path d="M10 11c.9.7 1.4 1.8 1.8 3-1.6.3-2.8.3-3.8-.2-1-.5-1.8-1.5-2.4-3.4 2.2-.4 3.5 0 4.4.6z"/><path d="M14 8a5.6 5.6 0 0 0-.9 3.2c1.5-.1 2.6-.5 3.4-1.1.8-.8 1.3-1.8 1.4-3.7-2.2.1-3.2.8-3.9 1.6z"/></svg>
               </div>
               <span class="rl-service-num">02</span>
@@ -1399,7 +1423,7 @@ body { padding-top: 104px !important; }
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
-              <div class="rl-service-icon" aria-hidden="true">
+              <div class="rl-service-icon" aria-hidden="true" style="--rl-svc:#8a5a3c;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 19a4 4 0 0 1-2.24-7.32A3.5 3.5 0 0 1 9 6.03V6a3 3 0 1 1 6 0v.04a3.5 3.5 0 0 1 3.24 5.65A4 4 0 0 1 16 19Z"/><path d="M12 19v3"/></svg>
               </div>
               <span class="rl-service-num">03</span>
@@ -1419,7 +1443,7 @@ body { padding-top: 104px !important; }
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
-              <div class="rl-service-icon" aria-hidden="true">
+              <div class="rl-service-icon" aria-hidden="true" style="--rl-svc:#3f7ea6;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5 12 2.5C11.5 5 10 7.4 8 9.5 6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
               </div>
               <span class="rl-service-num">04</span>
@@ -1439,7 +1463,7 @@ body { padding-top: 104px !important; }
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
-              <div class="rl-service-icon" aria-hidden="true">
+              <div class="rl-service-icon" aria-hidden="true" style="--rl-svc:#3f9e8f;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7"/><rect x="13.5" y="3.5" width="7" height="7"/><rect x="3.5" y="13.5" width="7" height="7"/><rect x="13.5" y="13.5" width="7" height="7"/></svg>
               </div>
               <span class="rl-service-num">05</span>
@@ -1459,7 +1483,7 @@ body { padding-top: 104px !important; }
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
-              <div class="rl-service-icon" aria-hidden="true">
+              <div class="rl-service-icon" aria-hidden="true" style="--rl-svc:#2e4a24;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 7 11h3l-4 6h12l-4-6h3z"/><path d="M12 17v4"/></svg>
               </div>
               <span class="rl-service-num">06</span>
@@ -1479,7 +1503,7 @@ body { padding-top: 104px !important; }
               <?php endif; ?>
             </div>
             <div class="rl-service-body">
-              <div class="rl-service-icon" aria-hidden="true">
+              <div class="rl-service-icon" aria-hidden="true" style="--rl-svc:#c8912f;">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
               </div>
               <span class="rl-service-num">07</span>
@@ -1515,9 +1539,11 @@ body { padding-top: 104px !important; }
     <div class="rl-welcome-inner">
 
       <div class="rl-welcome-img">
-        <?php if ( ! empty( $rl_images['welcome-main'] ) ) : ?>
-          <img src="<?php echo esc_url( $rl_images['welcome-main'] ); ?>" alt="Ruiz Landscape team at a completed landscape project in Orange County" class="rl-welcome-img-main" loading="eager" width="580" height="480" />
-        <?php endif; ?>
+        <div class="rl-welcome-img-clip">
+          <?php if ( ! empty( $rl_images['welcome-main'] ) ) : ?>
+            <img src="<?php echo esc_url( $rl_images['welcome-main'] ); ?>" alt="Ruiz Landscape team at a completed landscape project in Orange County" class="rl-welcome-img-main" loading="eager" width="580" height="480" />
+          <?php endif; ?>
+        </div>
         <?php if ( ! empty( $rl_images['welcome-accent'] ) ) : ?>
           <img src="<?php echo esc_url( $rl_images['welcome-accent'] ); ?>" alt="Detail of eco-conscious garden design by Ruiz Landscape" class="rl-welcome-img-accent" loading="lazy" width="200" height="200" />
         <?php endif; ?>
@@ -1925,15 +1951,18 @@ body { padding-top: 104px !important; }
     });
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
         var el = entry.target;
-        el.style.transitionDelay = el._rlDelay + 'ms';
-        el.classList.add('rl-in');
-        el.addEventListener('transitionend', function clear() {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = el._rlDelay + 'ms';
+          el.classList.add('rl-in');
+          el.addEventListener('transitionend', function clear() {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', clear);
+          });
+        } else {
           el.style.transitionDelay = '';
-          el.removeEventListener('transitionend', clear);
-        });
-        observer.unobserve(el);
+          el.classList.remove('rl-in');
+        }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     targets.forEach(function (el) { observer.observe(el); });

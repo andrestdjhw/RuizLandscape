@@ -57,7 +57,7 @@ get_header(); ?>
       "name": "Ruiz Landscape Service, Inc.",
       "url": "https://www.ruizlandscape.com",
       "telephone": "+1-949-305-1605",
-      "email": "office@RuizLandscape.com",
+      "email": "leads@RuizLandscape.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "15791 Rockfield Blvd Ste O",
@@ -283,6 +283,7 @@ body { padding-top: 104px !important; }
 }
 #rl-about .rla-story-text { display: flex; flex-direction: column; }
 #rl-about .rla-story-text .rl-body-text + .rl-body-text { margin-top: 18px; }
+#rl-about .rla-story-img { overflow: hidden; }
 #rl-about .rla-story-img img {
   width: 100%;
   height: 100%;
@@ -300,6 +301,7 @@ body { padding-top: 104px !important; }
   align-items: center;
 }
 #rl-about .rla-president-inner.is-solo { grid-template-columns: 1fr; max-width: 760px; }
+#rl-about .rla-president-photo { overflow: hidden; }
 #rl-about .rla-president-photo img {
   width: 100%;
   height: 100%;
@@ -523,6 +525,17 @@ body { padding-top: 104px !important; }
   #rl-about.rl-reveal-on .rla-reveal.rl-in {
     opacity: 1;
     transform: none;
+  }
+
+  /* Depth: feature photos zoom out into place as they reveal */
+  #rl-about.rl-reveal-on .rla-story-img img,
+  #rl-about.rl-reveal-on .rla-president-photo img {
+    transform: scale(1.16);
+    transition: transform 1.7s cubic-bezier(0.16, 0.84, 0.34, 1);
+  }
+  #rl-about.rl-reveal-on .rla-story-img.rl-in img,
+  #rl-about.rl-reveal-on .rla-president-photo.rl-in img {
+    transform: scale(1);
   }
 }
 </style>
@@ -749,15 +762,18 @@ body { padding-top: 104px !important; }
 
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
         var el = entry.target;
-        el.style.transitionDelay = el._d + 'ms';
-        el.classList.add('rl-in');
-        el.addEventListener('transitionend', function clear() {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = el._d + 'ms';
+          el.classList.add('rl-in');
+          el.addEventListener('transitionend', function clear() {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', clear);
+          });
+        } else {
           el.style.transitionDelay = '';
-          el.removeEventListener('transitionend', clear);
-        });
-        obs.unobserve(el);
+          el.classList.remove('rl-in');
+        }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 

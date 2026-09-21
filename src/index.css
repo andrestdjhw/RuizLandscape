@@ -1,2 +1,23 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* ══════════════════════════════════════════════
+   GLOBAL DEPTH — hero background zoom-out entrance
+   (continuous scroll parallax is added via JS, see src/index.js)
+══════════════════════════════════════════════ */
+[class*="hero-bg"] {
+  will-change: transform;
+  scale: 1.14;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [class*="hero-bg"] {
+    animation: rl-hero-depth-in 2s cubic-bezier(0.16, 0.84, 0.34, 1) both;
+  }
+}
+@keyframes rl-hero-depth-in {
+  from { scale: 1.22; }
+  to   { scale: 1.1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class*="hero-bg"] { scale: 1; }
+}

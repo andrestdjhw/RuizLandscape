@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 // ── Ícono ─────────────────────────────────────────────
 const PhoneIcon = () => (
@@ -20,6 +20,24 @@ function CallButton({
   label = "Call Us",
   position = "right",
 }) {
+  const [visible, setVisible] = useState(false)
+
+  // Solo se muestra una vez que el hero de la página salió de pantalla,
+  // así no compite visualmente con el contenido del hero.
+  useEffect(() => {
+    const hero = document.querySelector('[class$="-hero"]')
+    if (!hero || !("IntersectionObserver" in window)) {
+      setVisible(true)
+      return
+    }
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => setVisible(!entry.isIntersecting)),
+      { threshold: 0 }
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <style>{`
@@ -43,7 +61,20 @@ function CallButton({
           text-decoration: none;
           box-shadow: 0 10px 28px -8px rgba(0,0,0,0.45);
           font-family: 'Montserrat', sans-serif;
-          transition: background 0.2s ease, box-shadow 0.2s ease, padding 0.28s ease;
+          opacity: 0;
+          transform: translateY(16px) scale(0.9);
+          pointer-events: none;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .rl-callbtn {
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 0.84, 0.34, 1),
+                        background 0.2s ease, box-shadow 0.2s ease, padding 0.28s ease;
+          }
+        }
+        .rl-callbtn.is-visible {
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
         }
         .rl-callbtn--right { right: 24px; }
         .rl-callbtn--left  { left: 24px; }
@@ -102,7 +133,7 @@ function CallButton({
           pointer-events: none;
         }
         @media (prefers-reduced-motion: no-preference) {
-          .rl-callbtn::after { animation: rl-callbtn-pulse 2.4s ease-out infinite; }
+          .rl-callbtn.is-visible::after { animation: rl-callbtn-pulse 2.4s ease-out infinite; }
         }
         .rl-callbtn:hover::after { animation: none; }
 
@@ -110,17 +141,6 @@ function CallButton({
           0%   { box-shadow: 0 0 0 0 rgba(var(--rl-accent-rgb), 0.45); }
           70%  { box-shadow: 0 0 0 16px rgba(var(--rl-accent-rgb), 0); }
           100% { box-shadow: 0 0 0 0 rgba(var(--rl-accent-rgb), 0); }
-        }
-
-        /* Entrada suave al montar */
-        @media (prefers-reduced-motion: no-preference) {
-          .rl-callbtn {
-            animation: rl-callbtn-in 0.5s cubic-bezier(0.16, 0.84, 0.34, 1) 0.4s both;
-          }
-        }
-        @keyframes rl-callbtn-in {
-          from { opacity: 0; transform: translateY(16px) scale(0.9); }
-          to   { opacity: 1; transform: none; }
         }
 
         /* Móvil: un poco más compacto y pegado a la esquina */
@@ -134,7 +154,7 @@ function CallButton({
 
       <a
         href={`tel:${phone}`}
-        className={`rl-callbtn rl-callbtn--${position}`}
+        className={`rl-callbtn rl-callbtn--${position} ${visible ? "is-visible" : ""}`}
         aria-label={`${label}: ${display}`}
       >
         <span className="rl-callbtn-icon"><PhoneIcon /></span>

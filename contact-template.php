@@ -57,7 +57,7 @@ get_header(); ?>
       "name": "Ruiz Landscape Service, Inc.",
       "url": "https://www.ruizlandscape.com",
       "telephone": "+1-949-305-1605",
-      "email": "office@RuizLandscape.com",
+      "email": "leads@RuizLandscape.com",
       "priceRange": "$$",
       "image": "https://www.ruizlandscape.com/wp-content/uploads/2026/06/Ruiz_Landscape_HD_Transparent-scaled.png",
       "address": {
@@ -426,6 +426,15 @@ body { padding-top: 104px !important; }
     opacity: 1;
     transform: none;
   }
+
+  /* Depth: team photo zooms out into place as it reveals */
+  #rl-contact.rl-reveal-on .rlc-info-photo img {
+    transform: scale(1.16);
+    transition: transform 1.7s cubic-bezier(0.16, 0.84, 0.34, 1);
+  }
+  #rl-contact.rl-reveal-on .rlc-info-col.rl-in .rlc-info-photo img {
+    transform: scale(1);
+  }
 }
 </style>
 
@@ -483,7 +492,7 @@ body { padding-top: 104px !important; }
             </span>
             <div>
               <div class="rlc-info-label">Email</div>
-              <div class="rlc-info-value"><a href="mailto:office@RuizLandscape.com">office@ruizlandscape.com</a></div>
+              <div class="rlc-info-value"><a href="mailto:leads@RuizLandscape.com">leads@ruizlandscape.com</a></div>
             </div>
           </li>
 
@@ -614,15 +623,18 @@ body { padding-top: 104px !important; }
 
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
         var el = entry.target;
-        el.style.transitionDelay = el._d + 'ms';
-        el.classList.add('rl-in');
-        el.addEventListener('transitionend', function clear() {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = el._d + 'ms';
+          el.classList.add('rl-in');
+          el.addEventListener('transitionend', function clear() {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', clear);
+          });
+        } else {
           el.style.transitionDelay = '';
-          el.removeEventListener('transitionend', clear);
-        });
-        obs.unobserve(el);
+          el.classList.remove('rl-in');
+        }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 

@@ -71,7 +71,7 @@ get_header(); ?>
       "name": "Ruiz Landscape Service, Inc.",
       "url": "https://www.ruizlandscape.com",
       "telephone": "+1-949-305-1605",
-      "email": "office@RuizLandscape.com",
+      "email": "leads@RuizLandscape.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "15791 Rockfield Blvd Ste O",
@@ -541,15 +541,18 @@ body { padding-top: 104px !important; }
 
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
         var el = entry.target;
-        el.style.transitionDelay = el._d + 'ms';
-        el.classList.add('rl-in');
-        el.addEventListener('transitionend', function clear() {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = el._d + 'ms';
+          el.classList.add('rl-in');
+          el.addEventListener('transitionend', function clear() {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', clear);
+          });
+        } else {
           el.style.transitionDelay = '';
-          el.removeEventListener('transitionend', clear);
-        });
-        obs.unobserve(el);
+          el.classList.remove('rl-in');
+        }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 

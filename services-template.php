@@ -37,42 +37,49 @@ $rls_services = array(
     'title' => 'Landscape Design &amp; Installation',
     'desc'  => 'Lush gardens, water-wise outdoor living spaces, and sustainable designs brought to life with creativity and expertise.',
     'href'  => '/services/landscape-design-installation',
+    'color' => '#4a6e32',
     'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>',
   ),
   array(
     'title' => 'Lawn Care &amp; Maintenance',
     'desc'  => 'Mowing, fertilization, weed control, and seasonal upkeep that protect your investment year-round.',
     'href'  => '/services/lawn-care-maintenance',
+    'color' => '#7fae4a',
     'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V9"/><path d="M12 13c0-3 1.5-5 4-6-.5 3-2 5-4 6z"/><path d="M12 14c0-3-1.5-5-4-6 .5 3 2 5 4 6z"/><path d="M4 20h16"/></svg>',
   ),
   array(
     'title' => 'Tree &amp; Shrub Care',
     'desc'  => 'Pruning, trimming, disease management, and removal to keep your plants healthy and thriving.',
     'href'  => '/services/tree-shrub-care',
+    'color' => '#8a5a3c',
     'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-6"/><path d="M9 9a3 3 0 1 1 6 0 3 3 0 0 1 2.5 4.7A3 3 0 0 1 15 18H9a3 3 0 0 1-1.5-4.3A3 3 0 0 1 9 9z"/></svg>',
   ),
   array(
     'title' => 'Irrigation Systems',
     'desc'  => 'Water-wise irrigation that conserves water while keeping your landscape lush and healthy.',
     'href'  => '/services/irrigation-systems',
+    'color' => '#3f7ea6',
     'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 4 12 2c-.5 2-2 4-4 7.5S5 13 5 15a7 7 0 0 0 7 7z"/></svg>',
   ),
   array(
     'title' => 'Synthetic Turf',
     'desc'  => 'A pristine, low-maintenance, water-saving lawn — perfect for pets, kids, and water-conscious homeowners.',
     'href'  => '/services/synthetic-turf',
+    'color' => '#3f9e8f',
     'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg>',
   ),
   array(
     'title' => 'Large Tree Installation',
     'desc'  => 'Mature shade trees and specimens selected and installed with precision and care.',
     'href'  => '/services/large-tree-installation',
+    'color' => '#2e4a24',
     'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-9"/><path d="M7 13 12 5l5 8z"/><path d="M5 17 12 9l7 8z"/></svg>',
   ),
   array(
     'title' => 'Low Voltage Lighting',
     'desc'  => 'Energy-efficient lighting that accentuates your home, extends your evenings, and adds curb appeal.',
     'href'  => '/services/low-voltage-lighting',
+    'color' => '#c8912f',
     'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4"/><path d="M15.1 14c.2-1 .6-1.7 1.4-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.8.8 1.2 1.5 1.4 2.5z"/></svg>',
   ),
 );
@@ -100,7 +107,7 @@ get_header(); ?>
       "name": "Ruiz Landscape Service, Inc.",
       "url": "https://www.ruizlandscape.com",
       "telephone": "+1-949-305-1605",
-      "email": "office@RuizLandscape.com",
+      "email": "leads@RuizLandscape.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "15791 Rockfield Blvd Ste O",
@@ -325,13 +332,13 @@ body { padding-top: 104px !important; }
   height: 56px;
   border-radius: 50%;
   background: var(--rl-cream);
-  color: var(--rl-green);
+  color: var(--rl-svc, var(--rl-green));
   margin-bottom: 20px;
   transition: background 0.22s ease, color 0.22s ease;
 }
 #rl-services .rls-card-icon svg { width: 26px; height: 26px; }
 #rl-services .rls-card:hover .rls-card-icon {
-  background: var(--rl-green);
+  background: var(--rl-svc, var(--rl-green));
   color: #fff;
 }
 #rl-services .rls-card h3 {
@@ -480,7 +487,7 @@ body { padding-top: 104px !important; }
 
     <div class="rls-grid">
       <?php foreach ( $rls_services as $svc ) : ?>
-        <a href="<?php echo esc_url( $svc['href'] ); ?>" class="rls-card rls-reveal">
+        <a href="<?php echo esc_url( $svc['href'] ); ?>" class="rls-card rls-reveal" style="--rl-svc:<?php echo esc_attr( $svc['color'] ); ?>;">
           <span class="rls-card-icon"><?php echo $svc['icon']; ?></span>
           <h3><?php echo $svc['title']; ?></h3>
           <p><?php echo esc_html( $svc['desc'] ); ?></p>
@@ -571,15 +578,18 @@ body { padding-top: 104px !important; }
 
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
         var el = entry.target;
-        el.style.transitionDelay = el._d + 'ms';
-        el.classList.add('rl-in');
-        el.addEventListener('transitionend', function clear() {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = el._d + 'ms';
+          el.classList.add('rl-in');
+          el.addEventListener('transitionend', function clear() {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', clear);
+          });
+        } else {
           el.style.transitionDelay = '';
-          el.removeEventListener('transitionend', clear);
-        });
-        obs.unobserve(el);
+          el.classList.remove('rl-in');
+        }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 

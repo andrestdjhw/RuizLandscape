@@ -81,6 +81,93 @@ $gallery_before = array(
   15 => '', // Lighting — LowVoltage2
 );
 
+/* ══════════════════════════════════════════════
+   PROYECTOS DESTACADOS — 6 CARDS
+   Cada proyecto: título, ubicación, lista de servicios realizados e
+   imágenes (URL de Medios → "File URL"). Si 'images' queda vacío, la
+   card muestra un marcador "Photos coming soon".
+══════════════════════════════════════════════ */
+$gallery_projects = array(
+  array(
+    'title'    => 'Project One',
+    'location' => 'Irvine, CA',
+    'services' => array( 'Landscape design', 'Planting & installation' ),
+    'images'   => array(
+      '/wp-content/uploads/2026/09/Job1Pic1Website.jpg',
+      '/wp-content/uploads/2026/09/Job1Pic2Website.jpg',
+      '/wp-content/uploads/2026/09/Job1Pic3Website-e1790014768685.jpg',
+      '/wp-content/uploads/2026/09/Job1Pic4Website.jpg',
+    ),
+  ),
+  array(
+    'title'    => 'Project Two',
+    'location' => 'Newport Beach, CA',
+    'services' => array( 'Modern planting design', 'Tree installation', 'Mulched planter beds', 'Entry courtyard landscaping' ),
+    'images'   => array(
+      '/wp-content/uploads/2026/09/Job2Pic1Website.jpg',
+      '/wp-content/uploads/2026/09/Job2Pic2Website.jpg',
+      '/wp-content/uploads/2026/09/Job2Pic3Website.jpg',
+      '/wp-content/uploads/2026/09/Job2Pic4Website.jpg',
+      '/wp-content/uploads/2026/09/Job2Pic5Website.jpg',
+      '/wp-content/uploads/2026/09/Job2Pic6Website.jpg',
+    ),
+  ),
+  array(
+    'title'    => 'Project Three',
+    'location' => 'Anaheim, CA',
+    'services' => array( 'New-construction landscaping', 'Large tree installation', 'Backyard planting beds', 'Landscape around pool & patio' ),
+    'images'   => array(
+      '/wp-content/uploads/2026/09/Job3Pic1Website.jpg',
+      '/wp-content/uploads/2026/09/Job3Pic2Website.jpg',
+      '/wp-content/uploads/2026/09/Job3Pic3Website.jpg',
+      '/wp-content/uploads/2026/09/Job3Pic4Website.jpg',
+      '/wp-content/uploads/2026/09/Job3Pic5Website.jpg',
+      '/wp-content/uploads/2026/09/Job3Pic6Website.jpg',
+      '/wp-content/uploads/2026/09/Job3Pic7Website.jpg',
+      '/wp-content/uploads/2026/09/Job3Pic8Website.jpg',
+    ),
+  ),
+  array(
+    'title'    => 'Project Four',
+    'location' => 'Los Angeles, CA',
+    'services' => array( 'Synthetic turf & putting green', 'Low voltage path lighting', 'Planting beds along stone walkways', 'Poolside landscape design' ),
+    'images'   => array(
+      '/wp-content/uploads/2026/09/Job4Pic1Website.jpg',
+      '/wp-content/uploads/2026/09/Job4Pic2Website.jpg',
+      '/wp-content/uploads/2026/09/Job4Pic3Website.jpg',
+      '/wp-content/uploads/2026/09/Job4Pic4Website.jpg',
+      '/wp-content/uploads/2026/09/Job4Pic5Website.jpg',
+      '/wp-content/uploads/2026/09/Job4Pic6Website.jpg',
+      '/wp-content/uploads/2026/09/Job4Pic7Website.jpg',
+      '/wp-content/uploads/2026/09/Job4Pic8Website.jpg',
+    ),
+  ),
+  array(
+    'title'    => 'Project Five',
+    'location' => 'Costa Mesa, CA',
+    'services' => array( 'Drought-tolerant planting design', 'Succulent & river rock beds', 'Synthetic turf side yards', 'Stepping-stone turf walkways' ),
+    'images'   => array(
+      '/wp-content/uploads/2026/09/Job5Pic1Website.jpg',
+      '/wp-content/uploads/2026/09/Job5Pic2Website.jpg',
+      '/wp-content/uploads/2026/09/Job5Pic3Website.jpg',
+      '/wp-content/uploads/2026/09/Job5Pic4Website.jpg',
+      '/wp-content/uploads/2026/09/Job5Pic5Website.jpg',
+    ),
+  ),
+  array(
+    'title'    => 'Project Six',
+    'location' => 'Mission Viejo, CA',
+    'services' => array( 'Full backyard renovation', 'Decomposed granite pathways', 'New sod lawn installation', 'Planting beds & low voltage lighting' ),
+    'images'   => array(
+      '/wp-content/uploads/2026/09/Job6Pic1Website.jpg',
+      '/wp-content/uploads/2026/09/Job6Pic2Website.jpg',
+      '/wp-content/uploads/2026/09/Job6Pic3Website.jpg',
+      '/wp-content/uploads/2026/09/Job6Pic4Website.jpg',
+      '/wp-content/uploads/2026/09/Job6Pic5Website.jpg',
+    ),
+  ),
+);
+
 /* ── FAQ del home (mismas 6 preguntas) ── */
 $gallery_faqs = array(
   array(
@@ -138,7 +225,7 @@ get_header(); ?>
       "name": "Ruiz Landscape Service, Inc.",
       "url": "https://www.ruizlandscape.com",
       "telephone": "+1-949-305-1605",
-      "email": "office@RuizLandscape.com",
+      "email": "leads@RuizLandscape.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "15791 Rockfield Blvd Ste O",
@@ -321,7 +408,7 @@ body { padding-top: 104px !important; }
 /* Grid */
 #rl-gallery .rlg-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 18px;
 }
 #rl-gallery .rlg-card {
@@ -340,7 +427,8 @@ body { padding-top: 104px !important; }
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
+  scale: 1.16;
+  transition: transform 0.4s ease, scale 1.7s cubic-bezier(0.16, 0.84, 0.34, 1);
 }
 #rl-gallery .rlg-card:hover img { transform: scale(1.06); }
 
@@ -622,6 +710,252 @@ body { padding-top: 104px !important; }
   #rl-gallery .rlg-lb-link { width: 100%; justify-content: center; }
 }
 
+/* ══ PROYECTOS DESTACADOS (cards con carrusel) ══ */
+#rl-gallery .rlg-projects { background: var(--rl-cream); }
+#rl-gallery .rlg-head { text-align: center; margin-bottom: 48px; }
+#rl-gallery .rlg-head .rl-eyebrow { justify-content: center; }
+#rl-gallery .rlg-head .rl-divider { margin: 20px auto 0; }
+#rl-gallery .rlg-pj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+#rl-gallery .rlg-pj {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e7e3d8;
+  border-top: 3px solid var(--rl-accent);
+  overflow: hidden;
+  position: relative;
+}
+#rl-gallery .rlg-pj-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--rl-cream);
+  overflow: hidden;
+}
+#rl-gallery .rlg-pj-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  scale: 1.12;
+  transition: opacity 0.45s ease, scale 1.6s cubic-bezier(0.16, 0.84, 0.34, 1);
+}
+#rl-gallery .rlg-pj-slide.is-active { opacity: 1; }
+#rl-gallery .rlg-pj-ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #a39d8c;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+#rl-gallery .rlg-pj-ph svg { width: 34px; height: 34px; }
+#rl-gallery .rlg-pj-count {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(20,32,10,0.72);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 11px;
+  border-radius: 20px;
+}
+#rl-gallery .rlg-pj-nav {
+  position: absolute;
+  top: 50%;
+  width: 38px;
+  height: 38px;
+  margin-top: -19px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  color: var(--rl-green-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+#rl-gallery .rlg-pj-nav svg { width: 16px; height: 16px; }
+#rl-gallery .rlg-pj-prev { left: 12px; }
+#rl-gallery .rlg-pj-next { right: 12px; }
+#rl-gallery .rlg-pj-media:hover .rlg-pj-nav,
+#rl-gallery .rlg-pj-nav:focus-visible { opacity: 1; }
+#rl-gallery .rlg-pj-nav:hover { background: var(--rl-accent); color: #fff; }
+#rl-gallery .rlg-pj-body { padding: 24px 26px 26px; display: flex; flex-direction: column; flex: 1; }
+#rl-gallery .rlg-pj-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--rl-green-dark);
+  line-height: 1.15;
+}
+#rl-gallery .rlg-pj-loc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 13.5px;
+  color: var(--rl-green-mid);
+  font-weight: 600;
+}
+#rl-gallery .rlg-pj-loc svg { width: 14px; height: 14px; flex-shrink: 0; }
+#rl-gallery .rlg-pj-list {
+  list-style: none;
+  margin: 18px 0 20px;
+  padding: 16px 0 0;
+  border-top: 1px solid #ece8dd;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+#rl-gallery .rlg-pj-list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: #4a4a3a;
+  line-height: 1.4;
+}
+#rl-gallery .rlg-pj-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rl-accent);
+}
+#rl-gallery .rlg-pj-all {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--rl-accent);
+  padding: 0 0 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rl-green);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+#rl-gallery .rlg-pj-all svg { width: 12px; height: 12px; }
+#rl-gallery .rlg-pj-all:hover { color: var(--rl-accent); }
+#rl-gallery .rlg-pj-all[disabled] { opacity: 0.45; cursor: default; border-color: #ddd6c7; color: #8a8f7e; }
+
+/* Visor "View all photos" */
+#rl-gallery .rlg-pj-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(12,18,8,0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 72px;
+}
+#rl-gallery .rlg-pj-lb.is-open { display: flex; }
+#rl-gallery .rlg-pj-lb-img { max-width: 100%; max-height: 82vh; display: block; }
+#rl-gallery .rlg-pj-lb-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  text-align: center;
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+#rl-gallery .rlg-pj-lb button {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+#rl-gallery .rlg-pj-lb button:hover { background: var(--rl-accent); }
+#rl-gallery .rlg-pj-lb button svg { width: 20px; height: 20px; }
+#rl-gallery .rlg-pj-lb-close { top: 20px; right: 20px; }
+#rl-gallery .rlg-pj-lb-prev { left: 16px; top: 50%; margin-top: -23px; }
+#rl-gallery .rlg-pj-lb-next { right: 16px; top: 50%; margin-top: -23px; }
+
+@media (max-width: 1080px) { #rl-gallery .rlg-pj-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 680px) {
+  #rl-gallery .rlg-pj-grid { grid-template-columns: 1fr; }
+  #rl-gallery .rlg-pj-nav { opacity: 1; }
+  #rl-gallery .rlg-pj-lb { padding: 40px 12px; }
+}
+
+/* ══ PROFUNDIDAD + HOVER 3D (cards de la gallery) ══ */
+#rl-gallery .rlg-card,
+#rl-gallery .rlg-pj {
+  --rx: 0deg; --ry: 0deg; --nx: 0; --ny: 0; --mx: 50%; --my: 50%;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.25s ease-out, box-shadow 0.35s ease, scale 0.35s ease,
+              opacity 0.8s ease, translate 0.8s cubic-bezier(0.16, 0.84, 0.34, 1);
+  will-change: transform;
+}
+#rl-gallery .rlg-card:hover,
+#rl-gallery .rlg-pj:hover {
+  scale: 1.03;
+  z-index: 3;
+  box-shadow:
+    calc(var(--nx) * -26px) calc(var(--ny) * -26px + 30px) 48px -14px rgba(20,32,10,0.5),
+    0 10px 18px -8px rgba(0,0,0,0.28);
+}
+#rl-gallery .rlg-card::after,
+#rl-gallery .rlg-pj::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.3), transparent 55%);
+  transition: opacity 0.3s ease;
+}
+#rl-gallery .rlg-card:hover::after,
+#rl-gallery .rlg-pj:hover::after { opacity: 1; }
+#rl-gallery .rlg-card.is-in img { scale: 1; }
+#rl-gallery .rlg-pj.is-in .rlg-pj-slide.is-active { scale: 1; }
+#rl-gallery.rl-reveal-on .rlg-card,
+#rl-gallery.rl-reveal-on .rlg-pj { opacity: 0; translate: 0 32px; }
+#rl-gallery.rl-reveal-on .rlg-card.is-in,
+#rl-gallery.rl-reveal-on .rlg-pj.is-in { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  #rl-gallery .rlg-card, #rl-gallery .rlg-pj { transform: none; }
+  #rl-gallery .rlg-card img, #rl-gallery .rlg-pj-slide { scale: 1; }
+}
+
 /* ══ SECTION 3 — MAPA ══════════════════════════ */
 #rl-gallery .rlg-map-sec { background: var(--rl-cream); }
 #rl-gallery .rlg-map-text { max-width: 720px; margin: 0 auto 38px; text-align: center; }
@@ -699,17 +1033,14 @@ body { padding-top: 104px !important; }
 #rl-gallery .rl-faq-item.open .rl-faq-a { display: block; padding-top: 18px; }
 
 /* ══ RESPONSIVE ════════════════════════════════ */
-@media (max-width: 1080px) { #rl-gallery .rlg-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 860px) {
   #rl-gallery .rl-faq-inner { grid-template-columns: 1fr; gap: 40px; }
   #rl-gallery .rl-faq-left { position: static; }
 }
-@media (max-width: 720px) { #rl-gallery .rlg-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) {
   #rl-gallery .rlg-section { padding: 64px 0; }
   #rl-gallery .rlg-map-frame iframe { height: 320px; }
 }
-@media (max-width: 440px) { #rl-gallery .rlg-grid { grid-template-columns: 1fr; } }
 
 /* ══ SCROLL REVEAL ═════════════════════════════ */
 @media (prefers-reduced-motion: no-preference) {
@@ -739,6 +1070,204 @@ body { padding-top: 104px !important; }
     </p>
   </div>
 </section>
+
+
+<!-- ══════════════════════════════════════════════
+     SECTION 1.5 — PROYECTOS DESTACADOS (6 cards)
+══════════════════════════════════════════════ -->
+<section class="rlg-section rlg-projects" id="rlg-projects" aria-labelledby="rlg-projects-heading">
+  <div class="rlg-container">
+
+    <div class="rlg-head">
+      <span class="rl-eyebrow rlg-reveal">Featured Projects</span>
+      <h2 class="rl-h2 rlg-reveal" id="rlg-projects-heading">Recent work, project by project.</h2>
+      <div class="rl-divider rlg-reveal"></div>
+    </div>
+
+    <div class="rlg-pj-grid">
+      <?php foreach ( $gallery_projects as $pi => $pj ) :
+        $imgs  = array_values( array_filter( $pj['images'] ) );
+        $total = count( $imgs );
+      ?>
+        <article class="rlg-pj" data-total="<?php echo (int) $total; ?>">
+          <div class="rlg-pj-media">
+            <?php if ( $total ) : ?>
+              <?php foreach ( $imgs as $ii => $src ) : ?>
+                <img class="rlg-pj-slide<?php echo 0 === $ii ? ' is-active' : ''; ?>" src="<?php echo esc_url( $src ); ?>" alt="<?php echo esc_attr( $pj['title'] . ' — ' . $pj['location'] . ' (photo ' . ( $ii + 1 ) . ')' ); ?>" loading="lazy" />
+              <?php endforeach; ?>
+              <span class="rlg-pj-count"><span class="rlg-pj-cur">1</span> / <?php echo (int) $total; ?></span>
+              <?php if ( $total > 1 ) : ?>
+                <button class="rlg-pj-nav rlg-pj-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+                <button class="rlg-pj-nav rlg-pj-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+              <?php endif; ?>
+            <?php else : ?>
+              <div class="rlg-pj-ph">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>
+                Photos coming soon
+              </div>
+            <?php endif; ?>
+          </div>
+
+          <div class="rlg-pj-body">
+            <h3 class="rlg-pj-title"><?php echo esc_html( $pj['title'] ); ?></h3>
+            <div class="rlg-pj-loc">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <?php echo esc_html( $pj['location'] ); ?>
+            </div>
+            <ul class="rlg-pj-list">
+              <?php foreach ( $pj['services'] as $svc ) : ?>
+                <li><?php echo esc_html( $svc ); ?></li>
+              <?php endforeach; ?>
+            </ul>
+            <button class="rlg-pj-all" type="button" data-project="<?php echo (int) $pi; ?>"<?php echo $total ? '' : ' disabled'; ?>>
+              <?php echo $total ? 'View all ' . (int) $total . ' photos' : 'Photos coming soon'; ?>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </article>
+      <?php endforeach; ?>
+    </div>
+
+  </div>
+</section>
+
+<!-- Visor de fotos del proyecto -->
+<div class="rlg-pj-lb" id="rlg-pj-lb" role="dialog" aria-modal="true" aria-label="Project photos" aria-hidden="true">
+  <button class="rlg-pj-lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <button class="rlg-pj-lb-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+  <img class="rlg-pj-lb-img" id="rlg-pj-lb-img" src="" alt="" />
+  <button class="rlg-pj-lb-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+  <div class="rlg-pj-lb-cap" id="rlg-pj-lb-cap"></div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('rlg-projects');
+  if (!root) return;
+  var projects = <?php
+    $pj_json = array();
+    foreach ( $gallery_projects as $pj ) {
+      $pj_json[] = array(
+        'title'  => $pj['title'],
+        'images' => array_values( array_filter( $pj['images'] ) ),
+      );
+    }
+    echo wp_json_encode( $pj_json );
+  ?>;
+
+  // Carrusel dentro de cada card
+  root.querySelectorAll('.rlg-pj').forEach(function (card) {
+    var slides = card.querySelectorAll('.rlg-pj-slide');
+    if (slides.length < 2) return;
+    var cur = card.querySelector('.rlg-pj-cur');
+    var i = 0;
+    function show(n) {
+      slides[i].classList.remove('is-active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('is-active');
+      if (cur) cur.textContent = i + 1;
+    }
+    card.querySelector('.rlg-pj-prev').addEventListener('click', function () { show(i - 1); });
+    card.querySelector('.rlg-pj-next').addEventListener('click', function () { show(i + 1); });
+  });
+
+  // Visor "View all photos"
+  var lb = document.getElementById('rlg-pj-lb');
+  var lbImg = document.getElementById('rlg-pj-lb-img');
+  var lbCap = document.getElementById('rlg-pj-lb-cap');
+  var pIdx = 0, iIdx = 0;
+  function render() {
+    var p = projects[pIdx];
+    lbImg.src = p.images[iIdx];
+    lbImg.alt = p.title + ' — photo ' + (iIdx + 1);
+    lbCap.textContent = p.title + '  ·  ' + (iIdx + 1) + ' / ' + p.images.length;
+    var solo = p.images.length < 2;
+    lb.querySelector('.rlg-pj-lb-prev').style.display = solo ? 'none' : '';
+    lb.querySelector('.rlg-pj-lb-next').style.display = solo ? 'none' : '';
+  }
+  function open(p) {
+    if (!projects[p] || !projects[p].images.length) return;
+    pIdx = p; iIdx = 0; render();
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function go(step) {
+    var n = projects[pIdx].images.length;
+    iIdx = (iIdx + step + n) % n;
+    render();
+  }
+  root.querySelectorAll('.rlg-pj-all').forEach(function (b) {
+    b.addEventListener('click', function () { open(parseInt(b.getAttribute('data-project'), 10)); });
+  });
+  lb.querySelector('.rlg-pj-lb-close').addEventListener('click', close);
+  lb.querySelector('.rlg-pj-lb-prev').addEventListener('click', function () { go(-1); });
+  lb.querySelector('.rlg-pj-lb-next').addEventListener('click', function () { go(1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') go(-1);
+    else if (e.key === 'ArrowRight') go(1);
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var root = document.getElementById('rl-gallery');
+  if (!root) return;
+  var cards = root.querySelectorAll('.rlg-card, .rlg-pj');
+
+  // Entrada con profundidad: se reproduce cada vez que la card vuelve a verse
+  function revealAll() { cards.forEach(function (c) { c.classList.add('is-in'); }); }
+  if (!('IntersectionObserver' in window)) { revealAll(); }
+  else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var el = entry.target;
+        if (entry.isIntersecting) {
+          var idx = Array.prototype.indexOf.call(el.parentNode.children, el);
+          el.style.transitionDelay = ((idx % 2) * 90) + 'ms';
+          el.classList.add('is-in');
+          setTimeout(function () { el.style.transitionDelay = ''; }, 1000);
+        } else {
+          el.style.transitionDelay = '';
+          el.classList.remove('is-in');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    cards.forEach(function (c) { io.observe(c); });
+  }
+
+  // Hover 3D: inclinación según el cursor + sombra que se desplaza
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!fine || calm) return;
+  cards.forEach(function (c) {
+    c.addEventListener('mousemove', function (e) {
+      var r = c.getBoundingClientRect();
+      var nx = (e.clientX - r.left) / r.width - 0.5;
+      var ny = (e.clientY - r.top) / r.height - 0.5;
+      c.style.setProperty('--ry', (nx * 12).toFixed(2) + 'deg');
+      c.style.setProperty('--rx', (-ny * 10).toFixed(2) + 'deg');
+      c.style.setProperty('--nx', (nx * 2).toFixed(2));
+      c.style.setProperty('--ny', (ny * 2).toFixed(2));
+      c.style.setProperty('--mx', ((nx + 0.5) * 100).toFixed(1) + '%');
+      c.style.setProperty('--my', ((ny + 0.5) * 100).toFixed(1) + '%');
+    });
+    c.addEventListener('mouseleave', function () {
+      ['--rx', '--ry', '--nx', '--ny'].forEach(function (v) { c.style.setProperty(v, /n/.test(v) ? '0' : '0deg'); });
+    });
+  });
+});
+</script>
 
 
 <!-- ══════════════════════════════════════════════
@@ -989,15 +1518,18 @@ body { padding-top: 104px !important; }
 
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
         var el = entry.target;
-        el.style.transitionDelay = el._d + 'ms';
-        el.classList.add('rl-in');
-        el.addEventListener('transitionend', function clear() {
+        if (entry.isIntersecting) {
+          el.style.transitionDelay = el._d + 'ms';
+          el.classList.add('rl-in');
+          el.addEventListener('transitionend', function clear() {
+            el.style.transitionDelay = '';
+            el.removeEventListener('transitionend', clear);
+          });
+        } else {
           el.style.transitionDelay = '';
-          el.removeEventListener('transitionend', clear);
-        });
-        obs.unobserve(el);
+          el.classList.remove('rl-in');
+        }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 

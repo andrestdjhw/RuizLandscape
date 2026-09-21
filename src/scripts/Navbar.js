@@ -10,6 +10,17 @@ const services = [
   { label: "Low Voltage Lighting", href: "/services/low-voltage-lighting", key: "lighting", desc: "Showcase your yard with elegant night lighting." },
 ]
 
+// Per-service icon color, shared across the navbar, footer & home services grid
+const serviceColors = {
+  "landscape-design": "#4a6e32",
+  "lawn-care": "#7fae4a",
+  "tree-shrub-care": "#8a5a3c",
+  "irrigation": "#3f7ea6",
+  "synthetic-turf": "#3f9e8f",
+  "large-trees": "#2e4a24",
+  "lighting": "#c8912f",
+}
+
 // SVG Icons
 const PhoneIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -77,6 +88,13 @@ const MenuIcon = () => (
 const CloseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+  </svg>
+)
+
+const LicenseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="16" height="20" x="4" y="2" rx="2"/>
+    <path d="M9 7h6M9 11h6M9 15h4"/>
   </svg>
 )
 
@@ -477,7 +495,7 @@ function Navbar() {
           flex-shrink: 0;
           border: 1px solid #e3ddd0;
           background: #fbfaf6;
-          color: var(--rl-green-mid);
+          color: var(--rl-svc, var(--rl-green-mid));
           display: flex;
           align-items: center;
           justify-content: center;
@@ -485,9 +503,9 @@ function Navbar() {
         }
 
         .rl-mega-item:hover .rl-mega-ico {
-          background: var(--rl-green);
+          background: var(--rl-svc, var(--rl-green));
           color: #ffffff;
-          border-color: var(--rl-green);
+          border-color: var(--rl-svc, var(--rl-green));
         }
 
         .rl-mega-txt { display: flex; flex-direction: column; gap: 2px; }
@@ -656,7 +674,7 @@ function Navbar() {
           width: 22px;
           height: 22px;
           flex-shrink: 0;
-          color: var(--rl-green-mid);
+          color: var(--rl-svc, var(--rl-green-mid));
           display: flex;
           align-items: center;
           justify-content: center;
@@ -685,6 +703,10 @@ function Navbar() {
         .rl-mobile-cta:hover { background: transparent; color: var(--rl-green); }
 
         /* ── RESPONSIVE ── */
+        @media (max-width: 1150px) {
+          .rl-topbar-license span { display: none; }
+        }
+
         @media (max-width: 900px) {
           .rl-nav-links { display: none; }
           .rl-contact-desktop { display: none; }
@@ -712,10 +734,15 @@ function Navbar() {
               <span>949-305-1605</span>
             </a>
             <div className="rl-topbar-divider" />
-            <a href="mailto:office@ruizlandscape.com" className="rl-topbar-link">
+            <a href="mailto:leads@ruizlandscape.com" className="rl-topbar-link">
               <EmailIcon />
-              <span>office@ruizlandscape.com</span>
+              <span>leads@ruizlandscape.com</span>
             </a>
+            <div className="rl-topbar-divider" />
+            <span className="rl-topbar-link rl-topbar-license" aria-label="Licenses">
+              <LicenseIcon />
+              <span>Lic# 925207 &nbsp;&middot;&nbsp; Pest Lic# 38717</span>
+            </span>
           </div>
 
           {/* Center: location (clickeable → Google Maps) */}
@@ -799,6 +826,7 @@ function Navbar() {
                         key={s.href}
                         href={s.href}
                         className="rl-mega-item"
+                        style={{ "--rl-svc": serviceColors[s.key] }}
                         onClick={() => setServicesOpen(false)}
                       >
                         <span className="rl-mega-ico"><ServiceIcon name={s.key} /></span>
@@ -867,6 +895,7 @@ function Navbar() {
                   key={s.href}
                   href={s.href}
                   className="rl-mobile-service-item"
+                  style={{ "--rl-svc": serviceColors[s.key] }}
                   onClick={() => setMobileOpen(false)}
                 >
                   <span className="rl-mobile-service-ico"><ServiceIcon name={s.key} /></span>

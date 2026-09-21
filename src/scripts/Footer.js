@@ -615,7 +615,7 @@ function Footer() {
               </li>
               <li className="rl-footer-contact-item">
                 <span className="rl-footer-contact-icon"><EmailIcon /></span>
-                <a href="mailto:office@RuizLandscape.com">office@ruizlandscape.com</a>
+                <a href="mailto:leads@RuizLandscape.com">leads@ruizlandscape.com</a>
               </li>
               <li className="rl-footer-contact-item">
                 <span className="rl-footer-contact-icon"><GlobeIcon /></span>
@@ -645,7 +645,7 @@ function Footer() {
             </p>
             <div className="rl-footer-lic">
               <LicenseIcon />
-              CA State License #925207
+              CA State License #925207 &nbsp;|&nbsp; Pesticide License #38717
             </div>
           </div>
         </div>
