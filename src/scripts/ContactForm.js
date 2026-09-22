@@ -20,6 +20,11 @@ const EMAILJS_SERVICE_ID  = "service_dryazfe"
 const EMAILJS_TEMPLATE_ID = "template_l9hvbae"
 const EMAILJS_PUBLIC_KEY  = "k19cmsXnIMJX-yylZ"
 
+// Autoresponder: se envía al cliente justo después del email interno.
+// En EmailJS, el campo "To Email" de esta plantilla debe estar configurado
+// como {{to_email}} para que el mensaje llegue a la dirección del cliente.
+const EMAILJS_AUTORESPONSE_TEMPLATE_ID = "template_z4y0lc5"
+
 const ArrowRight = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
     fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -53,6 +58,12 @@ function ContactForm({
     // Contexto útil en el email (desde qué página se envió)
     data.rl_page = window.location.pathname
 
+    // Alias usados por la plantilla de autorespuesta.
+    // "email" coincide con el campo "To Email" ({{email}}) configurado en EmailJS.
+    data.email = data.rl_email
+    data.to_email = data.rl_email
+    data.to_name = data.rl_name
+
     setStatus("sending")
 
     try {
@@ -66,7 +77,25 @@ function ContactForm({
           template_params: data,
         }),
       })
+
       if (res.ok) {
+        // Autorespuesta al cliente. No bloquea el estado "done" si falla:
+        // el email interno ya se envió, así que igual se considera éxito.
+        fetch("https://api.emailjs.com/api/v1.0/email/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            service_id: EMAILJS_SERVICE_ID,
+            template_id: EMAILJS_AUTORESPONSE_TEMPLATE_ID,
+            user_id: EMAILJS_PUBLIC_KEY,
+            template_params: data,
+          }),
+        }).then(async (autoRes) => {
+          if (!autoRes.ok) {
+            console.error("EmailJS auto-reply failed:", autoRes.status, await autoRes.text())
+          }
+        }).catch((err) => console.error("EmailJS auto-reply network error:", err))
+
         setStatus("done")
         form.reset()
       } else {
